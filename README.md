@@ -1,5 +1,5 @@
-<h1 align="center"><br>DJ<br></h1>
-<h4 align="center">Peer-to-Peer Music Sharing</h4>
+<h1 align="center"><br>Engagement<br></h1>
+<h4 align="center">Metrics and Analytics</h4>
 
 <p align="center">
 </p>
