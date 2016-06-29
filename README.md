@@ -1,48 +1,39 @@
-Engagement Backend
-================
+<h1 align="center"><br>DJ<br></h1>
+<h4 align="center">Peer-to-Peer Music Sharing</h4>
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+<p align="center">
+</p>
+<br>
 
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
+This is the home for the Engagement backend
 
-Problems? Issues?
------------
+#### Features
 
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
+- add
+- more
+- stuff
 
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
+#### Inspiration
 
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+- add
 
-Ruby on Rails
--------------
+#### Todo
 
-This application requires:
+- add
+- more
+- stuff
 
-- Ruby 2.2.3
-- Rails 4.2.6
+#### Dependencies & Setup
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
+```unix
+  brew install pg
+  brew install redis
+```
 
-Getting Started
----------------
+```ruby
+rake db:setup
+```
 
-Documentation and Support
--------------------------
+#### License
 
-Issues
--------------
-
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
+Copyright (c) [Nick Soto](http://google.com)
