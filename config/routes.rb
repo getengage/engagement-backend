@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   end
 
   constraints subdomain: "example" do
-    get '/', to: 'report#index'
-    resource :report, only: :create
+    scope module: "api", path: nil, defaults: {format: :json} do
+      namespace :v1 do
+        resources :reports, only: :create
+      end
+    end
   end
 
   get "/pages/*id" => 'pages#show', as: :page, format: false
