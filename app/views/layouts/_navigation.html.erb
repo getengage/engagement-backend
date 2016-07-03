@@ -1,13 +1,45 @@
-<%# navigation styled for Zurb Foundation 5 %>
-<nav class="top-bar" data-topbar>
-  <ul class="title-area">
-    <li class="name"><%= link_to 'Home', root_path %></li>
-    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
-  </ul>
-  <div class="top-bar-section">
-    <ul>
-      <%= render 'layouts/navigation_links' %>
-        <%= render 'layouts/nav_links_for_auth' %>
+<!-- Navigation -->
+<div class="contain-to-grid sticky">
+
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1><%= link_to image_tag("engage-logo-multicolor-masked-dark.png"), "#", class: "logo show-for-small-only" %></h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
-  </div>
-</nav>
+
+    <div class="top-bar-section">
+
+      <div class="logo-wrapper hide-for-small-only">
+        <div class="logo">
+          <%= image_tag("engage-logo-multicolor-masked-dark.png") %>
+        </div>
+      </div>
+
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li><%= link_to('Login', new_user_session_path) %></li>
+        <li><%= link_to('Register', new_user_registration_path) %></li>
+      </ul>
+
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li class="has-dropdown">
+          <ul class="dropdown">
+            <li><a href="#">First link in dropdown</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="#">Home</a>
+          <ul class="dropdown">
+            <li><%= link_to('Register', new_user_registration_path) %></li>
+          </ul>
+        </li>
+        <li><%= link_to('Home', root_path) %></li>
+      </ul>
+
+    </div>
+  </nav>
+
+</div><!-- /navigation -->
