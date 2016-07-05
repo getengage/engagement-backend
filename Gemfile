@@ -8,6 +8,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'oj'
 gem 'oj_mimic_json'
+gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'rails', '4.2.6'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'

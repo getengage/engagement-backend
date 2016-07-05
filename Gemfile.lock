@@ -155,6 +155,9 @@ GEM
     oj (2.16.1)
     oj_mimic_json (1.0.1)
     orm_adapter (0.5.0)
+    passenger (5.0.29)
+      rack
+      rake (>= 0.8.1)
     pg (0.18.4)
     pkg-config (1.1.7)
     pry (0.10.3)
@@ -285,6 +288,7 @@ DEPENDENCIES
   launchy
   oj
   oj_mimic_json
+  passenger (>= 5.0.25)
   pg
   pry-rails
   pry-rescue
