@@ -70,6 +70,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    cause (0.1)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
@@ -111,6 +112,12 @@ GEM
       activesupport (>= 4.1.0)
     high_voltage (3.0.0)
     i18n (0.7.0)
+    influxdb (0.3.5)
+      cause
+      json
+    influxdb-rails (0.1.10)
+      influxdb
+      railties
     interception (0.5)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -274,6 +281,7 @@ DEPENDENCIES
   faker
   foundation-rails (~> 5.5)
   high_voltage (~> 3.0.0)
+  influxdb-rails
   jbuilder (~> 2.0)
   jquery-rails
   launchy
