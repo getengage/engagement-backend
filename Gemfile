@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
 ruby '2.2.3'
 gem 'bourbon'
-gem 'cassandra_migrations'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'data_migrate'
 gem 'high_voltage', '~> 3.0.0'
+# gem 'influxdb-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'oj'
 gem 'oj_mimic_json'
-gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
+# gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
+gem 'puma'
 gem 'rails', '4.2.6'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'

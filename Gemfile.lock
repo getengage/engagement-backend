@@ -70,13 +70,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    cassandra-driver (3.0.2)
-      ione (~> 1.2)
-    cassandra_migrations (0.2.7)
-      cassandra-driver (~> 3.0, >= 2.1.1)
-      colorize (~> 0.7.3)
-      rails (>= 3.2)
-      rake (~> 10)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
@@ -87,8 +80,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    colorize (0.7.7)
     concurrent-ruby (1.0.2)
+    data_migrate (2.1.0)
+      rails (>= 4.0)
     database_cleaner (1.5.3)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
@@ -118,7 +112,6 @@ GEM
     high_voltage (3.0.0)
     i18n (0.7.0)
     interception (0.5)
-    ione (1.2.3)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -155,9 +148,6 @@ GEM
     oj (2.16.1)
     oj_mimic_json (1.0.1)
     orm_adapter (0.5.0)
-    passenger (5.0.29)
-      rack
-      rake (>= 0.8.1)
     pg (0.18.4)
     pkg-config (1.1.7)
     pry (0.10.3)
@@ -169,6 +159,7 @@ GEM
     pry-rescue (1.4.4)
       interception (>= 0.5)
       pry
+    puma (3.4.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     quiet_assets (1.1.0)
@@ -275,8 +266,8 @@ DEPENDENCIES
   bourbon
   byebug
   capybara
-  cassandra_migrations
   coffee-rails (~> 4.1.0)
+  data_migrate
   database_cleaner
   devise
   factory_girl_rails
@@ -288,10 +279,10 @@ DEPENDENCIES
   launchy
   oj
   oj_mimic_json
-  passenger (>= 5.0.25)
   pg
   pry-rails
   pry-rescue
+  puma
   pundit
   quiet_assets
   rails (= 4.2.6)

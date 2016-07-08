@@ -1,0 +1,2 @@
+class Event::Activity
+end

@@ -7,10 +7,6 @@ module Api::V1
     include ActionController::RackDelegation
     include ActionController::StrongParameters
 
-    def keyspace
-      CassandraMigrations::Config.configurations[Rails.env]["keyspace"]
-    end
-
     private
 
     def render(options={})
