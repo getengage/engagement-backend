@@ -25,7 +25,7 @@ This is the home for the Engagement backend
 
 #### Dependencies & Setup
 
-## Dependencies
+###### Dependencies
 
 ```unix
   brew install pg
@@ -40,13 +40,13 @@ depending on rvm setup:
   rvm env -- 2.2.3@engagement > .powenv
 ```
 
-## Setup
+###### Setup
 
 ```ruby
 rake db:setup
 ```
 
-## Debugging
+###### Debugging
 
 ```unix
   add `byebug` to line in code

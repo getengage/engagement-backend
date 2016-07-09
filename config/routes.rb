@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   authenticated :user do
     namespace :dashboard do
       resources :events, only: :show
+      resource :main, only: :index
     end
 
     root to: "dashboard/main#index", as: :dashboard
