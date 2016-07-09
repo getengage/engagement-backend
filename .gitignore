@@ -58,6 +58,12 @@ pickle-email-*.html
 #
 # Here are some files you may want to ignore globally:
 
+# npm stuff
+npm-debug.log
+
+# debugging stuff
+.byebug_history
+
 # scm revert files
 **.orig
 

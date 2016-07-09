@@ -11,10 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629014837) do
+ActiveRecord::Schema.define(version: 20160709193740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "name",                                      null: false
+    t.uuid     "uuid",       default: "uuid_generate_v4()"
+    t.datetime "expired_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "api_keys", ["uuid"], name: "index_api_keys_on_uuid", using: :btree
+
+  create_table "client_api_keys", id: false, force: :cascade do |t|
+    t.integer "client_id",  null: false
+    t.integer "api_key_id", null: false
+  end
+
+  add_index "client_api_keys", ["api_key_id"], name: "index_client_api_keys_on_api_key_id", using: :btree
+  add_index "client_api_keys", ["client_id"], name: "index_client_api_keys_on_client_id", using: :btree
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "data_migrations", id: false, force: :cascade do |t|
+    t.string "version", null: false
+  end
+
+  add_index "data_migrations", ["version"], name: "unique_data_migrations", unique: true, using: :btree
+
+  create_table "events_activities", force: :cascade do |t|
+    t.string   "api_key"
+    t.string   "remote_ip"
+    t.string   "session_id"
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.string   "is_visible"
+    t.string   "source_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -35,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160629014837) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.integer  "role"
+    t.integer  "client_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
