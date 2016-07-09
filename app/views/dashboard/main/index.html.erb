@@ -1,0 +1,27 @@
+<div class="large-2 columns">
+  sidebar
+</div>
+<div class="large-10 columns">
+  <section>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Api Keys</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @api_keys.each do |key| %>
+          <tr>
+            <td><%= key.display_name %></td>
+            <td>ACTIVE</td>
+            <td><%= link_to "Go to Events", dashboard_event_path(key) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </section>
+</div>

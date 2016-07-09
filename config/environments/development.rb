@@ -1,3 +1,6 @@
+require 'byebug/core'
+# Byebug.start_server 'localhost', ENV.fetch("BYEBUG_SERVER_PORT", 1055).to_i
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
