@@ -31,11 +31,7 @@ This is the home for the Engagement backend
   brew install pg
   brew install redis
   brew install influxdb
-```
 
-depending on rvm setup:
-
-```unix
   powder link api.engage
   rvm env -- 2.2.3@engagement > .powenv
 ```
