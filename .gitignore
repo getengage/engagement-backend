@@ -61,6 +61,9 @@ pickle-email-*.html
 # npm stuff
 npm-debug.log
 
+# debugging stuff
+.byebug_history
+
 # scm revert files
 **.orig
 
