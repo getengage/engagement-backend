@@ -23,6 +23,7 @@ gem 'foundation-rails', '~> 5.5'
 gem 'pg'
 gem 'pundit'
 gem 'sidekiq'
+gem 'sinatra', :require => false
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'

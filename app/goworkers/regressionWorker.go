@@ -6,6 +6,10 @@ import (
     "github.com/sajari/regression"
 )
 
+func init() {
+    goworker.Register("GoWorker", regressionWorker)
+}
+
 func regressionWorker(queue string, args ...interface{}) error {
     r := new(regression.Regression)
     r.SetObserved("Murders per annum per 1,000,000 inhabitants")
@@ -38,16 +42,11 @@ func regressionWorker(queue string, args ...interface{}) error {
 
     fmt.Printf("Regression formula:\n%v\n", r.Formula)
     fmt.Printf("Regression:\n%s\n", r)
+    return nil
 }
 
 func main() {
-    workers.Configure(map[string]string{
-      // Omitted see above
-    })
-
-    // pull messages from "unsolved_puzzle" queue with concurrency of 100
-    workers.Process("go_queue", regressionWorker, 100)
-
-    // Blocks until process is told to exit via unix signal
-    workers.Run()
+    if err := goworker.Work(); err != nil {
+        fmt.Println("Error:", err)
+    }
 }

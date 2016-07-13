@@ -321,6 +321,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   sidekiq
+  sinatra
   spring
   spring-commands-rspec
   turbolinks
