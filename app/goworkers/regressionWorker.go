@@ -46,7 +46,7 @@ func main() {
     })
 
     // pull messages from "unsolved_puzzle" queue with concurrency of 100
-    workers.Process("regression", regressionWorker, 100)
+    workers.Process("go_queue", regressionWorker, 100)
 
     // Blocks until process is told to exit via unix signal
     workers.Run()
