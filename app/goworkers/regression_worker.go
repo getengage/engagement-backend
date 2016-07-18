@@ -38,7 +38,7 @@ func RegressionWorker(message *workers.Msg) {
     if err != nil {
         fmt.Printf("error:", err)
     }
-    q := fmt.Sprintf("SELECT * FROM %s", "engagement_development")
+    q := fmt.Sprintf("SELECT * FROM %s", "events")
     res, err := queryDB(clnt, q)
     if err != nil {
         fmt.Printf("error", err)

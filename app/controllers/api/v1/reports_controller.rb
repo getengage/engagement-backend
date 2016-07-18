@@ -1,7 +1,6 @@
 module Api::V1
   class ReportsController < ApiController
     def create
-      byebug
       data = {
         tags: tag_params,
         values: value_params
