@@ -52,6 +52,9 @@ rake db:setup
 ###### Debugging
 
 ```unix
+  toggle server config in development.rb
+  powder stop
+  powder start
   add `byebug` to line in code
   bundle exec byebug -R localhost:1048
   hit api endpoint with `byebug` line
