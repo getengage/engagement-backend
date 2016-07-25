@@ -3,9 +3,10 @@ package main
 import (
     "fmt"
     "github.com/jrallison/go-workers"
-    // "github.com/sajari/regression"
-    "github.com/d4l3k/go-pry/pry"
+    "github.com/sajari/regression"
     "github.com/influxdata/influxdb/client/v2"
+    "time"
+    "encoding/json"
 )
 
 const (
@@ -32,38 +33,36 @@ func queryDB(clnt client.Client, cmd string) (res []client.Result, err error) {
 }
 
 func RegressionWorker(message *workers.Msg) {
-    clnt, err := client.NewHTTPClient(client.HTTPConfig{
+    clnt, _ := client.NewHTTPClient(client.HTTPConfig{
         Addr: "http://localhost:8086",
     })
-    if err != nil {
-        fmt.Printf("error:", err)
-    }
-    q := fmt.Sprintf("SELECT * FROM %s", "events")
-    res, err := queryDB(clnt, q)
-    if err != nil {
-        fmt.Printf("error", err)
-    }
+    q := fmt.Sprintf("SELECT * FROM %s group by source_url, session_id", "events")
+    res, _ := queryDB(clnt, q)
 
-    fmt.Printf("response:\n", res)
+    for _, response_row := range res {
+      for _, results_row := range response_row.Series {
+        time_layout := time.RFC3339
 
-    // do something with your message
-    // message.Jid()
-    // message.Args() is a wrapper around go-simplejson (http://godoc.org/github.com/bitly/go-simplejson)
-    // r := new(regression.Regression)
-    // r.SetObserved("Murders per annum per 1,000,000 inhabitants")
-    // r.SetVar(0, "Inhabitants")
-    // r.SetVar(1, "Percent with incomes below $5000")
-    // r.Train(
-    //     regression.DataPoint(200, []float64{2000, 1}),
-    //     regression.DataPoint(400, []float64{4000, 0}),
-    //     regression.DataPoint(600, []float64{6000, 0}),
-    //     regression.DataPoint(4000, []float64{8000, 1}),
-    //     regression.DataPoint(1000, []float64{10000, 1}),
-    //     regression.DataPoint(1200, []float64{12000, 1}))
-    // r.Run()
-    //
-    // fmt.Printf("Regression formula:\n%v\n", r.Formula)
-    // fmt.Printf("Regression:\n%s\n", r)
+        r := new(regression.Regression)
+        r.SetObserved("Scroll Depth")
+        r.SetVar(0, "Elapsed Time")
+        r.SetVar(1, "Is Visible")
+
+        for j, _ := range results_row.Values {
+          if results_row.Values[j][7] != nil {
+            parsed_time, _ := time.Parse(time_layout, results_row.Values[j][0].(string))
+            starting_time, _ := time.Parse(time_layout, results_row.Values[0][0].(string))
+            elapsed_time_in_seconds := parsed_time.Sub(starting_time).Seconds()
+            float, _ := results_row.Values[j][7].(json.Number).Float64()
+            dp := regression.DataPoint(float, []float64{elapsed_time_in_seconds, 1})
+            r.Train(dp)
+          }
+        }
+        r.Run()
+        fmt.Printf("%s\n\n", results_row)
+        fmt.Printf("%s\n\n", r.String())
+      }
+    }
 }
 
 func main() {
