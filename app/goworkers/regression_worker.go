@@ -41,26 +41,36 @@ func RegressionWorker(message *workers.Msg) {
 
     for _, response_row := range res {
       for _, results_row := range response_row.Series {
+        final_scores := make([]float64, 2)
         time_layout := time.RFC3339
+
+        // regression calculation
 
         r := new(regression.Regression)
         r.SetObserved("Scroll Depth")
         r.SetVar(0, "Elapsed Time")
         r.SetVar(1, "Is Visible")
 
-        for j, _ := range results_row.Values {
-          if results_row.Values[j][7] != nil {
-            parsed_time, _ := time.Parse(time_layout, results_row.Values[j][0].(string))
-            starting_time, _ := time.Parse(time_layout, results_row.Values[0][0].(string))
-            elapsed_time_in_seconds := parsed_time.Sub(starting_time).Seconds()
-            float, _ := results_row.Values[j][7].(json.Number).Float64()
-            dp := regression.DataPoint(float, []float64{elapsed_time_in_seconds, 1})
-            r.Train(dp)
+        // time in viewport calculation
+        in_viewport := 0
+
+        for _, data_row := range results_row.Values {
+          if data_row[3] == true && data_row[4] == true {
+            in_viewport++
           }
+          parsed_time, _ := time.Parse(time_layout, data_row[0].(string))
+          starting_time, _ := time.Parse(time_layout, results_row.Values[0][0].(string))
+          elapsed_time_in_seconds := parsed_time.Sub(starting_time).Seconds()
+          float, _ := data_row[8].(json.Number).Float64()
+          dp := regression.DataPoint(float, []float64{elapsed_time_in_seconds, 1})
+          r.Train(dp)
         }
+
+        fmt.Printf("viewport: %s\n", in_viewport);
+
         r.Run()
-        fmt.Printf("%s\n\n", results_row)
-        fmt.Printf("%s\n\n", r.String())
+        final_scores = append(final_scores, r.R2 * 1000.0)
+        fmt.Printf("%s\n", final_scores)
       }
     }
 }
