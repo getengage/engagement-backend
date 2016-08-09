@@ -54,6 +54,9 @@ func RegressionWorker(message *workers.Msg) {
         // time in viewport calculation
         in_viewport := 0
 
+        // estimated reading time
+        word_count, _ := results_row.Values[0][7].(json.Number).Float64()
+
         for _, data_row := range results_row.Values {
           if data_row[3] == true && data_row[4] == true {
             in_viewport++
@@ -66,10 +69,9 @@ func RegressionWorker(message *workers.Msg) {
           r.Train(dp)
         }
 
-        fmt.Printf("viewport: %s\n", in_viewport);
-
         r.Run()
         final_scores = append(final_scores, r.R2 * 1000.0)
+        final_scores = append(final_scores, (word_count / 270) * 60)
         fmt.Printf("%s\n", final_scores)
       }
     }
