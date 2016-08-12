@@ -16,6 +16,7 @@ This is the home for the Engagement backend
 #### Inspiration
 
 - fonts: http://defharo.com/dise%C3%B1o-grafico/tipografia/monserga-outline-round-font/
+- goworkers: http://mildlyinternet.com/code/supercharge-resque-and-sidekiq-with-go-part-2.html
 
 #### Todo
 
@@ -34,6 +35,12 @@ This is the home for the Engagement backend
 
   powder link api.engage
   rvm env -- 2.2.3@engagement > .powenv
+
+  brew install go
+  export GOPATH=/path_to_go
+  go get github.com/benmanns/goworker
+  go get github.com/xlvector/hector
+  go install github.com/xlvector/hector/hectorcv
 ```
 
 ###### Setup
@@ -45,6 +52,9 @@ rake db:setup
 ###### Debugging
 
 ```unix
+  toggle server config in development.rb
+  powder stop
+  powder start
   add `byebug` to line in code
   bundle exec byebug -R localhost:1048
   hit api endpoint with `byebug` line
