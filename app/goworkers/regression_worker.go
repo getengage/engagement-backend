@@ -7,12 +7,14 @@ import (
     "github.com/influxdata/influxdb/client/v2"
     "time"
     "encoding/json"
+    "math"
 )
 
 const (
     MyDB = "engagement_development"
     username = "root"
     password = "root"
+    avgReadingSpeed = 270.0
 )
 
 // queryDB convenience function to query the database
@@ -39,12 +41,17 @@ func RegressionWorker(message *workers.Msg) {
     q := fmt.Sprintf("SELECT * FROM %s group by source_url, session_id", "events")
     res, _ := queryDB(clnt, q)
 
+    bp, _ := client.NewBatchPoints(client.BatchPointsConfig{
+        Database:  MyDB,
+        Precision: "s",
+    })
+
     for _, response_row := range res {
       for _, results_row := range response_row.Series {
-        final_scores := make([]float64, 2)
+        final_score := 0.0
         time_layout := time.RFC3339
 
-        // regression calculation
+        // regression calculation setup
 
         r := new(regression.Regression)
         r.SetObserved("Scroll Depth")
@@ -52,11 +59,12 @@ func RegressionWorker(message *workers.Msg) {
         r.SetVar(1, "Is Visible")
 
         // time in viewport calculation
-        in_viewport := 0
+        in_viewport := 0.0
 
         // estimated reading time
         word_count, _ := results_row.Values[0][7].(json.Number).Float64()
 
+        // iterate over values for a given series
         for _, data_row := range results_row.Values {
           if data_row[3] == true && data_row[4] == true {
             in_viewport++
@@ -64,17 +72,49 @@ func RegressionWorker(message *workers.Msg) {
           parsed_time, _ := time.Parse(time_layout, data_row[0].(string))
           starting_time, _ := time.Parse(time_layout, results_row.Values[0][0].(string))
           elapsed_time_in_seconds := parsed_time.Sub(starting_time).Seconds()
-          float, _ := data_row[8].(json.Number).Float64()
+          float, _ := data_row[9].(json.Number).Float64()
           dp := regression.DataPoint(float, []float64{elapsed_time_in_seconds, 1})
           r.Train(dp)
         }
 
+        // run regression
         r.Run()
-        final_scores = append(final_scores, r.R2 * 1000.0)
-        final_scores = append(final_scores, (word_count / 270) * 60)
-        fmt.Printf("%s\n", final_scores)
+        view_time_calculation := in_viewport / ((word_count / avgReadingSpeed) * 60.0)
+        rsquared_calculation := r.R2
+
+        // Regression Strength - max 50 points
+        if math.IsNaN(rsquared_calculation) {
+            final_score += 10.0
+        } else {
+            final_score += math.Min(rsquared_calculation * 50.0, 50.0)
+        }
+
+        // InViewPort Time - max 100 Points
+        final_score += math.Min(view_time_calculation * 1000.0, 100.0)
+
+
+        // for Batching Points
+
+        tags := map[string]string{"source_url": results_row.Tags["source_url"]}
+        fields := map[string]interface{}{
+            "score": final_score,
+        }
+
+        pt, err := client.NewPoint(
+            "event_scores",
+            tags,
+            fields,
+            time.Now(),
+        )
+
+        if err != nil {
+            fmt.Println(err)
+        }
+
+        bp.AddPoint(pt)
       }
     }
+    clnt.Write(bp)
 }
 
 func main() {
