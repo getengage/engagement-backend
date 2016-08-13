@@ -8,5 +8,9 @@ module Event
     property "source_url"
     property "x_pos"
     property "y_pos"
+    property "top"
+    property "bottom"
+    property "in_viewport"
+    property "word_count"
   end
 end
