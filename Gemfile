@@ -19,7 +19,7 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'administrate'
 gem 'devise'
-gem 'foundation-rails', '~> 5.5'
+gem 'foundation-rails', '6.2.3.0'
 gem 'pg'
 gem 'pundit'
 gem 'sidekiq'
@@ -31,6 +31,7 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 2.0'
+  gem "refills", group: :development
 end
 group :development, :test do
   gem 'byebug'
