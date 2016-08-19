@@ -7,9 +7,4 @@ class ApiKey < ActiveRecord::Base
   def display_name
     name.titleize
   end
-
-  # UPDATE
-  def uuid
-    "1234"
-  end
 end

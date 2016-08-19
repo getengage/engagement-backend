@@ -8,4 +8,4 @@
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 
-ApiKey.create(uuid: "1234", name: "test")
+ApiKey.create(name: "test")

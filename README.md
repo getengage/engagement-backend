@@ -34,6 +34,7 @@ This is the home for the Engagement backend
   brew install influxdb
 
   powder link api.engage
+  touch .powenv
   rvm env -- 2.2.3@engagement > .powenv
 
   brew install go
@@ -46,7 +47,9 @@ This is the home for the Engagement backend
 ###### Setup
 
 ```ruby
-rake db:setup
+  rake db:create db:migrate
+  rake data:migrate
+  rake db:seed
 ```
 
 ###### Debugging
