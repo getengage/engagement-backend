@@ -32,16 +32,17 @@ This is the home for the Engagement backend
   brew install pg
   brew install redis
   brew install influxdb
+  brew install node
+  brew install go
 
   powder link api.engage
   touch .powenv
   rvm env -- 2.2.3@engagement > .powenv
 
-  brew install go
   export GOPATH=/path_to_go
   go get github.com/benmanns/goworker
   go get github.com/xlvector/hector
-  go install github.com/xlvector/hector/hectorcv
+  go get github.com/xlvector/hector/hectorcv
 ```
 
 ###### Setup
@@ -55,9 +56,7 @@ This is the home for the Engagement backend
 ###### Debugging
 
 ```unix
-  toggle server config in development.rb
-  powder stop
-  powder start
+  powder restart
   add `byebug` to line in code
   bundle exec byebug -R localhost:1048
   hit api endpoint with `byebug` line
