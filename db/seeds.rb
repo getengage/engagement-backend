@@ -8,4 +8,9 @@
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 
-ApiKey.create(name: "test")
+client = Client.where(name: "FooCompany").first_or_create
+puts 'CREATED CLIENT: ' << client.name
+
+api_key = ApiKey.where(name: "test").first_or_create
+ClientApiKey.where(client: client, api_key: api_key).first_or_create
+puts 'CREATED API KEY: ' << api_key.name
