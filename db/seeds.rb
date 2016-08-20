@@ -9,6 +9,7 @@ user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 
 client = Client.where(name: "FooCompany").first_or_create
+user.update(client: client)
 puts 'CREATED CLIENT: ' << client.name
 
 api_key = ApiKey.where(name: "test").first_or_create
