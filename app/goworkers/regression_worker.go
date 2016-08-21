@@ -11,6 +11,10 @@ import (
     "math"
 )
 
+type ResponseData struct {
+    SourceUrl  string `json:"source_url"`
+}
+
 const (
     MyDB = "engagement_development"
     username = "root"
@@ -97,6 +101,7 @@ func RegressionWorker(message *workers.Msg) {
         tags := map[string]string{
             "uuid": uuid.TimeUUID().String(),
             "source_url": results_row.Tags["source_url"],
+            "api_key": results_row.Values[0][1].(string),
         }
 
         fields := map[string]interface{}{

@@ -13,12 +13,18 @@
         </tr>
       </thead>
       <tbody>
-        <% @query_results.activities.each_with_index do |event, index| %>
+        <% if @query_results.present? %>
+          <% @query_results.values.each_with_index do |event, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= event.created_at %></td>
+              <td><%= event.source_url %></td>
+              <td><%= link_to("View", dashboard_event_detail_path(@api_key.uuid, event.uuid)) %></td>
+            </tr>
+          <% end %>
+        <% else %>
           <tr>
-            <td><%= index + 1 %></td>
-            <td><%= event.created_at %></td>
-            <td><%= event.source_url %></td>
-            <td><%= link_to("", "") %></td>
+            <td colspan="4">No Events</td>
           </tr>
         <% end %>
       </tbody>
