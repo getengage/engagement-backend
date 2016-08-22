@@ -6,13 +6,14 @@
 //= require dataTables.foundation.min
 //= require_tree .
 
-$(document).on('ready page:load', function () {
+document.addEventListener("turbolinks:load", function() {
   $(document).foundation();
 
   $('table').each(function() {
     $(this).dataTable({
       "bFilter": false,
       "bLengthChange": false,
+      "bInfo": false,
       "bPaginate": true
     });
   });
