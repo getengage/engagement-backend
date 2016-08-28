@@ -9,7 +9,18 @@
 
       <ul class="menu simple">
         <li><span><i class="icon-bell"></i></span></li>
-        <li>test</li>
+        <li>
+          <ul class="dropdown menu" data-dropdown-menu>
+            <% if user_signed_in? %>
+              <li>
+                <a><%= current_user.name %></a>
+                <ul class="menu">
+                  <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+                 </ul>
+               </li>
+            <% end %>
+          </ul>
+        </li>
         <li><img src="http://placehold.it/50x50"></li>
       </ul>
 
