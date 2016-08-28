@@ -1,0 +1,20 @@
+.sub_nav {
+  color: $light-purple;
+  background-color: $light-purple;
+
+  i { color: $whitesmoke; }
+
+  ul {
+    margin-bottom: 0;
+    background-color: $light-purple;
+  }
+
+  li, em {
+    font-weight: bold;
+    font-size: 0.75rem;
+    color: $super-light-purple;
+    padding: 0 0.5rem;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+}

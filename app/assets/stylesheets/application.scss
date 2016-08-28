@@ -1,53 +1,5 @@
 @import "entypo";
 @import "foundation_and_overrides";
 @import "dataTables.foundation";
-
-i { color: $whitesmoke; }
-
-.nav {
-  li, a { color: $whitesmoke; }
-  .menu-text { text-transform: uppercase; }
-  img { border-radius: 25px; }
-  .main-menu-right *:not(:last-child) {
-    display: inline-block;
-    vertical-align: middle;
-    box-sizing: border-box;
-  }
-
-  .main-menu-right > span, .main-menu-right > ul {
-    margin-right: 0.5rem;
-    padding-right: 0.5rem;
-    border-right: 1px solid $light-purple;
-  }
-
-  .main-menu-right .search::before {
-    content: '\f16c';
-    display: block;
-    position: absolute;
-    top: 0.4rem;
-    left: 0.9rem;
-    z-index: 1;
-    font-family: 'foundation-icons';
-    font-size: 1.75rem;
-    color: #2199e8;
-  }
-}
-
-.sub_nav {
-  color: $light-purple;
-  background-color: $light-purple;
-
-  ul {
-    margin-bottom: 0;
-    background-color: $light-purple;
-  }
-
-  li, em {
-    font-weight: bold;
-    font-size: 0.75rem;
-    color: $super-light-purple;
-    padding: 0 0.5rem;
-    display: inline-block;
-    text-transform: uppercase;
-  }
-}
+@import "layout/nav";
+@import "layout/subnav";
