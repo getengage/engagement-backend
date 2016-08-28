@@ -43,7 +43,18 @@ This is the home for the Engagement backend
   go get github.com/benmanns/goworker
   go get github.com/xlvector/hector
   go get github.com/xlvector/hector/hectorcv
+
 ```
+
+don't use rails server for local development, use:
+
+```unix
+  foreman start -f Procfile.dev
+```
+
+this replaces webpack to rebuild the app/assets.
+
+react is a dependency so get [react developer tools for chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related)
 
 ###### Setup
 

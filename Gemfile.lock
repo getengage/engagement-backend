@@ -110,6 +110,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    entypo-rails (2.2.3)
+      railties (>= 3.1, <= 5)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -319,6 +321,7 @@ DEPENDENCIES
   data_migrate
   database_cleaner
   devise
+  entypo-rails
   factory_girl_rails
   faker
   foundation-rails (= 6.2.3.0)

@@ -42,6 +42,20 @@
 
 @import 'util/util';
 
+// 1. Fonts
+// ---------
+
+@font-face {
+  font-family: "FreeSet";
+  src: url("app/assets/FreeSet-Regular.eot");
+  src: url("app/assets/FreeSet-Regular.eot?#iefix") format("embedded-opentype"),
+       url("app/assets/FreeSet-Regular.woff") format("woff"),
+       url("app/assets/FreeSet-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 // 1. Global
 // ---------
 
@@ -60,9 +74,17 @@ $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background: $white;
+
+$dark-purple: #6b519e;
+$purple: #7f64b5;
+$light-purple: #7f64b5;
+$super-light-purple: #b7abd3;
+$whitesmoke: #eaf2f4;
+$dimgray: #62636a;
+
+$body-background: $whitesmoke;
 $body-font-color: $black;
-$body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-font-family: FreeSet, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -378,7 +400,7 @@ $mediaobject-image-width-stacked: 100%;
 
 $menu-margin: 0;
 $menu-margin-nested: 1rem;
-$menu-item-padding: 0.7rem 1rem;
+$menu-item-padding: 0.5rem;
 $menu-item-color-active: $white;
 $menu-item-background-active: map-get($foundation-palette, primary);
 $menu-icon-spacing: 0.25rem;
@@ -558,8 +580,8 @@ $tooltip-radius: $global-radius;
 // 36. Top Bar
 // -----------
 
-$topbar-padding: 0.5rem;
-$topbar-background: $light-gray;
+$topbar-padding: 1rem;
+$topbar-background: $dark-purple;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
