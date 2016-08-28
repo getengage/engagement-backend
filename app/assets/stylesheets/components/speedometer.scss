@@ -1,0 +1,41 @@
+.counter {
+    display: inline-block;
+    position: relative;
+}
+.counter .speedometer {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    border: 20px solid #000;
+    border-right: 20px solid white;
+    border-bottom: 20px solid white;
+    -webkit-transform: rotate(45deg);
+    display: inline-block;
+}
+.counter .needle {
+    width: 5px;
+    height: 50px;
+    background: #999999;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    display: inline-block;
+    left: 50%;
+    position: absolute;
+    top: 10px;
+    -webkit-animation:move 5s infinite;
+    transform:rotate(0deg);
+    transform-origin:bottom;
+}
+@-webkit-keyframes move {
+    0% {
+        transform:rotate(-90deg);
+    }
+    50% {
+        transform:rotate(90deg);
+    }
+    100% {
+        transform:rotate(-90deg);
+    }
+}

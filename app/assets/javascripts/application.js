@@ -10,6 +10,7 @@
 //= require foundation
 //= require jquery.dataTables.min
 //= require dataTables.foundation.min
+//= require Chart.bundle.min
 
 document.addEventListener("turbolinks:load", function() {
   $(document).foundation();
