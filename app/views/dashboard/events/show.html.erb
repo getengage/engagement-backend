@@ -1,28 +1,27 @@
-<div class="large-2 columns">
-  sidebar
-</div>
-<div class="large-10 columns">
+<div class="large-12 columns">
   <section>
     <table>
       <thead>
         <tr>
           <th>Row Id</th>
           <th width="100%">Created At</th>
-          <th>Visible?</th>
-          <th>Referrer</th>
-          <th>Session Id</th>
           <th>Source URL</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <% @query_results.activities.each_with_index do |event, index| %>
+        <% if @query_results.present? %>
+          <% @query_results.values.each_with_index do |event, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= event.created_at %></td>
+              <td><%= event.source_url %></td>
+              <td><%= link_to("View", dashboard_event_detail_path(@api_key.uuid, event.uuid)) %></td>
+            </tr>
+          <% end %>
+        <% else %>
           <tr>
-            <td><%= index + 1 %></td>
-            <td><%= event.created_at %></td>
-            <td><%= event.is_visible %></td>
-            <td><%= event.referrer %></td>
-            <td><%= event.session_id %></td>
-            <td><%= event.source_url %></td>
+            <td colspan="4">No Events</td>
           </tr>
         <% end %>
       </tbody>

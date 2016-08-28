@@ -5,10 +5,15 @@ import (
     "github.com/jrallison/go-workers"
     "github.com/sajari/regression"
     "github.com/influxdata/influxdb/client/v2"
+    "github.com/influxdata/influxdb/uuid"
     "time"
     "encoding/json"
     "math"
 )
+
+type ResponseData struct {
+    SourceUrl  string `json:"source_url"`
+}
 
 const (
     MyDB = "engagement_development"
@@ -79,7 +84,7 @@ func RegressionWorker(message *workers.Msg) {
 
         // run regression
         r.Run()
-        view_time_calculation := in_viewport / ((word_count / avgReadingSpeed) * 60.0)
+        view_time_calculation := (in_viewport * 2) / ((word_count / avgReadingSpeed) * 60.0)
         rsquared_calculation := r.R2
 
         // Regression Strength - max 50 points
@@ -90,12 +95,15 @@ func RegressionWorker(message *workers.Msg) {
         }
 
         // InViewPort Time - max 100 Points
-        final_score += math.Min(view_time_calculation * 1000.0, 100.0)
-
+        final_score += math.Min(view_time_calculation * 100.0, 100.0)
 
         // for Batching Points
+        tags := map[string]string{
+            "uuid": uuid.TimeUUID().String(),
+            "source_url": results_row.Tags["source_url"],
+            "api_key": results_row.Values[0][1].(string),
+        }
 
-        tags := map[string]string{"source_url": results_row.Tags["source_url"]}
         fields := map[string]interface{}{
             "score": final_score,
         }

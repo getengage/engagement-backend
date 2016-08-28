@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'hello_world', to: 'hello_world#index'
   mount Sidekiq::Web => '/sidekiq'
 
   # some constraints here
@@ -24,7 +25,9 @@ Rails.application.routes.draw do
 
   authenticated :user do
     namespace :dashboard do
-      resources :events, only: :show
+      resources :events, only: :show do
+        resources :details, only: [:show, :index]
+      end
       resource :main, only: :index
     end
 

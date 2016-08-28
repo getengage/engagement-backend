@@ -1,5 +1,5 @@
 InfluxDB::Rails.configure do |config|
-  config.influxdb_database = "engagement_development"
+  config.influxdb_database = "engagement_#{Rails.env}"
   config.influxdb_username = "root"
   config.influxdb_password = "root"
   config.influxdb_hosts    = ["localhost"]
