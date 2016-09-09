@@ -3,19 +3,12 @@ module Dashboard
     def show
       if @api_key = ApiKey.find_by_uuid(api_key_param)
         @result = Event::Score.find(uid_param)
+        @source_url = @result.values.first.source_url
+        @mean_scores_from_15_days = Event::Score.mean_scores_from_15_days(@source_url)
+        @line_chart = LineChartPresenter.new(title: "Last 15 Day Engagement Scores",
+                                    labels: (15.days.ago.to_date..Date.today).map{ |date| date.strftime("%b %d") },
+                                    data: @mean_scores_from_15_days.values.map{|x| x.mean.to_f})
       end
-      @data = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-          {
-              label: "My First dataset",
-              backgroundColor: "rgba(220,220,220,0.2)",
-              borderColor: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
-          }
-        ]
-      }
-      @options = { height: "200" }
     end
 
     def uid_param
