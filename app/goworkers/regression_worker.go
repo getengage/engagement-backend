@@ -11,10 +11,6 @@ import (
     "math"
 )
 
-type ResponseData struct {
-    SourceUrl  string `json:"source_url"`
-}
-
 const (
     MyDB = "engagement_development"
     username = "root"
