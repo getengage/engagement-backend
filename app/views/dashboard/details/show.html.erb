@@ -28,10 +28,10 @@
     </div>
     <div class="large-6 columns">
       <div class="callout clearfix">
-        <small class="float-left">Engage Score</small>
+        <small class="float-left">Latest Engage Score</small>
         <small class="float-right">X</small>
         <div class="float-center" style="text-align: center; clear:both">
-          <h2><%= @result.values.first.score.to_i %> / 250 </h2>
+          <h2><%= number_with_precision(@result.values.first.score, precision: 2) %> / 250 </h2>
         </div>
         <div class="float-center" style="clear:both; text-align:center">
           <div class="counter"> <span class="speedometer"></span>
