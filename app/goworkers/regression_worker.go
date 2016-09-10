@@ -62,16 +62,17 @@ func RegressionWorker(message *workers.Msg) {
         r.SetVar(1, "Is Visible")
 
         // time in viewport calculation and end of content check
-        in_viewport := 0.0
+        in_viewport_and_visible := 0.0
         reached_end_of_content := false
 
         // estimated reading time
         word_count, _ := results_row.Values[0][7].(json.Number).Float64()
+        referrer := results_row.Values[0][5].(string)
 
         // iterate over values for a given series
         for _, data_row := range results_row.Values {
           if data_row[3] == true && data_row[4] == true {
-            in_viewport++
+            in_viewport_and_visible++
           }
           parsed_time, _ := time.Parse(time_layout, data_row[0].(string))
           starting_time, _ := time.Parse(time_layout, results_row.Values[0][0].(string))
@@ -87,7 +88,7 @@ func RegressionWorker(message *workers.Msg) {
         }
 
         // total viewport time accounting for 2 second delay/gap
-        total_in_viewport_time := in_viewport * 2
+        total_in_viewport_time := in_viewport_and_visible * 2
 
         // gauge viewport time for user w/ avg reading speed
         estimated_in_viewport_threshold := ((word_count / avgReadingSpeed) * 60.0)
@@ -115,6 +116,7 @@ func RegressionWorker(message *workers.Msg) {
         }
 
         fields := map[string]interface{}{
+            "referrer": referrer,
             "reached_end_of_content": reached_end_of_content,
             "total_in_viewport_time": total_in_viewport_time,
             "word_count": word_count,

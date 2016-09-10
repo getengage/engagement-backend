@@ -39,13 +39,16 @@
           </div>
         </div>
         <small class="float-left" style="clear:both">
-          Content On Page: <%= @result.values.first.total_in_viewport_time %>
+          Content On Page: <%= distance_of_time_in_words(@result.values.first.total_in_viewport_time) %>
         </small>
         <small class="float-left" style="clear:both">
           Word Count: <%= @result.values.first.word_count %>
         </small>
         <small class="float-left" style="clear:both">
           Reached End of Content?: <%= @result.values.first.reached_end_of_content ? "Yes" : "No" %>
+        </small>
+        <small class="float-left" style="clear:both">
+          Referrer: <%= @result.values.first.referrer || "N/A" %>
         </small>
       </div>
     </div>
