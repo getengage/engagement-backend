@@ -44,6 +44,9 @@
         <small class="float-left" style="clear:both">
           Word Count: <%= @result.values.first.word_count %>
         </small>
+        <small class="float-left" style="clear:both">
+          Reached End of Content?: <%= @result.values.first.reached_end_of_content ? "Yes" : "No" %>
+        </small>
       </div>
     </div>
   </div>
