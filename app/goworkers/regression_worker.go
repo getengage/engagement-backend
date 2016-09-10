@@ -1,3 +1,5 @@
+// Downsample raw events sent from client to API endpoint
+
 package main
 
 import (
@@ -59,8 +61,9 @@ func RegressionWorker(message *workers.Msg) {
         r.SetVar(0, "Elapsed Time")
         r.SetVar(1, "Is Visible")
 
-        // time in viewport calculation
+        // time in viewport calculation and end of content check
         in_viewport := 0.0
+        reached_end_of_content := false
 
         // estimated reading time
         word_count, _ := results_row.Values[0][7].(json.Number).Float64()
@@ -73,14 +76,25 @@ func RegressionWorker(message *workers.Msg) {
           parsed_time, _ := time.Parse(time_layout, data_row[0].(string))
           starting_time, _ := time.Parse(time_layout, results_row.Values[0][0].(string))
           elapsed_time_in_seconds := parsed_time.Sub(starting_time).Seconds()
-          float, _ := data_row[9].(json.Number).Float64()
-          dp := regression.DataPoint(float, []float64{elapsed_time_in_seconds, 1})
+          y_position, _ := data_row[9].(json.Number).Float64()
+          bottom_of_viewport, _ := data_row[2].(json.Number).Float64()
+          if (y_position > bottom_of_viewport && reached_end_of_content != true) {
+            reached_end_of_content = true
+            _ = reached_end_of_content
+          }
+          dp := regression.DataPoint(y_position, []float64{elapsed_time_in_seconds, 1})
           r.Train(dp)
         }
 
+        // total viewport time accounting for 2 second delay/gap
+        total_in_viewport_time := in_viewport * 2
+
+        // gauge viewport time for user w/ avg reading speed
+        estimated_in_viewport_threshold := ((word_count / avgReadingSpeed) * 60.0)
+
         // run regression
         r.Run()
-        view_time_calculation := (in_viewport * 2) / ((word_count / avgReadingSpeed) * 60.0)
+        estimated_total_read_through := total_in_viewport_time / estimated_in_viewport_threshold
         rsquared_calculation := r.R2
 
         // Regression Strength - max 50 points
@@ -91,7 +105,7 @@ func RegressionWorker(message *workers.Msg) {
         }
 
         // InViewPort Time - max 100 Points
-        final_score += math.Min(view_time_calculation * 100.0, 100.0)
+        final_score += math.Min(estimated_total_read_through * 100.0, 100.0)
 
         // for Batching Points
         tags := map[string]string{
@@ -101,6 +115,9 @@ func RegressionWorker(message *workers.Msg) {
         }
 
         fields := map[string]interface{}{
+            "reached_end_of_content": reached_end_of_content,
+            "total_in_viewport_time": total_in_viewport_time,
+            "word_count": word_count,
             "score": final_score,
         }
 
