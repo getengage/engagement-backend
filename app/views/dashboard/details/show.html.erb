@@ -38,6 +38,12 @@
             <span class="needle"></span>
           </div>
         </div>
+        <small class="float-left" style="clear:both">
+          Content On Page: <%= @result.values.first.total_in_viewport_time %>
+        </small>
+        <small class="float-left" style="clear:both">
+          Word Count: <%= @result.values.first.word_count %>
+        </small>
       </div>
     </div>
   </div>
