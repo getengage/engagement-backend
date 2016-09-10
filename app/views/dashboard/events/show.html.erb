@@ -25,8 +25,9 @@
           <thead>
             <tr>
               <th>Row Id</th>
-              <th width="100%">Created At</th>
+              <th>Created At</th>
               <th>Source URL</th>
+              <th>Referrer</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -35,8 +36,9 @@
               <% @query_results.values.each_with_index do |event, index| %>
                 <tr>
                   <td><%= index + 1 %></td>
-                  <td><%= event.created_at %></td>
+                  <td><%= event.time %></td>
                   <td><%= event.source_url %></td>
+                  <td><%= event.referrer || "N/A" %></td>
                   <td><%= link_to("View", dashboard_event_detail_path(@api_key.uuid, event.uuid)) %></td>
                 </tr>
               <% end %>
