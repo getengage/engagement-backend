@@ -1,41 +1,25 @@
-<div class="large-12 columns">
-  <div class="row" style="margin-top: 2rem">
-    <div class="large-6 columns">
-      <nav aria-label="You are here:" role="navigation">
-        <ul class="breadcrumbs">
-          <li>
-            <span class="show-for-sr">Current: </span> Home
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <div class="large-6 columns">
-      <div class="callout">
-      </div>
+<div class="row" style="margin-top:4rem">
+  <div class="large-5 large-offset-1 columns">
+    <div class="row">
+      <h4>Choose from the options on the right to get started</h4>
+      <h6>ipsum Lorem ipsum dolor sit amet, consectetur adipisicing elit</h6>
+      <div style="text-align: center"><i style="font-size:10rem" class="icon-line-graph"></i></div>
     </div>
   </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <div class="callout">
-        <table>
-          <thead>
-            <tr>
-              <th>Api Keys</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @api_keys.each do |key| %>
-              <tr>
-                <td><%= key.display_name %></td>
-                <td>ACTIVE</td>
-                <td><%= link_to "Go to Events", dashboard_event_path(key.uuid) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+  <div class="large-5 columns">
+    <div class="row">
+      <% dashboard_sections.each do |section| %>
+        <div class="column">
+          <div class="media-object">
+            <div class="media-object-section middle">
+              <img src="//placehold.it/100x100" class="thumbnail" alt="">
+            </div>
+            <div class="media-object-section middle">
+              <h4 style="display: inline-block"><%= link_to section.titleize, send("dashboard_#{section}_path") %></h4>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

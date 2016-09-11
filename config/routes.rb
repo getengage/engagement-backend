@@ -25,9 +25,11 @@ Rails.application.routes.draw do
 
   authenticated :user do
     namespace :dashboard do
-      resources :events, only: :show do
+      resources :events, only: [:index, :show] do
         resources :details, only: [:show, :index]
       end
+      resources :settings, only: [:index]
+      resources :reports, only: [:index]
       resource :main, only: :index
     end
 

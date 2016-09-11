@@ -10,7 +10,7 @@
   </head>
   <body>
     <%= render "nav" %>
-    <%= render "sub_nav" %>
+    <%= render "sub_nav" unless subnav_hidden? %>
     <%= yield %>
   </body>
 </html>

@@ -1,7 +1,7 @@
 module Dashboard
   class MainController < ApplicationController
     def index
-      @api_keys = current_user.api_keys
+      @subnav_hidden = true
     end
   end
 end

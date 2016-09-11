@@ -6,6 +6,10 @@ module Dashboard
       end
     end
 
+    def index
+      @api_keys = current_user.api_keys
+    end
+
     def api_key_param
       params.require(:id)
     end
