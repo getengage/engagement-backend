@@ -31,7 +31,7 @@
         <small class="float-left">Latest Engage Score</small>
         <small class="float-right">X</small>
         <div class="float-center" style="clear:both; text-align:center; margin-top: 2rem">
-          <div class="counter" style="display:inline-block">
+          <div class="counter">
             <span class="speedometer"></span>
             <span class="needle" style="transform: rotate(<%= (-45 + ((@result.values.first.score / 250) * 100)).to_i %>deg)"></span>
           </div>
