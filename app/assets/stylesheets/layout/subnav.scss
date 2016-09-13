@@ -6,7 +6,7 @@
   color: $light-purple;
   background-color: $light-purple;
 
-  i { color: $whitesmoke; }
+  i, li, em, a { color: $ultra-light-purple; }
 
   ul {
     margin-bottom: 0;
@@ -16,7 +16,6 @@
   li, em {
     font-weight: bold;
     font-size: 0.70rem;
-    color: $ultra-light-purple;
     padding: 0 0.5rem;
     letter-spacing: 0.05rem;
     display: inline-block;

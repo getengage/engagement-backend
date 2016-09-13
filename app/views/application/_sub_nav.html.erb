@@ -7,10 +7,10 @@
   <div class="top-bar-center">
     <span>
       <ul>
-        <li><i class="icon-line-graph"></i>Events</li><em>•</em>
+        <li><i class="icon-line-graph"></i><%= link_to "Events", dashboard_events_path %></li><em>•</em>
         <li><i class="icon-bar-graph"></i>Stats</li><em>•</em>
-        <li><i class="icon-text-doc"></i>Reports</li><em>•</em>
-        <li><i class="icon-cog"></i>Settings</li>
+        <li><i class="icon-text-doc"></i><%= link_to "Reports", dashboard_reports_path %></li><em>•</em>
+        <li><i class="icon-cog"></i><%= link_to "Settings", dashboard_settings_path %></li>
       </ul>
     </span>
   </div>
