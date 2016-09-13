@@ -1,7 +1,8 @@
 .sub_nav {
-  -webkit-box-shadow: 0px 1px 1px #585dbb;
-  -moz-box-shadow: 0px 1px 1px #585dbb;
-  box-shadow: 0px 1px 1px #585dbb;
+  -webkit-box-shadow: 0px 1px 1px #3e3f44;
+  -moz-box-shadow: 0px 1px 1px #3e3f44;
+  box-shadow: 0px 1px 1px #3e3f44;
+  border-top: 1px solid #555665;
   color: $light-purple;
   background-color: $light-purple;
 
@@ -14,9 +15,10 @@
 
   li, em {
     font-weight: bold;
-    font-size: 0.75rem;
-    color: $super-light-purple;
+    font-size: 0.70rem;
+    color: $ultra-light-purple;
     padding: 0 0.5rem;
+    letter-spacing: 0.05rem;
     display: inline-block;
     text-transform: uppercase;
   }

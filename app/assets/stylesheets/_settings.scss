@@ -588,3 +588,13 @@ $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
 $topbar-unstack-breakpoint: medium;
 
+
+.callout {
+  -webkit-box-shadow: 0px 1px 1px #e1e2fb;
+  -moz-box-shadow: 0px 1px 1px #e1e2fb;
+  box-shadow: 0px 1px 1px #e1e2fb;
+}
+
+.breadcrumbs li {
+  letter-spacing: 0.05rem;
+}
