@@ -116,6 +116,7 @@ func RegressionWorker(message *workers.Msg) {
         }
 
         fields := map[string]interface{}{
+            "session_id": results_row.Tags["session_id"],
             "referrer": referrer,
             "reached_end_of_content": reached_end_of_content,
             "total_in_viewport_time": total_in_viewport_time,

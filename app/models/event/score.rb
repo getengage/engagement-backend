@@ -10,9 +10,13 @@ module Event
       new(results.first)
     end
 
-    def self.mean_scores_from_15_days(source_url)
-      results = InfluxDB::Rails.client.query "select mean(score) from #{influx_table} where source_url = '#{source_url}' and time > now() - 15d group by time(1d)"
+    def self.mean_scores_from_15_days(source_url, api_key)
+      results = InfluxDB::Rails.client.query "select mean(score) from #{influx_table} where api_key = '#{api_key}' and source_url = '#{source_url}' and time > now() - 15d group by time(1d)"
       new(results.first)
+    end
+
+    def self.top_scores_by_source_url(api_key)
+      results = InfluxDB::Rails.client.query("select count(distinct(session_id)) as count from #{influx_table} where api_key = '#{api_key}' group by source_url")
     end
   end
 end
