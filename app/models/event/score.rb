@@ -16,7 +16,8 @@ module Event
     end
 
     def self.top_scores_by_source_url(api_key)
-      results = InfluxDB::Rails.client.query("select count(distinct(session_id)) as count from #{influx_table} where api_key = '#{api_key}' group by source_url")
+      results = InfluxDB::Rails.client.query("select top(count, 5) as count, source_url from unique_visits_1d group by source_url")
+      new(results.first)
     end
   end
 end
