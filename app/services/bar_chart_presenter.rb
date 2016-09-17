@@ -4,7 +4,7 @@ class BarChartPresenter
   def initialize(title:, labels:, data:, **options)
     @options = default_options.reverse_merge(options)
     @data = {
-      labels: labels,
+      labels: padded(labels, "N/A"),
       datasets: [
         {
             label: title,
@@ -23,19 +23,24 @@ class BarChartPresenter
                 'rgba(153, 102, 255, 1)',
             ],
             borderWidth: 1,
-            data: data
+            data: padded(data, 0)
         }
       ]
     }
   end
 
+  def padded(data, filler)
+    data.size == 5 ? data : data + ([filler] * (5 - data.size))
+  end
+
   def default_options
     { height: "200",
+      tooltips: {
+        titleFontSize: 10
+      },
       scales: {
         yAxes: [{
-          ticks: {
-            stepSize: 1.0
-          }
+          display: false,
         }]
       }
     }

@@ -1,6 +1,8 @@
 .counter {
     display: inline-block;
     position: relative;
+    height: 60px;
+    overflow: hidden;
 }
 .counter .speedometer {
 

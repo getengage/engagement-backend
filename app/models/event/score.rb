@@ -15,8 +15,18 @@ module Event
       new(results.first)
     end
 
+    def self.top_visits_by_source_url(api_key)
+      results = InfluxDB::Rails.client.query("select top(count, 5) as count, source_url from unique_visits_1d")
+      new(results.first)
+    end
+
     def self.top_scores_by_source_url(api_key)
-      results = InfluxDB::Rails.client.query("select top(count, 5) as count, source_url from unique_visits_1d group by source_url")
+      results = InfluxDB::Rails.client.query("select top(mean, 5) as count, source_url from mean_scores_1d")
+      new(results.first)
+    end
+
+    def self.top_referrals_by_source_url(api_key)
+      results = InfluxDB::Rails.client.query("select top(count, 5) as count, source_url from referrals_1d")
       new(results.first)
     end
   end
