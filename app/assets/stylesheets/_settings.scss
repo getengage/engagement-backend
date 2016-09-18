@@ -517,16 +517,16 @@ $switch-paddle-transition: all 0.25s ease-out;
 
 $table-background: $white;
 $table-color-scale: 5%;
-$table-border: 1px solid smart-scale($table-background, $table-color-scale);
+$table-border: 1px solid smart-scale($table-background, $table-color-scale + 6%);
 $table-padding: rem-calc(8 10 10);
 $table-hover-scale: 2%;
 $table-row-hover: darken($table-background, $table-hover-scale);
 $table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
 $table-striped-background: smart-scale($table-background, $table-color-scale);
 $table-stripe: even;
-$table-head-background: $light-purple;
+$table-head-background: darken($table-background, $table-hover-scale + 4%);
 $table-foot-background: smart-scale($table-background, $table-color-scale);
-$table-head-font-color: $ultra-light-purple;
+$table-head-font-color: darken($table-background, 75%);
 $show-header-for-stacked: false;
 
 // 32. Tabs
@@ -581,7 +581,7 @@ $tooltip-radius: $global-radius;
 // 36. Top Bar
 // -----------
 
-$topbar-padding: 1rem;
+$topbar-padding: 0.6rem;
 $topbar-background: $dark-purple;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 1rem;
