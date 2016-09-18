@@ -24,3 +24,7 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 });
+
+Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
+  return this.progressBarTimeout = setTimeout(this.showProgressBar, 0);
+};

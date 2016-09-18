@@ -7,7 +7,7 @@
   },
   "scripts": {
     "postinstall": "cd client && npm install",
-    "rails-server": "echo 'visit http://localhost:3000/hello_world' && foreman start -f Procfile.dev",
+    "rails-server": "echo 'visit http://localhost:3000' && foreman start -f Procfile.dev",
     "build:production:client": "(cd client && npm run build:production:client --silent)",
     "build:client": "(cd client && npm run build:client --silent",
     "build:dev:client": "(cd client && npm run build:dev:client --silent)",

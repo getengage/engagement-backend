@@ -1,5 +1,19 @@
-<div class="small-6 small-centered">
+<div class="large-12 columns">
   <div class="row" style="margin-top: 2rem">
-    <%= react_component("SettingsContainerApp", props: {data: @api_keys.map(&:attributes)}, prerender: false) %>
+    <div class="large-6 columns">
+      <nav aria-label="You are here:" role="navigation">
+        <ul class="breadcrumbs">
+          <li><%= link_to "Home", root_path %></li>
+          <li>
+            <span class="show-for-sr">Current: </span> Events
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="small-6 small-centered"
+    <div class="row" style="margin-top:1rem">
+      <%= react_component("SettingsContainerApp", props: {data: @api_keys.map(&:attributes)}, prerender: false) %>
+    </div>
   </div>
 </div>
