@@ -1,33 +1,27 @@
 module Event
   class Score < InfluxCollection
     def self.find(uuid)
-      results = InfluxDB::Rails.client.query "select * from #{influx_table} where uuid = '#{uuid}'"
-      new(results.first)
+      query("select * from #{influx_table} where uuid = '%s'", uuid)
     end
 
     def self.find_by_api_key(api_key)
-      results = InfluxDB::Rails.client.query "select last(score) as score, referrer, source_url, uuid from #{influx_table} where api_key = '#{api_key}' group by source_url"
-      new(results.first)
+      query("select last(score) as score, referrer, source_url, uuid from #{influx_table} where api_key = '%s' group by source_url", api_key)
     end
 
     def self.mean_scores_from_15_days(source_url, api_key)
-      results = InfluxDB::Rails.client.query "select mean(score) from #{influx_table} where api_key = '#{api_key}' and source_url = '#{source_url}' and time > now() - 15d group by time(1d)"
-      new(results.first)
+      query("select mean(score) from #{influx_table} where api_key = '%s' and source_url = '%s' and time > now() - 15d group by time(1d)", api_key, source_url)
     end
 
     def self.top_visits_by_source_url(api_key)
-      results = InfluxDB::Rails.client.query("select top(count, 5) as count, source_url from unique_visits_1d")
-      new(results.first)
+      query("select top(count, 5) as count, source_url from unique_visits_1d")
     end
 
     def self.top_scores_by_source_url(api_key)
-      results = InfluxDB::Rails.client.query("select top(mean, 5) as count, source_url from mean_scores_1d")
-      new(results.first)
+      query("select top(mean, 5) as count, source_url from mean_scores_1d")
     end
 
     def self.top_referrals_by_source_url(api_key)
-      results = InfluxDB::Rails.client.query("select top(count, 5) as count, source_url from referrals_1d")
-      new(results.first)
+      query("select top(count, 5) as count, source_url from referrals_1d")
     end
   end
 end
