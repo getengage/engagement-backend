@@ -47,10 +47,10 @@
 
 @font-face {
   font-family: "FreeSet";
-  src: url("app/assets/FreeSet-Regular.eot");
-  src: url("app/assets/FreeSet-Regular.eot?#iefix") format("embedded-opentype"),
-       url("app/assets/FreeSet-Regular.woff") format("woff"),
-       url("app/assets/FreeSet-Regular.ttf") format("truetype");
+  src: url("/assets/FreeSet-Regular.eot");
+  src: url("/assets/FreeSet-Regular.eot?#iefix") format("embedded-opentype"),
+       url("/assets/FreeSet-Regular.woff") format("woff"),
+       url("/assets/FreeSet-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -524,7 +524,7 @@ $table-row-hover: darken($table-background, $table-hover-scale);
 $table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
 $table-striped-background: smart-scale($table-background, $table-color-scale);
 $table-stripe: even;
-$table-head-background: smart-scale($table-background, $table-color-scale / 2);
+$table-head-background: darken($table-background, $table-hover-scale);
 $table-foot-background: smart-scale($table-background, $table-color-scale);
 $table-head-font-color: $body-font-color;
 $show-header-for-stacked: false;

@@ -1,0 +1,5 @@
+<div class="small-6 small-centered">
+  <div class="row" style="margin-top: 2rem">
+    <%= react_component("SettingsContainerApp", props: {data: @api_keys.map(&:attributes)}, prerender: false) %>
+  </div>
+</div>

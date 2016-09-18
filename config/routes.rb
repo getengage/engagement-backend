@@ -1,10 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  get 'hello_world', to: 'hello_world#index'
   mount Sidekiq::Web => '/sidekiq'
 
-  # some constraints here
   namespace :admin do
     resources :users
     root to: "users#index"
