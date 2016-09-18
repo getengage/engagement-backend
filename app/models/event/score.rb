@@ -6,7 +6,7 @@ module Event
     end
 
     def self.find_by_api_key(api_key)
-      results = InfluxDB::Rails.client.query "select * from #{influx_table} where api_key = '#{api_key}'"
+      results = InfluxDB::Rails.client.query "select last(score) as score, referrer, source_url, uuid from #{influx_table} where api_key = '#{api_key}' group by source_url"
       new(results.first)
     end
 
