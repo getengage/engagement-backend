@@ -41,14 +41,14 @@
     </div>
     <div class="large-3 columns">
       <div class="callout clearfix">
-        <small class="float-left">Highest Engage Score</small>
+        <small class="float-left">Average Engage Score</small>
         <small class="float-right">X</small>
         <div class="float-center" style="clear:both; text-align:center; margin-top: 2rem">
           <div class="counter" style="display:inline-block">
             <span class="speedometer"></span>
-            <span class="needle" style="transform: rotate(<%= (-45 + ((@result.values.first.score / 250) * 100)).to_i %>deg)"></span>
+            <span class="needle" style="transform: rotate(<%= (-45 + ((@median_score.values.first.score / 250) * 100)).to_i %>deg)"></span>
           </div>
-          <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.values.first.score, precision: 2) %> / 250 </h4>
+          <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@median_score.values.first.score, precision: 2) %> / 250 </h4>
         </div>
       </div>
     </div>
