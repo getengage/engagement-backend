@@ -1,6 +1,4 @@
-// CRITICAL that webpack-bundle must be BEFORE bootstrap-sprockets and turbolinks
-// since it is exposing jQuery and jQuery-ujs
-
+//= require jquery
 //= require webpack-bundle
 //= require turbolinks
 //= require foundation
