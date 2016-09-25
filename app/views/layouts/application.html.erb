@@ -11,16 +11,7 @@
   <body>
     <%= render "nav" %>
     <%= render "sub_nav" unless subnav_hidden? || !user_signed_in? %>
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, id: "flash_#{name}" %>
-      <div class="alert callout" data-closable>
-        <p><%= msg %></p>
-        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-
+    <%= render "flash" %>
     <%= yield %>
   </body>
 </html>
