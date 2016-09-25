@@ -7,11 +7,10 @@ feature 'Navigation links', :devise do
   # Scenario: View navigation links
   #   Given I am a visitor
   #   When I visit the home page
-  #   Then I see "home," "sign in," and "sign up"
+  #   Then I see "log in," and "sign up"
   scenario 'view navigation links' do
     visit root_path
-    expect(page).to have_content 'Home'
-    expect(page).to have_content 'Sign in'
+    expect(page).to have_content 'Log in'
     expect(page).to have_content 'Sign up'
   end
 
