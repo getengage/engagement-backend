@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import _ from 'lodash';
 
 var SettingsForm = React.createClass({
   doSubmit: function (e) {

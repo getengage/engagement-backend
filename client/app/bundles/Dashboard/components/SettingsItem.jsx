@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import _ from 'lodash';
 
 var SettingsItem = React.createClass({
   removeNode: function (e) {
