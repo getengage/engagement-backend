@@ -1,7 +1,8 @@
-<h1 align="center"><br>Engagement<br></h1>
+<h1 align="center">Engagement<br></h1>
 <h4 align="center">Metrics and Analytics</h4>
 
 <p align="center">
+  <a href="https://circleci.com/gh/nicksoto/engagement-backend"><img src="https://circleci.com/gh/nicksoto/engagement-backend.png?style=shield&circle-token=13e8f29fdd7502e8466f98ae36fd6f4624ba49c7"></a>
 </p>
 <br>
 
