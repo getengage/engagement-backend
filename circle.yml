@@ -8,4 +8,8 @@ general:
   branches:
     only:
       - master # list of branches to build
-      - /feature-.*/ # or regexes
+      - /feature-.*/ ## or regexes
+
+test:
+  pre:
+    - cd client && npm run build:test
