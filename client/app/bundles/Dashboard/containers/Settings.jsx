@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import _ from 'lodash';
 import SettingsTable from '../components/SettingsTable';
 import SettingsForm from '../components/SettingsForm';
 
