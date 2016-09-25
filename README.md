@@ -49,10 +49,11 @@ This is the home for the Engagement backend
 don't use rails server for local development, use:
 
 ```unix
-  foreman start -f Procfile.dev
+  npm run postinstall (if first install or devdependencies change)
+  npm run rails-server
 ```
 
-this replaces webpack to rebuild the app/assets.
+this uses webpack to rebuild the app/assets/web-bundle.js file w/ react components.
 
 react is a dependency so get [react developer tools for chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related)
 
