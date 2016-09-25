@@ -2,3 +2,10 @@
 dependencies:
   pre:
     - gem install bundler --pre
+
+# limit pushes to master and release branches
+general:
+  branches:
+    only:
+      - master # list of branches to build
+      - /feature-.*/ # or regexes
