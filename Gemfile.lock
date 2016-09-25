@@ -85,6 +85,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (1.0.14)
+      capybara (>= 1.0, < 3)
+      launchy
     chartjs-ror (3.0.2)
       rails (>= 3.1)
     childprocess (0.5.9)
@@ -325,6 +328,7 @@ DEPENDENCIES
   bourbon
   byebug
   capybara
+  capybara-screenshot
   chartjs-ror
   coffee-rails (~> 4.1.0)
   data_migrate

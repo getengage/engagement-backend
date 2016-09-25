@@ -49,6 +49,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'capybara-screenshot'
 end
 group :production do
   gem 'rails_12factor'
