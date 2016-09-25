@@ -1,0 +1,4 @@
+# or else bundler will fail
+dependencies:
+  pre:
+    - gem install bundler --pre
