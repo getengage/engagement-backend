@@ -4,6 +4,12 @@
     height: 60px;
     overflow: hidden;
 }
+
+.counter + h4 {
+  letter-spacing: -1px;
+  color: $dark-purple;
+}
+
 .counter .speedometer {
 
     width: 80px;

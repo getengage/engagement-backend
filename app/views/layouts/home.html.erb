@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content_for?(:title) ? yield(:title) : "Engage" %></title>
+    <%= stylesheet_link_tag 'home', media: 'all' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= yield %>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+    <%= javascript_tag do  %>
+      (function($) {
+        "use strict";
+
+        $('body').scrollspy({
+            target: '.navbar-fixed-top',
+            offset: 60
+        });
+
+        $('#topNav').affix({
+            offset: {
+                top: 200
+            }
+        });
+
+        new WOW().init();
+
+        $('a.page-scroll').bind('click', function(event) {
+            var $ele = $(this);
+            $('html, body').stop().animate({
+                scrollTop: ($($ele.attr('href')).offset().top - 60)
+            }, 1450, 'easeInOutExpo');
+            event.preventDefault();
+        });
+
+        $('.navbar-collapse ul li a').click(function() {
+            /* always close responsive nav after click */
+            $('.navbar-toggle:visible').click();
+        });
+
+        $('#galleryModal').on('show.bs.modal', function (e) {
+           $('#galleryImage').attr("src",$(e.relatedTarget).data("src"));
+        });
+      })(jQuery);
+    <% end %>
+  </body>
+</html>
