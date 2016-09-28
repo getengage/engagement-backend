@@ -5,6 +5,7 @@ module Dashboard
         @result = Event::Score.find(uid_param)
         @source_url = @result.values.first.source_url
         @mean_scores_from_15_days = Event::Score.mean_scores_from_15_days(@source_url, @api_key.uuid)
+        @unique_visits_from_15_days = Event::Score.unique_visits_from_15_days(@source_url, @api_key.uuid)
         @median_score = Event::Score.median_score_alltime(@source_url, @api_key.uuid)
         @line_chart = LineChartPresenter.new(title: "Last 15 Day Engagement Scores",
                                     labels: (15.days.ago.to_date..Date.today).map{ |date| date.strftime("%b %d") },

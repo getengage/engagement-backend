@@ -6,7 +6,7 @@
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Events", dashboard_event_path(@api_key.uuid) %></li>
           <li>Details</li>
-          <li style="color: #6f99d5; white-space: pre; font-weight: bold">
+          <li style="color: #6f99d5; white-space: pre-wrap; font-weight: bold">
             <span class="show-for-sr">Current</span><%= @result.values.first.source_url %>
           </li>
         </ul>
@@ -57,6 +57,11 @@
             <li><%= @result.values.first.word_count %><span>Word Count</span></li>
             <li><%= @result.values.first.reached_end_of_content ? "Yes" : "No" %><span>Reached End?</span></li>
             <li style="font-size:1rem"><%= strip_url(@result.values.first.referrer).truncate(20) || "N/A" %><span>Referrer</span></li>
+          </ul>
+          <br>
+          <br>
+          <ul>
+            <li>There were <strong><%= @unique_visits_from_15_days.values.map(&:count).sum %></strong> visits in the last 15 days: <strong><%= @unique_visits_from_15_days.values[0].count %></strong> visits today and <strong><%= @unique_visits_from_15_days.values[1].count %></strong> the day before.<span>Visit Summary</span></li>
           </ul>
         </div>
       </div>

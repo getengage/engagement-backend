@@ -12,6 +12,10 @@ module Event
       query("select mean(score) from #{influx_table} where api_key = '%s' and source_url = '%s' and time > now() - 15d group by time(1d)", api_key, source_url)
     end
 
+    def self.unique_visits_from_15_days(source_url, api_key)
+      query("select count(session_id) from #{influx_table} where api_key = '%s' and source_url = '%s' and time > now() - 15d group by time(1d) order by time desc", api_key, source_url)
+    end
+
     def self.median_score_alltime(source_url, api_key)
       query("select median(score) as score from #{influx_table} where api_key = '%s' and source_url = '%s'", api_key, source_url)
     end
