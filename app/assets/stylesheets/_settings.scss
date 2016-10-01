@@ -599,3 +599,17 @@ $topbar-unstack-breakpoint: medium;
 .breadcrumbs li {
   letter-spacing: 0.05rem;
 }
+
+small {
+  color: #8a8a8a;
+  display: block;
+  font-size: 0.7rem !important;
+}
+
+.category {
+  display: inline-block;
+  padding: 0.1rem 1rem;
+  color: white;
+  background-color: $dark-purple;
+  letter-spacing: -1px;
+}
