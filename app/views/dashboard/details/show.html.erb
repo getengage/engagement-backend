@@ -5,7 +5,6 @@
         <ul class="breadcrumbs">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Events", dashboard_event_path(@api_key.uuid) %></li>
-          <li>Details</li>
           <li style="color: #6f99d5; font-weight: bold">
             <span class="show-for-sr">Current</span><%= @result.values.first.source_url %>
           </li>
