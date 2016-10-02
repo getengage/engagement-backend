@@ -41,6 +41,7 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'
   gem 'faker'
+  # gem 'guard-rspec'
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
