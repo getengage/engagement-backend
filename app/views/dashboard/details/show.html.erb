@@ -5,7 +5,7 @@
         <ul class="breadcrumbs">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Events", dashboard_event_path(@api_key.uuid) %></li>
-          <li style="color: #6f99d5; font-weight: bold">
+          <li style="color: #7F8AA2">
             <span class="show-for-sr">Current</span><%= @result.values.first.source_url %>
           </li>
         </ul>
@@ -20,18 +20,21 @@
   <div class="row">
     <div class="large-6 columns">
       <div class="callout clearfix">
+        <span>
+          <i class="icon-up-bold" style="float: right; font-size: 2rem; color: #7FA285;"></i>
+        </span>
         <small>Visits</small>
-        <span style="color: #6f99d5;">There were <strong><%= @unique_visits_from_15_days.values.map(&:count).sum %></strong> visits in the last 15 days: <strong><%= @unique_visits_from_15_days.values[0].count %></strong> visits today and <strong><%= @unique_visits_from_15_days.values[1].count %></strong> the day before.</span>
+        <span style="color: #7F8AA2;">There were <strong><%= @unique_visits_from_15_days.values.map(&:count).sum %></strong> visits in the last 15 days: <strong><%= @unique_visits_from_15_days.values[0].count %></strong> today and <strong><%= @unique_visits_from_15_days.values[1].count %></strong> the day before.</span>
       </div>
     </div>
     <div class="large-6 columns">
       <div class="callout clearfix">
+        <i class="icon-up-bold" style="float: right; font-size: 2rem; color: #7FA285;"></i>
         <small>Engagement</small>
-        <span style="color: #6f99d5;"><strong>50%</strong> of users visiting in the last 15 days were engaged.</span>
+        <span style="color: #7F8AA2;"><strong>50%</strong> of users visiting in the last 15 days were engaged.</span>
       </div>
     </div>
   </div>
-  <br>
   <div class="row">
     <div class="large-12 columns">
       <h6 class="category">Stats</h6>
