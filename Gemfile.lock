@@ -337,6 +337,7 @@ DEPENDENCIES
   entypo-rails
   factory_girl_rails
   faker
+  foreman
   foundation-rails (= 6.2.3.0)
   hashie
   high_voltage (~> 3.0.0)
