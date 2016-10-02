@@ -48,7 +48,7 @@ web: &app_base
 
     # Enable the byebug debugging server - this can be overriden
     # from the command line:
-    ENABLE_DEBUG_SERVER: true
+    # ENABLE_DEBUG_SERVER: true
 
     # Run the app in the 'development' environment:
     RACK_ENV: development
