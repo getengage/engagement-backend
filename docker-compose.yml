@@ -1,14 +1,12 @@
 version: '2'
 services:
   postgres:
+    restart: always
     image: postgres
     ports:
       - '5432:5432'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
-    environment:
-      POSTGRES_USERNAME: postgres
-      POSTGRES_PASSWORD: 3x1mpl3
   web:
     build: .
     env_file: web.env
