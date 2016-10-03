@@ -12,7 +12,7 @@ services:
   web:
     build: .
     env_file: web.env
-    command: foreman start -f Procfile.dev
+    command: bash -c "rm -rf /app/tmp/pids/server.pid && foreman start -f Procfile.dev"
     volumes:
       - .:/app
     ports:
