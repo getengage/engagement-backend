@@ -6,8 +6,12 @@ services:
       - '5432:5432'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: 3x1mpl3
   web:
     build: .
+    env_file: web.env
     command: foreman start -f Procfile.dev
     volumes:
       - .:/app
@@ -15,6 +19,5 @@ services:
       - "3000:3000"
     depends_on:
       - 'postgres'
-
 volumes:
   postgres:

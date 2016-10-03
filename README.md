@@ -75,6 +75,24 @@ react is a dependency so get [react developer tools for chrome](https://chrome.g
   hit api endpoint with `byebug` line
 ```
 
+###### Deploying
+
+Docker and Docker Compose are required
+
+```unix
+  brew install docker-compose
+  brew install docker-machine
+  brew install Caskroom/cask/virtualbox
+```
+
+```unix
+  powder restart
+  add `byebug` to line in code
+  bundle exec byebug -R localhost:1048
+  hit api endpoint with `byebug` line
+```
+
+
 #### License
 
 Copyright (c) [Nick Soto](http://google.com)

@@ -48,7 +48,9 @@ test:
 
 production:
   adapter:  postgresql
-  host:     localhost
+  url:      <%= ENV['DATABASE_URL'] %>
+  username: <%= ENV['POSTGRES_USERNAME'] %>
+  pasword:  <%= ENV['POSTGRES_PASSWORD'] %>
   encoding: unicode
   database: engagement-backend_production
   pool:     5

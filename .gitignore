@@ -85,6 +85,7 @@ npm-debug.log
 # Environment files that may contain sensitive data
 .env
 .powenv
+web.env
 
 # tilde files are usually backup files from a text editor
 *~
