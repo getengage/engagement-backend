@@ -14,11 +14,6 @@ This is the home for the Engagement backend
 - more
 - stuff
 
-#### Inspiration
-
-- fonts: http://defharo.com/dise%C3%B1o-grafico/tipografia/monserga-outline-round-font/
-- goworkers: http://mildlyinternet.com/code/supercharge-resque-and-sidekiq-with-go-part-2.html
-
 #### Todo
 
 - add
@@ -57,6 +52,11 @@ don't use rails server for local development, use:
 this uses webpack to rebuild the app/assets/web-bundle.js file w/ react components.
 
 react is a dependency so get [react developer tools for chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related)
+
+#### Services
+
+- goworkers: http://mildlyinternet.com/code/supercharge-resque-and-sidekiq-with-go-part-2.html
+- influxdb: https://www.influxdata.com/time-series-platform/influxdb/
 
 ###### Setup
 
