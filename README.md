@@ -62,7 +62,7 @@ react is a dependency so get [react developer tools for chrome](https://chrome.g
 
 ```ruby
   rake db:create db:migrate
-  rake data:migrate
+  rake data:migrate:with_data
   rake db:seed
 ```
 
