@@ -7,6 +7,11 @@ services:
       - '5432:5432'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
+  influxdb:
+    restart: always
+    image: influxdb
+    ports:
+      - '8086:8086'
   web:
     build: .
     env_file: web.env
@@ -17,5 +22,6 @@ services:
       - "3000:3000"
     depends_on:
       - 'postgres'
+      - 'influxdb'
 volumes:
   postgres:
