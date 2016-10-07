@@ -77,13 +77,19 @@ react is a dependency so get [react developer tools for chrome](https://chrome.g
 
 ###### Deploying
 
-Docker and Docker Compose are required
+Docker and Docker Compose scripts are available
 
 ```unix
   brew install docker-compose
   brew install docker-machine
   brew install Caskroom/cask/virtualbox
 ```
+
+Alternatively you can use Flynn for deployments
+
+`brew install flynn`
+`flynn install`
+`flynn -a dashboard env | grep LOGIN_TOKEN # for accessing login token`
 
 ```unix
   powder restart
