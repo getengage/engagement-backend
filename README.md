@@ -8,7 +8,11 @@
 
 This is the home for the Engagement backend. Please note, this is an <b>Experimental</b> project that utilizes Influxdb as a Time-Series DB for the backend as well as a JS Client that utitlizes new HTML API's with fractured support across browsers.
 
-### Features
+### Background
+
+There are currently few tools that measure how engaged a user is when viewing online content. This project seeks to take metrics that correlate w/ user engagement (time content is within viewport, page visibility, scroll depth, etc) and use these as predictor variables of positive user engagement.
+
+### Application Features
 
 - See latest page visits
 - Top 10 pages by Engage score, visit, and referral
@@ -51,9 +55,7 @@ don't use rails server for local development, use:
 
 this uses webpack to rebuild the app/assets/web-bundle.js file w/ react components.
 
-react is a dependency so get [react developer tools for chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related)
-
-### Services
+react is a dependency so get [react developer tools for chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related). More information on goworker dependencies and influxdb can be found at the following links:
 
 - goworkers: http://mildlyinternet.com/code/supercharge-resque-and-sidekiq-with-go-part-2.html
 - influxdb: https://www.influxdata.com/time-series-platform/influxdb/
