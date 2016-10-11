@@ -8,21 +8,21 @@
 
 This is the home for the Engagement backend
 
-#### Features
+### Features
 
-- add
-- more
-- stuff
+- See latest page visits
+- Top 10 pages by Engage score, visit, and referral
+- Historical view of page visits grouped by Engage scores
+- and more
 
-#### Todo
+### Todo
 
-- add
-- more
-- stuff
+- Flynn/Docker Deployment steps
+- Better UI Interface
 
-#### Dependencies & Setup
+### Dependencies & Setup
 
-###### Dependencies
+##### Dependencies
 
 ```unix
   brew install pg
@@ -53,12 +53,12 @@ this uses webpack to rebuild the app/assets/web-bundle.js file w/ react componen
 
 react is a dependency so get [react developer tools for chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related)
 
-#### Services
+### Services
 
 - goworkers: http://mildlyinternet.com/code/supercharge-resque-and-sidekiq-with-go-part-2.html
 - influxdb: https://www.influxdata.com/time-series-platform/influxdb/
 
-###### Setup
+##### Setup
 
 ```ruby
   rake db:create
@@ -66,7 +66,7 @@ react is a dependency so get [react developer tools for chrome](https://chrome.g
   rake db:seed
 ```
 
-###### Debugging
+##### Debugging
 
 ```unix
   powder restart
@@ -75,7 +75,7 @@ react is a dependency so get [react developer tools for chrome](https://chrome.g
   hit api endpoint with `byebug` line
 ```
 
-###### Deploying
+##### Deploying
 
 Docker and Docker Compose scripts are available
 
@@ -99,6 +99,6 @@ Alternatively you can use Flynn for deployments
 ```
 
 
-#### License
+### License
 
 Copyright (c) [Nick Soto](http://google.com)
