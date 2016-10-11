@@ -16,7 +16,7 @@ There are currently few tools that measure how engaged a user is when viewing on
 
 <h1 align="center">
   <br>
-  <a href="https://webtorrent.io">
+  <a>
     <img src="dashboard_details_v0.0.png" alt="Engagement" width="490">
   </a>
   <br>
