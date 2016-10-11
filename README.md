@@ -14,11 +14,13 @@ There are currently few tools that measure how engaged a user is when viewing on
 
 ### Application Features
 
-<h1 align="center">
+<h3 align="center">
+  <br>
   <br>
   <a>
-    <img src="dashboard_details_v0.0.png" alt="Engagement" width="490">
+    <img src="dashboard_details_v0.0.png" alt="Engagement" width="980">
   </a>
+  <br>
   <br>
 </h1>
 
