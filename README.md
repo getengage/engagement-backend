@@ -14,6 +14,14 @@ There are currently few tools that measure how engaged a user is when viewing on
 
 ### Application Features
 
+<h1 align="center">
+  <br>
+  <a href="https://webtorrent.io">
+    <img src="dashboard_details_v0.0.png" alt="Engagement" width="490">
+  </a>
+  <br>
+</h1>
+
 - See latest page visits
 - Top 10 pages by Engage score, visit, and referral
 - Historical view of page visits grouped by Engage scores
