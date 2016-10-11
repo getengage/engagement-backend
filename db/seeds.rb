@@ -43,7 +43,3 @@ sources.each do |source|
 end
 
 puts 'CREATED INFLUX DATA'
-
-system("brew services restart influxdb")
-
-puts "FORCE INFLUXDB RESTART"

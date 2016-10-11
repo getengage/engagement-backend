@@ -1,9 +1,4 @@
-<h1 align="center">
-  <a><img src="dashboard_details_v0.0.png" alt="Engage" width="490"></a>
-  <br>
-  Engagement
-  <br>
-</h1>
+<h1 align="center">Engagement<br></h1>
 <h4 align="center">Metrics and Analytics</h4>
 
 <p align="center">
@@ -66,8 +61,8 @@ react is a dependency so get [react developer tools for chrome](https://chrome.g
 ###### Setup
 
 ```ruby
-  rake db:create
-  rake db:migrate:with_data
+  rake db:create db:migrate
+  rake data:migrate:with_data
   rake db:seed
 ```
 
