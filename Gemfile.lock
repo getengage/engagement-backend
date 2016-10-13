@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/influxdata/influxdb-rails.git
+  remote: https://github.com/influxdata/influxdb-rails
   revision: 96181c2b304d205317144b2bb60f33e4bad664c4
   specs:
     influxdb-rails (0.1.10)
