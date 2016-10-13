@@ -3,7 +3,7 @@ import SettingsItem from './SettingsItem';
 
 var SettingsTable = React.createClass({
   componentDidMount: function() {
-    if (!$.fn.DataTable.fnIsDataTable(this.refs.table)) {
+    if (this.refs.table && !$.fn.DataTable.fnIsDataTable(this.refs.table)) {
       return $(this.refs.table).dataTable({
         "bFilter": false,
         "bLengthChange": false,

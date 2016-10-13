@@ -5,7 +5,9 @@ import SettingsForm from '../components/SettingsForm';
 var SettingsContainer = React.createClass({
   getInitialState: function () {
     return {
-      data: this.props.data
+      data: this.props.data,
+      source: this.props.source,
+      userId: this.props.user_id
     };
   },
   handleNodeRemoval: function (nodeId) {
@@ -16,17 +18,17 @@ var SettingsContainer = React.createClass({
     this.setState({data});
     return;
   },
-  handleSubmit: function (uuid) {
+  handleSubmit: function (newVals) {
     var data = this.state.data;
-    var id = this.state.data.length+1;
-    data = data.concat([{id, uuid}]);
+    newVals.id = this.state.data.length+1;
+    data = data.concat([newVals]);
     this.setState({data});
   },
   render: function() {
     return (
       <div className="callout">
         <SettingsTable data={this.state.data} removeNode={this.handleNodeRemoval} />
-        <SettingsForm onTaskSubmit={this.handleSubmit} />
+        <SettingsForm userId={this.state.userId} source={this.state.source} onApiKeyNewSubmit={this.handleSubmit} />
       </div>
     );
   }

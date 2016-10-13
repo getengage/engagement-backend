@@ -8,7 +8,7 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class="<%= controller_name %>">
     <%= render "nav" %>
     <%= render "sub_nav" unless subnav_hidden? || !user_signed_in? %>
     <%= render "flash" %>
