@@ -5,6 +5,15 @@ body.pages, body.sessions, body.registrations {
 .hero {
   color: #FFF;
   padding-top: 3rem;
+
+  h1 {
+    letter-spacing: -1px;
+    margin-bottom: 0;
+  }
+
+  a {
+    margin-top: 1rem;
+  }
 }
 
 .authform {
