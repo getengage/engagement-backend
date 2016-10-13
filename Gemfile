@@ -15,7 +15,7 @@ gem 'oj'
 gem 'oj_mimic_json'
 gem 'powder'
 gem 'puma'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7.1'
 gem "react_on_rails", "6.1.1"
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
