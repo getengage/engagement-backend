@@ -1,0 +1,3 @@
+exclude_paths:
+- "app/assets/javascripts/dataTables.foundation.min.js"
+- "app/assets/javascripts/jquery.dataTables.min.js"
