@@ -1,10 +1,10 @@
 class BarChartPresenter
   attr_reader :data, :options
 
-  def initialize(title:, labels:, data:, **options)
+  def initialize(title, data, **options)
     @options = default_options.reverse_merge(options)
     @data = {
-      labels: padded(labels, "N/A"),
+      labels: padded(data, "N/A", "source_url"),
       datasets: [
         {
             label: title,
@@ -23,13 +23,14 @@ class BarChartPresenter
                 'rgba(153, 102, 255, 1)',
             ],
             borderWidth: 1,
-            data: padded(data, 0)
+            data: padded(data, 0, "count")
         }
       ]
     }
   end
 
-  def padded(data, filler)
+  def padded(data, filler, method)
+    data = data.values.map{|x| x.send(method) }
     data.size == 5 ? data : data + ([filler] * (5 - data.size))
   end
 
