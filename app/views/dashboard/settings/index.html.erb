@@ -13,7 +13,7 @@
   </div>
   <div class="small-6 small-centered"
     <div class="row" style="margin-top:1rem">
-      <%= react_component("SettingsContainerApp", props: {data: @api_keys.map(&:attributes)}, prerender: false) %>
+      <%= react_component("SettingsContainerApp", props: {user_id: current_user.id, source: v1_api_keys_path, data: @api_keys.map(&:attributes)}, prerender: false) %>
     </div>
   </div>
 </div>
