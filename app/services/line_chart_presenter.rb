@@ -17,6 +17,8 @@ class LineChartPresenter
   end
 
   def default_options
-    { height: "200" }
+    { height: "200",
+      legend: { position: "bottom" }
+    }
   end
 end
