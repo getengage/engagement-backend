@@ -29,6 +29,10 @@ module Event
       query("select top(mean, 5) as count, source_url from mean_scores_1d")
     end
 
+    def self.scores_from_30_days(source_url, api_key)
+      query("select * from #{influx_table} where api_key = '%s' and source_url = '%s' and time > now() - 30d", api_key, source_url)
+    end
+
     def self.top_referrals_by_source_url(api_key)
       query("select top(count, 5) as count, source_url from referrals_1d")
     end

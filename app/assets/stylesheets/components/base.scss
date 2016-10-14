@@ -1,0 +1,24 @@
+small {
+  color: #8a8a8a;
+  display: block;
+  font-size: 0.7rem !important;
+}
+
+.callout {
+  -webkit-box-shadow: 0px 1px 1px #e1e2fb;
+  -moz-box-shadow: 0px 1px 1px #e1e2fb;
+  box-shadow: 0px 1px 1px #e1e2fb;
+}
+
+.callout-inner {
+  text-align:center;
+  clear:both;
+  margin-top: 2rem;
+}
+
+.category {
+  display: inline-block;
+  padding: 0rem 0.1rem;
+  color: $dark-purple;
+  letter-spacing: 0.1rem;
+}

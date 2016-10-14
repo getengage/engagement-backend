@@ -589,22 +589,3 @@ $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
 $topbar-unstack-breakpoint: medium;
 
-
-.callout {
-  -webkit-box-shadow: 0px 1px 1px #e1e2fb;
-  -moz-box-shadow: 0px 1px 1px #e1e2fb;
-  box-shadow: 0px 1px 1px #e1e2fb;
-}
-
-small {
-  color: #8a8a8a;
-  display: block;
-  font-size: 0.7rem !important;
-}
-
-.category {
-  display: inline-block;
-  padding: 0rem 0.1rem;
-  color: $dark-purple;
-  letter-spacing: 0.2rem;
-}
