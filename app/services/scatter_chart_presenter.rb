@@ -13,9 +13,8 @@ class ScatterChartPresenter
             data: data.values.map{|x| {x: x.score, y: x.total_in_viewport_time} },
             radius: 25,
             pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "rgba(178, 235, 242, 1)",
-            pointHoverRadius: 25,
-            scaleSteps: 10
+            pointBackgroundColor: "rgba(224, 247, 250, 1)",
+            pointHoverRadius: 25
         }
       ]
     }
@@ -23,16 +22,8 @@ class ScatterChartPresenter
 
   def default_options
     { height: "200",
-      legend: { position: "bottom" },
-      scales: {
-        yAxes: [{
-          display: true,
-          ticks: {
-            beginAtZero: true,
-            steps: 10
-          }
-        }]
-      }
+      showLines: false,
+      legend: { position: "bottom" }
     }
   end
 end

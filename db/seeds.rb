@@ -16,10 +16,10 @@ sources = ["usatoday.com", "newyorker.com", "huffingtonpost.com", "nytimes.com",
            "financialtimes.com", "slate.com"]
 
 sources.each do |source|
-  20.times do
+  40.times do
     tags = {
       "uuid": SecureRandom.hex,
-      "source_url": "#{source}/news/article-content-#{rand(200)}",
+      "source_url": "#{source}/news/article-content-#{rand(5)}",
       "api_key": api_key.uuid,
     }
 
