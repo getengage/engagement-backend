@@ -36,11 +36,12 @@ class BarChartPresenter
 
   def default_options
     { height: "200",
+      legend: { position: "bottom" },
       tooltips: {
         titleFontSize: 10
       },
       scales: {
-        yAxes: [{
+        xAxes: [{
           display: false,
         }]
       }
