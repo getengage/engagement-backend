@@ -23,6 +23,11 @@ There are currently few tools that measure how engaged a user is when viewing on
   </a>
   <br>
   <br>
+  <a>
+    <img src="dashboard_events_v0.0.png" alt="Engagement" width="980">
+  </a>
+  <br>
+  <br>
 </h1>
 
 - See latest page visits
