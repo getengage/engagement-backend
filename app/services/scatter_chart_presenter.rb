@@ -23,7 +23,14 @@ class ScatterChartPresenter
   def default_options
     { height: "200",
       showLines: false,
-      legend: { position: "bottom" }
+      legend: { position: "bottom" },
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
     }
   end
 end
