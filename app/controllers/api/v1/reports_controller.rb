@@ -21,8 +21,10 @@ module Api::V1
     end
 
     def value_params
-      data_params.permit(:referrer, :x_pos, :y_pos, :is_visible,
-                         :in_viewport, :top, :bottom, :word_count)
+      data_params.
+        permit(:referrer, :x_pos, :y_pos, :is_visible,
+               :in_viewport, :top, :bottom, :word_count).
+        merge(remote_ip: request.remote_ip, user_agent: request.user_agent)
     end
   end
 end

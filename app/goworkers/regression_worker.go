@@ -8,9 +8,11 @@ import (
     "github.com/sajari/regression"
     "github.com/influxdata/influxdb/client/v2"
     "github.com/influxdata/influxdb/uuid"
+    "github.com/ip2location/ip2location-go"
     "time"
     "encoding/json"
     "math"
+    "os"
 )
 
 const (
@@ -19,6 +21,15 @@ const (
     password = "root"
     avgReadingSpeed = 270.0
 )
+
+func keyIndex(collection []string, match string) int {
+    for i := 0; i < len(collection); i++ {
+        if (collection[i] == match) {
+            return i
+        }
+    }
+    return -1
+}
 
 // queryDB convenience function to query the database
 func queryDB(clnt client.Client, cmd string) (res []client.Result, err error) {
@@ -38,9 +49,15 @@ func queryDB(clnt client.Client, cmd string) (res []client.Result, err error) {
 }
 
 func RegressionWorker(message *workers.Msg) {
+    // get current working directory and IP/country Lookup
+    pwd, _ := os.Getwd()
+    ip2location.Open(pwd + "/lib/ip2location/IP2LOCATION-LITE-DB3.BIN")
+
+    // create new Influx client
     clnt, _ := client.NewHTTPClient(client.HTTPConfig{
         Addr: "http://localhost:8086",
     })
+
     q := fmt.Sprintf("SELECT * FROM %s group by source_url, session_id", "events")
     res, _ := queryDB(clnt, q)
 
@@ -51,8 +68,18 @@ func RegressionWorker(message *workers.Msg) {
 
     for _, response_row := range res {
       for _, results_row := range response_row.Series {
+
+        // initial setup of score & time layout
         final_score := 0.0
         time_layout := time.RFC3339
+
+        // measurement key indexes
+        apiKeyIdx := keyIndex(results_row.Columns, "api_key")
+        wordCountIdx := keyIndex(results_row.Columns, "word_count")
+        referrerIdx := keyIndex(results_row.Columns, "referrer")
+        yPosIdx := keyIndex(results_row.Columns, "y_pos")
+        bottomIdx := keyIndex(results_row.Columns, "bottom")
+        remoteIpIdx := keyIndex(results_row.Columns, "remote_ip")
 
         // regression calculation setup
 
@@ -66,19 +93,20 @@ func RegressionWorker(message *workers.Msg) {
         reached_end_of_content := false
 
         // estimated reading time
-        word_count, _ := results_row.Values[0][7].(json.Number).Float64()
-        referrer := results_row.Values[0][5].(string)
+        word_count, _ := results_row.Values[0][wordCountIdx].(json.Number).Float64()
+        referrer := results_row.Values[0][referrerIdx].(string)
 
         // iterate over values for a given series
         for _, data_row := range results_row.Values {
           if data_row[3] == true && data_row[4] == true {
             in_viewport_and_visible++
           }
+
           parsed_time, _ := time.Parse(time_layout, data_row[0].(string))
           starting_time, _ := time.Parse(time_layout, results_row.Values[0][0].(string))
           elapsed_time_in_seconds := parsed_time.Sub(starting_time).Seconds()
-          y_position, _ := data_row[9].(json.Number).Float64()
-          bottom_of_viewport, _ := data_row[2].(json.Number).Float64()
+          y_position, _ := data_row[yPosIdx].(json.Number).Float64()
+          bottom_of_viewport, _ := data_row[bottomIdx].(json.Number).Float64()
           if (y_position > bottom_of_viewport && reached_end_of_content != true) {
             reached_end_of_content = true
             _ = reached_end_of_content
@@ -86,6 +114,12 @@ func RegressionWorker(message *workers.Msg) {
           dp := regression.DataPoint(y_position, []float64{elapsed_time_in_seconds, 1})
           r.Train(dp)
         }
+
+        // lookup location from remote_ip
+        ip2location_results := ip2location.Get_all(results_row.Values[0][remoteIpIdx].(string))
+        country := ip2location_results.Country_long
+        region := ip2location_results.Region
+        city := ip2location_results.City
 
         // total viewport time accounting for 2 second delay/gap
         total_in_viewport_time := in_viewport_and_visible * 2
@@ -112,7 +146,7 @@ func RegressionWorker(message *workers.Msg) {
         tags := map[string]string{
             "uuid": uuid.TimeUUID().String(),
             "source_url": results_row.Tags["source_url"],
-            "api_key": results_row.Values[0][1].(string),
+            "api_key": results_row.Values[0][apiKeyIdx].(string),
         }
 
         fields := map[string]interface{}{
@@ -122,6 +156,10 @@ func RegressionWorker(message *workers.Msg) {
             "total_in_viewport_time": total_in_viewport_time,
             "word_count": word_count,
             "score": final_score,
+            "city": city,
+            "region": region,
+            "country": country,
+            "remote_ip": results_row.Values[0][remoteIpIdx].(string),
         }
 
         pt, err := client.NewPoint(
@@ -138,6 +176,7 @@ func RegressionWorker(message *workers.Msg) {
         bp.AddPoint(pt)
       }
     }
+    ip2location.Close()
     clnt.Write(bp)
 }
 
