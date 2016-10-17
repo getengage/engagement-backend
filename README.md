@@ -58,8 +58,7 @@ There are currently few tools that measure how engaged a user is when viewing on
   export GOPATH=/path_to_go
   go get github.com/benmanns/goworker
   go get github.com/xlvector/hector
-  go get github.com/xlvector/hector/hectorcv
-
+  go get github.com/ip2location/ip2location-go
 ```
 
 don't use rails server for local development, use:
@@ -91,6 +90,12 @@ react is a dependency so get [react developer tools for chrome](https://chrome.g
   add `byebug` to line in code
   bundle exec byebug -R localhost:1048
   hit api endpoint with `byebug` line
+```
+
+For debugging goworkers, use delve
+
+```unix
+  brew install delve
 ```
 
 ##### Deploying

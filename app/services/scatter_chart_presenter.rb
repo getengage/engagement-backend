@@ -21,9 +21,17 @@ class ScatterChartPresenter
   end
 
   def default_options
-    { height: "200",
+    { height: "400",
+      maintainAspectRatio: false,
       showLines: false,
-      legend: { position: "bottom" }
+      legend: { position: "bottom" },
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
     }
   end
 end
