@@ -25,13 +25,11 @@
       <%= form_for(current_user, url: v1_user_path(current_user.id), html: { :method => :put }, remote: true) do |f| %>
         <div class="form-group">
           <%= f.label :first_name, "First name" %>
-          <%= f.text_field :name, class: "form-control" %>
+          <%= f.text_field :name, class: "form-control inline-editable" %>
           <%= f.label :avatar_label, "Profile Avatar" %>
           <%= f.label :avatar, current_user.avatar.present? ? current_user.avatar.file.identifier : "No Avatar", class: "button" %>
-          <%= f.file_field :avatar, class: "show-for-sr" %>
+          <%= f.file_field :avatar, class: "show-for-sr inline-editable" %>
         </div>
-        <hr>
-        <%= f.submit "Submit", class: "button right" %>
       <% end %>
     </div>
   </div>

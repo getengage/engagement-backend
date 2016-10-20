@@ -37,6 +37,16 @@ document.addEventListener("turbolinks:load", function() {
     dropdown.removeClass('js-dropdown-animated');
   });
 
+  $('.inline-editable').on('change', function(e) {
+    var form = $(this).closest('form');
+    e.preventDefault();
+    $.ajax(({
+      type: "PUT",
+      url: form.attr('action'),
+      data: form.serialize()
+    }));
+  });
+
   Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
     return this.progressBarTimeout = setTimeout(this.showProgressBar, 0);
   }
