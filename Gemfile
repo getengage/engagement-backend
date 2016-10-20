@@ -30,6 +30,7 @@ gem 'pg'
 gem 'pundit'
 gem 'sidekiq'
 gem 'sinatra', :require => false
+gem 'whenever', :require => false
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'

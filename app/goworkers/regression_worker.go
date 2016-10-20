@@ -58,7 +58,7 @@ func RegressionWorker(message *workers.Msg) {
         Addr: "http://localhost:8086",
     })
 
-    q := fmt.Sprintf("SELECT * FROM %s group by source_url, session_id", "events")
+    q := fmt.Sprintf("SELECT * FROM %s where time > now() - 1d group by source_url, session_id", "events")
     res, _ := queryDB(clnt, q)
 
     bp, _ := client.NewBatchPoints(client.BatchPointsConfig{
@@ -192,7 +192,7 @@ func main() {
     "process": "1",
   })
 
-  // pull messages from "myqueue2" with concurrency of 20
+  // pull messages from "go_queue" with concurrency of 20
   workers.Process("go_queue", RegressionWorker, 20)
 
   // stats will be available at http://localhost:8080/stats
