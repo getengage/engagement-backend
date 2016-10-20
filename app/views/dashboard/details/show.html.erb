@@ -1,107 +1,105 @@
-<div class="large-12 columns">
-  <div class="row" style="margin-top: 2rem">
-    <div class="large-12 columns">
-      <nav aria-label="You are here:" role="navigation">
-        <ul class="breadcrumbs">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Events", dashboard_event_path(@api_key.uuid) %></li>
-          <li style="color: #7F8AA2">
-            <span class="show-for-sr">Current</span><%= @result.values.first.source_url %>
-          </li>
-        </ul>
-      </nav>
-    </div>
+<div class="row" style="margin-top: 2rem">
+  <div class="large-12 columns">
+    <nav aria-label="You are here:" role="navigation">
+      <ul class="breadcrumbs">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Events", dashboard_event_path(@api_key.uuid) %></li>
+        <li style="color: #7F8AA2">
+          <span class="show-for-sr">Current</span><%= @result.values.first.source_url %>
+        </li>
+      </ul>
+    </nav>
   </div>
-  <div class="row" style="margin-top: 1rem">
-    <div class="large-12 columns">
-      <h6 class="category">Summary</h6>
-    </div>
+</div>
+<div class="row" style="margin-top: 1rem">
+  <div class="large-12 columns">
+    <h6 class="category">Summary</h6>
   </div>
-  <div class="row">
-    <div class="large-6 columns">
-      <div class="callout clearfix">
-        <span>
-          <i class="icon-up-bold" style="float: right; font-size: 2rem; color: rgba(132, 212, 212, 1);"></i>
-        </span>
-        <small>Visits</small>
-        <span style="color: #7F8AA2;">There were <strong><%= @unique_visits_from_15_days.values.map(&:count).sum %></strong> visits in the last 15 days: <strong><%= @unique_visits_from_15_days.values[0].count %></strong> today and <strong><%= @unique_visits_from_15_days.values[1].count %></strong> the day before.</span>
-      </div>
-    </div>
-    <div class="large-6 columns">
-      <div class="callout clearfix">
+</div>
+<div class="row">
+  <div class="large-6 columns">
+    <div class="callout clearfix">
+      <span>
         <i class="icon-up-bold" style="float: right; font-size: 2rem; color: rgba(132, 212, 212, 1);"></i>
-        <small>Engagement</small>
-        <span style="color: #7F8AA2;"><strong>50%</strong> of users visiting in the last 15 days were engaged.</span>
+      </span>
+      <small>Visits</small>
+      <span style="color: #7F8AA2;">There were <strong><%= @unique_visits_from_15_days.values.map(&:count).sum %></strong> visits in the last 15 days: <strong><%= @unique_visits_from_15_days.values[0].count %></strong> today and <strong><%= @unique_visits_from_15_days.values[1].count %></strong> the day before.</span>
+    </div>
+  </div>
+  <div class="large-6 columns">
+    <div class="callout clearfix">
+      <i class="icon-up-bold" style="float: right; font-size: 2rem; color: rgba(132, 212, 212, 1);"></i>
+      <small>Engagement</small>
+      <span style="color: #7F8AA2;"><strong><%= @scores_from_30_days.values.select{|x| x.score > 200 }.size %></strong> of users visiting in the last 30 days were engaged.</span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h6 class="category">Stats</h6>
+  </div>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+    <div class="callout clearfix">
+      <small class="float-left">Avg Scores From Past 15 Days</small>
+      <small class="float-right">X</small>
+      <div class="float-center callout-inner">
+        <%= line_chart @line_chart.data, @line_chart.options %>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <h6 class="category">Stats</h6>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-6 columns">
-      <div class="callout clearfix">
-        <small class="float-left">Avg Scores From Past 15 Days</small>
-        <small class="float-right">X</small>
-        <div class="float-center callout-inner">
-          <%= line_chart @line_chart.data, @line_chart.options %>
+  <div class="large-3 columns">
+    <div class="callout clearfix">
+      <small class="float-left">Latest Engage Score</small>
+      <small class="float-right">X</small>
+      <div class="float-center callout-inner">
+        <div class="counter">
+          <span class="speedometer"></span>
+          <span class="needle" style="transform: rotate(<%= (-45 + ((@result.values.first.score / 250) * 100)).to_i %>deg)"></span>
         </div>
-      </div>
-    </div>
-    <div class="large-3 columns">
-      <div class="callout clearfix">
-        <small class="float-left">Latest Engage Score</small>
-        <small class="float-right">X</small>
-        <div class="float-center callout-inner">
-          <div class="counter">
-            <span class="speedometer"></span>
-            <span class="needle" style="transform: rotate(<%= (-45 + ((@result.values.first.score / 250) * 100)).to_i %>deg)"></span>
-          </div>
-          <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.values.first.score, precision: 2) %> / 250 </h4>
-        </div>
-      </div>
-    </div>
-    <div class="large-3 columns">
-      <div class="callout clearfix">
-        <small class="float-left">Average Engage Score</small>
-        <small class="float-right">X</small>
-        <div class="float-center callout-inner">
-          <div class="counter" style="display:inline-block">
-            <span class="speedometer"></span>
-            <span class="needle" style="transform: rotate(<%= (-45 + ((@median_score.values.first.score / 250) * 100)).to_i %>deg)"></span>
-          </div>
-          <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@median_score.values.first.score, precision: 2) %> / 250 </h4>
-        </div>
-      </div>
-    </div>
-    <div class="large-6 columns">
-      <div class="callout clearfix">
-        <div class="stats">
-          <ul>
-            <li><%= distance_of_time_in_words(@result.values.first.total_in_viewport_time) %><span>Content On Page</span></li>
-            <li><%= @result.values.first.word_count %><span>Word Count</span></li>
-            <li><%= @result.values.first.reached_end_of_content ? "Yes" : "No" %><span>Reached End?</span></li>
-            <li style="font-size:1rem"><%= strip_url(@result.values.first.referrer).truncate(20) || "N/A" %><span>Referrer</span></li>
-          </ul>
-        </div>
+        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.values.first.score, precision: 2) %> / 250 </h4>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <h6 class="category">History</h6>
+  <div class="large-3 columns">
+    <div class="callout clearfix">
+      <small class="float-left">Average Engage Score</small>
+      <small class="float-right">X</small>
+      <div class="float-center callout-inner">
+        <div class="counter" style="display:inline-block">
+          <span class="speedometer"></span>
+          <span class="needle" style="transform: rotate(<%= (-45 + ((@median_score.values.first.score / 250) * 100)).to_i %>deg)"></span>
+        </div>
+        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@median_score.values.first.score, precision: 2) %> / 250 </h4>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <div class="callout clearfix">
-        <small class="float-left">Last 30 Day Score Plot</small>
-        <small class="float-right">X</small>
-        <div class="float-center callout-inner">
-          <%= scatter_chart @scatter_chart.data, @scatter_chart.options %>
-        </div>
+  <div class="large-6 columns">
+    <div class="callout clearfix">
+      <div class="stats">
+        <ul>
+          <li><%= distance_of_time_in_words(@result.values.first.total_in_viewport_time) %><span>Content On Page</span></li>
+          <li><%= @result.values.first.word_count %><span>Word Count</span></li>
+          <li><%= @result.values.first.reached_end_of_content ? "Yes" : "No" %><span>Reached End?</span></li>
+          <li style="font-size:1rem"><%= strip_url(@result.values.first.referrer).truncate(20) || "N/A" %><span>Referrer</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h6 class="category">History</h6>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="callout clearfix">
+      <small class="float-left">Last 30 Day Score Plot</small>
+      <small class="float-right">X</small>
+      <div class="float-center callout-inner">
+        <%= scatter_chart @scatter_chart.data, @scatter_chart.options %>
       </div>
     </div>
   </div>

@@ -3,8 +3,10 @@ import React, { PropTypes } from 'react';
 var SettingsItem = React.createClass({
   removeNode: function (e) {
     e.preventDefault();
-    this.props.removeNode(this.props.nodeId);
-    return;
+    $.ajax({
+      url: this.props.source,
+      type: 'DELETE'
+    }).then(this.props.removeNode(this.props.nodeId));
   },
   render: function() {
     return (
@@ -19,6 +21,5 @@ var SettingsItem = React.createClass({
     );
   }
 });
-
 
 export default SettingsItem;

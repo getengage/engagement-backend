@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     scope module: "api", path: nil, defaults: {format: :json} do
       namespace :v1 do
         resources :reports, only: :create
-        resources :api_keys, only: :create
+        resources :api_keys, only: [:create, :destroy], param: :uuid
+        resources :users, only: :update
       end
     end
   end
