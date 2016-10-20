@@ -88,6 +88,12 @@ GEM
     capybara-screenshot (1.0.14)
       capybara (>= 1.0, < 3)
       launchy
+    carrierwave (0.11.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+      mimemagic (>= 0.3.0)
     chartjs-ror (3.0.2)
       rails (>= 3.1)
     childprocess (0.5.9)
@@ -162,6 +168,8 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
+    mini_magick (4.5.1)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
     momentjs-rails (2.11.1)
@@ -327,6 +335,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot
+  carrierwave
   chartjs-ror
   coffee-rails (~> 4.1.0)
   data_migrate
@@ -343,6 +352,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  mini_magick
   oj
   oj_mimic_json
   pg

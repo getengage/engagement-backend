@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     root to: "users#index"
   end
 
-  constraints subdomain: "api" do
+  # constraints subdomain: "api" do
     scope module: "api", path: nil, defaults: {format: :json} do
       namespace :v1 do
         resources :reports, only: :create
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         resources :users, only: :update
       end
     end
-  end
+  # end
 
   unauthenticated do
     get "/pages/*id" => 'pages#show', as: :page, format: false

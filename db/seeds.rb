@@ -20,7 +20,7 @@ sources.each do |source|
     tags = {
       "uuid": SecureRandom.hex,
       "source_url": "#{source}/news/article-content-#{rand(5)}",
-      "api_key": api_key.uuid,
+      "api_key": api_key.uuid
     }
 
     values = {
@@ -30,6 +30,9 @@ sources.each do |source|
       "total_in_viewport_time": Random.new.rand(200..400),
       "word_count": Random.new.rand(200..400),
       "score": Random.new.rand(100..250),
+      "remote_ip": IPAddr.new(rand(2**32),Socket::AF_INET).to_s,
+      "city": ["New York", "Los Angeles", "Miami"].sample,
+      "country": "United States"
     }
 
     data = {

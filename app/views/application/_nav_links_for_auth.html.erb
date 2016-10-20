@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <li><span><i class="icon-bell"></i></span></li>
   <li>
-    <ul class="dropdown menu" data-dropdown-menu>
+    <ul class="dropdown menu dropdown_profile" data-dropdown-menu>
       <% if user_signed_in? %>
         <li>
           <a><%= current_user.name %></a>
@@ -12,7 +12,7 @@
       <% end %>
     </ul>
   </li>
-  <li><img src="http://placehold.it/40x40"></li>
+  <li><%= image_tag(current_user.avatar_url(:thumb).to_s) %></li>
 <% else %>
   <li><%= link_to 'Log in', new_user_session_path, class: "nav_link" %></li>
   <li><%= link_to 'Sign up', new_user_registration_path, class: "nav_link" %></li>

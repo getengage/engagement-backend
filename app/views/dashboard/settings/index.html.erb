@@ -26,7 +26,11 @@
         <div class="form-group">
           <%= f.label :first_name, "First name" %>
           <%= f.text_field :name, class: "form-control" %>
+          <%= f.label :avatar_label, "Profile Avatar" %>
+          <%= f.label :avatar, current_user.avatar.present? ? current_user.avatar.file.identifier : "No Avatar", class: "button" %>
+          <%= f.file_field :avatar, class: "show-for-sr" %>
         </div>
+        <hr>
         <%= f.submit "Submit", class: "button right" %>
       <% end %>
     </div>
