@@ -1,11 +1,12 @@
 <% if user_signed_in? %>
   <li><span><i class="icon-bell"></i></span></li>
   <li>
-    <ul class="dropdown menu dropdown_profile" data-dropdown-menu>
+    <ul class="dropdown menu dropdown_profile" data-dropdown-menu data-vertical-class="slide_and_fade" data-alignment="right">
       <% if user_signed_in? %>
         <li>
           <a><%= current_user.name %></a>
           <ul class="menu">
+            <li><%= link_to 'Settings', dashboard_settings_path %></li>
             <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
            </ul>
          </li>

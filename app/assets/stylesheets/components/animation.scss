@@ -1,0 +1,5 @@
+.slide_and_fade {
+   @include mui-animation(fade, slide($direction: down));
+   animation-duration: 0.5s;
+   margin-top: 20px;
+}

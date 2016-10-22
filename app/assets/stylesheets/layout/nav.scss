@@ -1,11 +1,8 @@
 .nav {
   a, i { color: $whitesmoke; }
 
-  li:not(:last-child) {
-    color: $whitesmoke;
-    margin-right: 0.5rem;
-    padding-right: 0.5rem;
-    border-right: 1px solid $light-purple;
+  li {
+    font-size: 0.9rem;
   }
 
   .nav_link {
@@ -15,9 +12,19 @@
   }
 
   .dropdown_profile {
+    & > li {
+      padding: 0 1rem;
+      border-left: 1px solid $whitesmoke;
+      border-right: 1px solid $whitesmoke;
+    }
+
     .submenu {
       padding: 0.5rem;
       border: 1px solid $light-purple;
+
+      li {
+        padding: 0.5rem;
+      }
 
       &:after, &:before {
         bottom: 100%;
