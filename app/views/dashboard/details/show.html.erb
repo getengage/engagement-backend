@@ -87,6 +87,16 @@
       </div>
     </div>
   </div>
+  <div class="large-6 columns">
+    <div class="callout clearfix">
+      <span style="display:inline-block" class="stats">
+        <ul>
+          <li><%= @result.values.first.city || "N/A" %><span><%= @result.values.first.country || "Location" %></span></li>
+        </ul>
+      </span>
+      <%= image_tag('us-map.png', size: '150x90') %>
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="large-12 columns">
