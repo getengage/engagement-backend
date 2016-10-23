@@ -8,14 +8,15 @@ Rails.application.routes.draw do
     root to: "users#index"
   end
 
-  constraints subdomain: "api" do
+  # constraints subdomain: "api" do
     scope module: "api", path: nil, defaults: {format: :json} do
       namespace :v1 do
         resources :reports, only: :create
-        resources :api_keys, only: :create
+        resources :api_keys, only: [:create, :destroy], param: :uuid
+        resources :users, only: :update
       end
     end
-  end
+  # end
 
   unauthenticated do
     get "/pages/*id" => 'pages#show', as: :page, format: false
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
       end
       resources :settings, only: [:index]
       resources :reports, only: [:index]
+      resources :notifications, only: [:index]
+      resources :insights, only: [:index]
       resource :main, only: :index
     end
 

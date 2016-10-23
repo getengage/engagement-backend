@@ -1,9 +1,67 @@
-<section class="hero">
-  <div class="row intro">
-    <div class="small-centered medium-uncentered medium-6 large-7 large-offset-1 medium-offset-1 columns hero">
-      <h1>Engagement</h1>
-      <h5>User Engagement Metrics</h5>
-      <%= link_to "Get Started", new_user_registration_path, class: "large button" %>
+<div class="section-wrapper is-animating">
+  <section id="hero1" class="hero">
+    <div class="inner">
+      <div class="copy">
+      <h1>Get Engaged</h1>
+      <p>Content Analytics & Metrics For Online Publishers</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="inner">
+      <div class="copy">
+        <h1>Scores</h1>
+        <p>Get content scores based on how active and engaged readers are</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hero2" class="hero">
+    <div class="inner">
+      <div class="copy">
+        <h1>Insights</h1>
+        <p>Know more about the content you are publishing and how to improve it</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="inner">
+      <div class="copy">
+        <h1>Reports</h1>
+        <p>Send detailed reports on user activity straight to your inbox</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="row full-width">
+    <div class="small-12 medium-6 large-6 columns col_sep">
+      <ul class="footer-links">
+        <li><a href="http://github.com/nicksoto/engagement-backend">Contribute to the Project</a></li>
+        <li><%= link_to 'Log in', new_user_session_path %></li>
+        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+      <ul>
+    </div>
+    <div class="small-12 medium-6 large-6 columns">
+      <ul class="footer-links">
+        <li><p>Copyright © 2016 Nick Soto. All Rights Reserved.</p></li>
+      </ul>
     </div>
   </div>
-</section>
+</footer>
+
+<%= javascript_tag do -%>
+  $(window).scroll(function(e){
+    if (window.scrollY <= 600) { parallax() };
+  });
+
+  function parallax(){
+    var scrolled = $(window).scrollTop();
+    $('#hero1').css('background-position', 'center ' + -(scrolled * -0.005) +'rem');
+    $('#hero1').css('opacity',1 - (scrolled * 0.00175));
+    $('#hero1 h1, #hero1 p').css('color', 'rgba(255,255,255,' + (1 - (scrolled * 0.00875)) + ')');
+  };
+<% end %>

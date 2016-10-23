@@ -8,9 +8,13 @@
 //= require Chart.bundle.min
 
 document.addEventListener("turbolinks:load", function() {
-  $(document).foundation();
+  var doc      = $(document),
+      table    = doc.find('table'),
+      dropDown = doc.find('.dropdown_profile');
 
-  $('table').each(function() {
+  doc.foundation();
+
+  table.each(function() {
     $(this).dataTable({
       "bFilter": false,
       "bLengthChange": false,
@@ -18,8 +22,18 @@ document.addEventListener("turbolinks:load", function() {
       "bPaginate": true
     });
   });
-});
 
-Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
-  return this.progressBarTimeout = setTimeout(this.showProgressBar, 0);
-};
+  $('.inline-editable').on('change', function(e) {
+    var form = $(this).closest('form');
+    e.preventDefault();
+    $.ajax(({
+      type: "PUT",
+      url: form.attr('action'),
+      data: form.serialize()
+    }));
+  });
+
+  Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
+    return this.progressBarTimeout = setTimeout(this.showProgressBar, 0);
+  }
+});

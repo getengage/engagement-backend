@@ -19,7 +19,7 @@ var SettingsTable = React.createClass({
   render: function() {
     var listNodes = this.props.data.map(function (listItem) {
       return (
-        <SettingsItem key={listItem.id} nodeId={listItem.id} name={listItem.name} uuid={listItem.uuid} removeNode={this.removeNode} />
+        <SettingsItem key={listItem.id} nodeId={listItem.id} name={listItem.name} uuid={listItem.uuid} removeNode={this.removeNode} source={listItem.source} />
       );
     },this);
     return (

@@ -10,7 +10,7 @@ module Event
     end
 
     def self.mean_scores_from_15_days(source_url, api_key)
-      query("select mean(score) from #{influx_table} where api_key = '%s' and source_url = '%s' and time > now() - 15d group by time(1d)", api_key, source_url)
+      query("select mean(score) from #{influx_table} where api_key = '%s' and source_url = '%s' and time > now() - 15d group by time(1d) order by time desc", api_key, source_url)
     end
 
     def self.unique_visits_from_15_days(source_url, api_key)

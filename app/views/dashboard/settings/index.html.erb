@@ -1,19 +1,46 @@
-<div class="large-12 columns">
-  <div class="row" style="margin-top: 2rem">
-    <div class="large-6 columns">
-      <nav aria-label="You are here:" role="navigation">
-        <ul class="breadcrumbs">
-          <li><%= link_to "Home", root_path %></li>
-          <li>
-            <span class="show-for-sr">Current: </span> Settings
-          </li>
-        </ul>
-      </nav>
+<div class="row" style="margin-top: 2rem">
+  <div class="large-6 columns">
+    <nav aria-label="You are here:" role="navigation">
+      <ul class="breadcrumbs">
+        <li><%= link_to "Home", root_path %></li>
+        <li>
+          <span class="show-for-sr">Current: </span> Settings
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="large-6 columns">
+    <div class="callout">
     </div>
   </div>
-  <div class="small-6 small-centered"
-    <div class="row" style="margin-top:1rem">
-      <%= react_component("SettingsContainerApp", props: {user_id: current_user.id, source: v1_api_keys_path, data: @api_keys.map(&:attributes)}, prerender: false) %>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h6 class="category">Manage Profile</h6>
+  </div>
+</div>
+<div class="row">
+  <div class="small-6 small-centered">
+    <div class="callout">
+      <%= form_for(current_user, url: v1_user_path(current_user.id), html: { :method => :put }, remote: true) do |f| %>
+        <div class="form-group">
+          <%= f.label :first_name, "First name" %>
+          <%= f.text_field :name, class: "form-control inline-editable" %>
+          <%= f.label :avatar_label, "Profile Avatar" %>
+          <%= f.label :avatar, current_user.avatar.present? ? current_user.avatar.file.identifier : "No Avatar", class: "button" %>
+          <%= f.file_field :avatar, class: "show-for-sr inline-editable" %>
+        </div>
+      <% end %>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h6 class="category">Manage API Keys</h6>
+  </div>
+</div>
+<div class="row">
+  <div class="small-6 small-centered">
+    <%= react_component("SettingsContainerApp", props: {user_id: current_user.id, source: v1_api_keys_path, data: @api_keys.map{|x| x.attributes.merge(source: v1_api_key_path(x.uuid, user_id: current_user.id)) }}, prerender: false) %>
   </div>
 </div>

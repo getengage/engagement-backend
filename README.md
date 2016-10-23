@@ -1,5 +1,4 @@
-<h1 align="center">Engagement<br></h1>
-<h4 align="center">Metrics and Analytics</h4>
+<img src="app/assets/images/get_engaged.png" alt="Engagement" width="980">
 
 <p align="center">
   <a href="https://circleci.com/gh/nicksoto/engagement-backend"><img src="https://circleci.com/gh/nicksoto/engagement-backend.png?style=shield&circle-token=13e8f29fdd7502e8466f98ae36fd6f4624ba49c7"></a>
@@ -15,21 +14,6 @@ There are currently few tools that measure how engaged a user is when viewing on
 
 ### Application Features
 
-<h3 align="center">
-  <br>
-  <br>
-  <a>
-    <img src="dashboard_details_v0.0.png" alt="Engagement" width="980">
-  </a>
-  <br>
-  <br>
-  <a>
-    <img src="dashboard_events_v0.0.png" alt="Engagement" width="980">
-  </a>
-  <br>
-  <br>
-</h1>
-
 - See latest page visits
 - Top 10 pages by Engage score, visit, and referral
 - Historical view of page visits grouped by Engage scores
@@ -37,91 +21,15 @@ There are currently few tools that measure how engaged a user is when viewing on
 
 ### Todo
 
-- Flynn/Docker Deployment steps
+- "Insights" section for predictive analytics of Engagement scores
+- "Reports" for PDF report generation
+- Better scoring algorithm
 - Better UI Interface
 
-### Dependencies & Setup
+### Contributing / Setup
 
-##### Dependencies
-
-```unix
-  brew install pg
-  brew install redis
-  brew install influxdb
-  brew install node
-  brew install go
-
-  powder link api.engage
-  touch .powenv
-  rvm env -- 2.2.3@engagement > .powenv
-
-  export GOPATH=/path_to_go
-  go get github.com/benmanns/goworker
-  go get github.com/xlvector/hector
-  go get github.com/ip2location/ip2location-go
-```
-
-don't use rails server for local development, use:
-
-```unix
-  npm run postinstall (if first install or devdependencies change)
-  npm run rails-server
-```
-
-this uses webpack to rebuild the app/assets/web-bundle.js file w/ react components.
-
-react is a dependency so get [react developer tools for chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related). More information on goworker dependencies and influxdb can be found at the following links:
-
-- goworkers: http://mildlyinternet.com/code/supercharge-resque-and-sidekiq-with-go-part-2.html
-- influxdb: https://www.influxdata.com/time-series-platform/influxdb/
-
-##### Setup
-
-```ruby
-  rake db:create
-  rake db:migrate:with_data
-  rake db:seed
-```
-
-##### Debugging
-
-```unix
-  powder restart
-  add `byebug` to line in code
-  bundle exec byebug -R localhost:1048
-  hit api endpoint with `byebug` line
-```
-
-For debugging goworkers, use delve
-
-```unix
-  brew install delve
-```
-
-##### Deploying
-
-Docker and Docker Compose scripts are available
-
-```unix
-  brew install docker-compose
-  brew install docker-machine
-  brew install Caskroom/cask/virtualbox
-```
-
-Alternatively you can use Flynn for deployments
-
-`brew install flynn`
-`flynn install`
-`flynn -a dashboard env | grep LOGIN_TOKEN # for accessing login token`
-
-```unix
-  powder restart
-  add `byebug` to line in code
-  bundle exec byebug -R localhost:1048
-  hit api endpoint with `byebug` line
-```
-
+Please read [CONTRIBUTING.md](https://github.com/nicksoto/engagement-backend/CONTRIBUTING.md) for details on contributing as well as information on system setup
 
 ### License
 
-Copyright (c) [Nick Soto](http://google.com)
+Copyright (c) [Nick Soto](http://github.com/nicksoto)

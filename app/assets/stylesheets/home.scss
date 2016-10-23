@@ -1,22 +1,96 @@
+@include mui-series {
+  #hero1 h1 {
+    @include mui-queue(1s, 0.25s, fade);
+  }
+
+  #hero1 p {
+    @include mui-queue(1s, 0s, fade);
+  }
+}
+
+body.pages {
+  .main-menu-right .menu {
+    @include mui-animation(fade);
+    animation-duration: 1s;
+  }
+}
+
 body.pages, body.sessions, body.registrations {
   background: $dark-purple;
 }
 
-.hero {
-  color: #FFF;
-  padding-top: 3rem;
-
-  h1 {
-    letter-spacing: -1px;
-    margin-bottom: 0;
-  }
-
-  a {
-    margin-top: 1rem;
-  }
+h1 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 4rem;
+  letter-spacing: -2px;
 }
 
 .authform {
   background-color: #FFF;
-  padding: 4rem;
+  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+body.pages .top-bar{
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+  background: rgba(0,0,0,0.1);
+
+  ul {
+    background-color: inherit;
+  }
+}
+
+#hero1 {
+  background: image_url("engage_details_1600.jpg");
+  background-size: cover;
+  background-position: center 0rem;
+  background-attachment: fixed;
+}
+.hero, .content{
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.inner {
+  min-height: 600px;
+  position: relative;
+}
+
+.hero .inner, .footer {
+  background: rgba(0,0,0,0.7) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAD0lEQVQIW2NkQABjRmQOAAM+AGkQsDBSAAAAAElFTkSuQmCC) repeat;}
+
+.copy {
+  position: absolute;
+  top: 50%;
+  height: 10em;
+  margin-top: -5em;
+  width: 100%;
+}
+
+.hero h1, .hero p {
+  color: #fff;
+}
+
+.footer {
+  padding: 2rem 4rem;
+  text-align: center;
+}
+
+.footer h4, .footer p, .footer a {
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: 400;
+  margin-top: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.footer .col_sep {
+  border-right: 1px solid #b3b3b3;
+}
+
+.footer-links {
+  list-style-type: none;
 }
