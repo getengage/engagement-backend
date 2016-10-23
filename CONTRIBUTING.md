@@ -1,7 +1,8 @@
 <h1 align="center">Engagement<br></h1>
 <h4 align="center">Contributing</h4>
+<br>
 
-#### Dependencies
+### Dependencies
 
 Many of the development dependencies can be installed through [homebrew](http://brew.sh)
 
@@ -36,7 +37,7 @@ Because React is a dependency, it is recommended to install the [react developer
 - goworkers: http://mildlyinternet.com/code/supercharge-resque-and-sidekiq-with-go-part-2.html
 - influxdb: https://www.influxdata.com/time-series-platform/influxdb/
 
-#### Setup
+### Setup
 
 ```ruby
   rake db:create
@@ -46,7 +47,7 @@ Because React is a dependency, it is recommended to install the [react developer
 
 Please note - it may be essential to restart influxdb after seeding, as well as manually creating the [continuous queries](https://docs.influxdata.com/influxdb/v0.9/query_language/continuous_queries) from the command line
 
-#### Debugging
+### Debugging
 
 For debugging goworkers, please see [delve](https://github.com/go-delve/homebrew-delve)
 
@@ -63,7 +64,7 @@ For remote debugging API endpoints:
   hit api endpoint with `byebug` line
 ```
 
-#### Deploying
+### Deploying
 
 Docker and Docker Compose scripts are available:
 
