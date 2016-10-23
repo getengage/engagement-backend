@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       end
       resources :settings, only: [:index]
       resources :reports, only: [:index]
+      resources :notifications, only: [:index]
+      resources :insights, only: [:index]
       resource :main, only: :index
     end
 

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :subnav_hidden?
 
   def dashboard_sections
-    ["events", "settings", "reports"]
+    ["events", "notifications", "reports", "insights"]
   end
   helper_method :dashboard_sections
 
