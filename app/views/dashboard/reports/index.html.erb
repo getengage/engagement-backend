@@ -1,0 +1,65 @@
+<div class="row" style="margin-top: 2rem">
+  <div class="large-6 columns">
+    <nav aria-label="You are here:" role="navigation">
+      <ul class="breadcrumbs">
+        <li>
+          <span class="show-for-sr">Current: </span> Reports
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="large-6 columns">
+    <div class="callout">
+    </div>
+  </div>
+</div>
+<% if @api_keys.present? %>
+  <div class="row">
+    <div class="large-12 columns">
+      <h6 class="category">Add New Report</h6>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="callout">
+      <%= form_for(current_user.report_summaries.new, url: dashboard_reports_path) do |f| %>
+        <%= f.label "API Key" %>
+        <%= f.collection_select :api_key_id, @api_keys, :id, :name, prompt: true %>
+        <%= f.label "Frequency" %>
+        <%= f.select(:frequency, options_for_select([["Daily", "daily"], ["Weekly", "weekly"]])) %>
+        </label>
+        <%= f.submit "Create", class: "button" %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="large-12 columns">
+    <h6 class="category">Reports</h6>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="callout">
+      <table>
+        <thead>
+          <tr>
+            <th>API Key</th>
+            <th>Frequency</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @report_summaries.each do |report| %>
+            <tr>
+              <td><%= "#{report.api_key.name} (#{(report.api_key.uuid)})" %></td>
+              <td><%= report.frequency %></td>
+              <td><%= report.created_at.to_s(:date_and_time) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
