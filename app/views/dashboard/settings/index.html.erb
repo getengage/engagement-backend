@@ -26,6 +26,13 @@
         <div class="form-group">
           <%= f.label :first_name, "First name" %>
           <%= f.text_field :name, class: "form-control inline-editable" %>
+          <%= f.label :permissions, "Permissions" %>
+          <fieldset>
+            <%= f.radio_button :permissions, "allow_all", class: "inline-editable", checked: (current_user.permissions == "allow_all") %>
+            <%= f.label :permissions, "Allow All", value: "allow_all" %>
+            <%= f.radio_button :permissions, "no_emails", class: "inline-editable", checked: (current_user.permissions == "no_emails") %>
+            <%= f.label :permissions, "No Emails", value: "no_emails" %>
+          </fieldset>
           <%= f.label :avatar_label, "Profile Avatar" %>
           <%= f.label :avatar, current_user.avatar.present? ? current_user.avatar.file.identifier : "No Avatar", class: "button" %>
           <%= f.file_field :avatar, class: "show-for-sr inline-editable" %>

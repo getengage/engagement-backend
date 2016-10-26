@@ -15,7 +15,7 @@ body.pages {
   }
 }
 
-body.pages, body.sessions, body.registrations {
+body.pages, body.sessions, body.registrations, body.passwords {
   background: $dark-purple;
 }
 
@@ -26,7 +26,9 @@ h1 {
 }
 
 .authform {
-  background-color: #FFF;
+  background-color: $ultra-light-purple;
+  border-top: 2px solid darken($dark-purple, 20%);
+  margin-top: 2rem;
   padding: 2rem;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }

@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'mini_magick'
 gem 'oj'
 gem 'oj_mimic_json'
+gem 'pdfkit'
 gem 'powder'
 gem 'puma'
 gem 'rails', '4.2.7.1'
@@ -31,8 +32,10 @@ gem 'pundit'
 gem 'sidekiq'
 gem 'sinatra', :require => false
 gem 'whenever', :require => false
+gem 'wkhtmltopdf-binary'
 group :development do
   gem 'better_errors'
+  gem 'letter_opener'
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'spring'

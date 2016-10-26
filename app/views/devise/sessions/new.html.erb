@@ -1,8 +1,8 @@
-<div class="small-6 small-centered">
-  <div class="row" style="margin-top: 2rem">
+<div class="small-10 medium-6 large-4 small-centered">
+  <div class="row">
     <div class="authform">
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-        <h3>Sign in</h3>
+        <h4>Sign in</h4>
         <%= devise_error_messages! %>
         <div class="form-group">
           <%= f.label :email %>
@@ -14,10 +14,11 @@
         </div>
           <%= f.submit 'Sign in', :class => 'button right' %>
           <% if devise_mapping.rememberable? -%>
-            <div class="checkbox" style="width:150px">
-              <label>
+            <div class="checkbox clearfix">
+              <label class="float-left">
                 <%= f.check_box :remember_me %> Remember me
               </label>
+              <label class="float-right"><%= link_to "Forgot Your Password?", new_password_path('user'), class: "login-link" %></label>
             </div>
           <% end -%>
       <% end %>
