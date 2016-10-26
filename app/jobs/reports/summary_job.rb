@@ -13,7 +13,7 @@ class Reports::SummaryJob < ActiveJob::Base
           top_scores_by_source_url: Event::Score.top_scores_by_source_url(api_key.uuid)
         }
         emails = api_key.report_summary_users.map(&:email)
-        Report::SummaryMailer.notify(emails, data).deliver_later
+        Reports::SummaryMailer.notify(emails, data, api_key.name).deliver_now
       end
   end
 end

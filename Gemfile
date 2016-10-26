@@ -28,6 +28,7 @@ gem 'devise'
 gem 'foreman'
 gem 'foundation-rails', '6.2.3.0'
 gem 'pg'
+gem 'premailer-rails'
 gem 'pundit'
 gem 'sidekiq'
 gem 'sinatra', :require => false
