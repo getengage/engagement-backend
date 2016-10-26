@@ -4,6 +4,8 @@ languages:
 exclude_paths:
 - "app/assets/javascripts/dataTables.foundation.min.js"
 - "app/assets/javascripts/jquery.dataTables.min.js"
+- "app/assets/stylesheets/email.css"
+- "app/assets/stylesheets/print.css"
 - "db/data/"
 - "public/*"
 - "script/*"
