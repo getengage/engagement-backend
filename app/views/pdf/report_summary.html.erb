@@ -1,0 +1,30 @@
+<header>
+  <h1>Engage</h1>
+  <span>Summary Report for <%= Date.current.to_s(:date_only) %></span>
+</header>
+<% local_assigns.keys.each do |key| %>
+  <% kv_pairs = local_assigns[key].values.first.to_h.keys %>
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="<%= kv_pairs.size %>"><%= key.to_s.titleize %></th>
+        </tr>
+        <tr>
+          <% kv_pairs.each do |value| %>
+            <th><%= value.to_s.humanize %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% local_assigns[key].values.each do |value| %>
+          <tr>
+            <% value.to_h.values.each do |key| %>
+              <td><%= key %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+<% end %>

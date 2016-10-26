@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020130240) do
+ActiveRecord::Schema.define(version: 20161024141207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 20161020130240) do
 
   add_index "data_migrations", ["version"], name: "unique_data_migrations", unique: true, using: :btree
 
+  create_table "report_summaries", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "api_key_id",             null: false
+    t.integer  "frequency",  default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "report_summaries", ["api_key_id"], name: "index_report_summaries_on_api_key_id", using: :btree
+  add_index "report_summaries", ["user_id"], name: "index_report_summaries_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -66,9 +77,12 @@ ActiveRecord::Schema.define(version: 20161020130240) do
     t.integer  "role"
     t.integer  "client_id"
     t.string   "avatar"
+    t.integer  "permissions",            default: 0,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "report_summaries", "api_keys"
+  add_foreign_key "report_summaries", "users"
 end

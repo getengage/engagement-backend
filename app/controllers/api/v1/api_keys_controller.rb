@@ -14,6 +14,7 @@ module Api::V1
       render({json: {uuid: api_key.uuid, name: api_key.name}})
     end
 
+    protected
     def get_user
       @user = User.find(params.require(:user_id))
     end

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # constraints subdomain: "api" do
     scope module: "api", path: nil, defaults: {format: :json} do
       namespace :v1 do
-        resources :reports, only: :create
+        resources :metrics, only: :create
         resources :api_keys, only: [:create, :destroy], param: :uuid
         resources :users, only: :update
       end
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         resources :details, only: [:show, :index]
       end
       resources :settings, only: [:index]
-      resources :reports, only: [:index]
+      resources :reports, only: [:index, :create]
       resources :notifications, only: [:index]
       resources :insights, only: [:index]
       resource :main, only: :index

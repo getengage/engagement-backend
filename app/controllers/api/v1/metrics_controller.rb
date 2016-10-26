@@ -1,5 +1,5 @@
 module Api::V1
-  class ReportsController < ApiController
+  class MetricsController < ApiController
     def create
       data = {
         tags: tag_params,
