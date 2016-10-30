@@ -41,11 +41,29 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
   end
 
   describe '#destroy' do
+    let(:api_key) { create(:api_key, client: user.client) }
+
     describe "with valid params" do
-      it "sets the expired_at time" do
+      it "soft deletes api key" do
+        expect {
+          delete :destroy, { user_id: user.id, uuid: api_key.uuid }
+        }.to change(ApiKey.unscoped, :count).by(1)
       end
 
-      it "is idempotent" do
+      it "sets expired_at column" do
+        time = Time.current
+        Timecop.freeze(time) do
+          delete :destroy, { user_id: user.id, uuid: api_key.uuid }
+        end
+        expect(api_key.reload.expired_at).to eq time
+      end
+    end
+
+    describe "with invalid params" do
+      it "raises error w/ invalid uuid" do
+        expect {
+          delete :destroy, { user_id: user.id, uuid: SecureRandom.hex }
+        }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end

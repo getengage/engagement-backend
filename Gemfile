@@ -57,7 +57,6 @@ group :test do
   gem 'capybara-screenshot'
   gem "codeclimate-test-reporter", require: nil
   gem 'database_cleaner'
-  gem 'faker'
   gem 'launchy'
   gem 'selenium-webdriver'
   gem 'timecop'

@@ -9,7 +9,7 @@ module Api::V1
     end
 
     def destroy
-      api_key = @user.api_keys.find_by(uuid: params.require(:uuid))
+      api_key = @user.api_keys.find_by!(uuid: params.require(:uuid))
       api_key.destroy
       render({json: {uuid: api_key.uuid, name: api_key.name}})
     end
