@@ -54,11 +54,13 @@ group :development, :test do
 end
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem "codeclimate-test-reporter", require: nil
   gem 'database_cleaner'
+  gem 'faker'
   gem 'launchy'
   gem 'selenium-webdriver'
-  gem 'capybara-screenshot'
+  gem 'timecop'
 end
 group :production do
   gem 'rails_12factor'
