@@ -10,6 +10,11 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
           post :create, { user_id: user.id, name: "FooBar" }
         }.to change(ApiKey, :count).by(1)
       end
+
+      it "responds with json" do
+        post :create, { user_id: user.id, name: "FooBar" }
+        expect response.content_type == "application/json"
+      end
     end
 
     describe "with invalid params" do
