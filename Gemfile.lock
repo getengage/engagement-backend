@@ -99,6 +99,8 @@ GEM
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
+    codeclimate-test-reporter (0.6.0)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -124,6 +126,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     entypo-rails (2.2.3)
       railties (>= 3.1, <= 5)
     erubis (2.7.0)
@@ -144,7 +147,6 @@ GEM
       sprockets-es6 (>= 0.9.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    hashie (3.4.4)
     high_voltage (3.0.0)
     htmlentities (4.3.4)
     i18n (0.7.0)
@@ -281,7 +283,7 @@ GEM
     rspec-support (3.5.0)
     rubyzip (1.2.0)
     sass (3.4.22)
-    sass-rails (5.0.5)
+    sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -297,6 +299,11 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
       sinatra (>= 1.4.7)
+    simplecov (0.12.0)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -353,6 +360,7 @@ DEPENDENCIES
   capybara-screenshot
   carrierwave
   chartjs-ror
+  codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   data_migrate
   database_cleaner
@@ -362,7 +370,6 @@ DEPENDENCIES
   faker
   foreman
   foundation-rails (= 6.2.3.0)
-  hashie
   high_voltage (~> 3.0.0)
   influxdb-rails!
   jbuilder (~> 2.0)
@@ -387,7 +394,7 @@ DEPENDENCIES
   react_on_rails (= 6.1.1)
   refills
   rspec-rails
-  sass-rails (~> 5.0)
+  sass-rails (~> 5.0.6)
   selenium-webdriver
   sidekiq
   sinatra

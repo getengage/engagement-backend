@@ -10,7 +10,7 @@ class ScatterChartPresenter
             label: title,
             backgroundColor: "rgba(220,220,220,0.2)",
             borderColor: "rgba(220,220,220,1)",
-            data: data.values.map{|x| {x: x.score, y: x.total_in_viewport_time} },
+            data: data.map{|x| {x: x.score, y: x.total_in_viewport_time} },
             radius: 25,
             pointBorderColor: "rgba(75,192,192,1)",
             pointBackgroundColor: "rgba(224, 247, 250, 1)",

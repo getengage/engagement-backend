@@ -1,5 +1,12 @@
 module Event
   class Score < InfluxCollection
+    include ActiveModel::Model
+    attr_accessor :time, :api_key, :city, :country,
+                  :reached_end_of_content, :referrer,
+                  :remote_ip, :score, :session_id,
+                  :source_url, :total_in_viewport_time,
+                  :uuid, :word_count, :count, :mean
+
     def self.find(uuid)
       query("select * from #{influx_table} where uuid = '%s'", uuid)
     end

@@ -30,7 +30,7 @@ class BarChartPresenter
   end
 
   def padded(data, filler, method)
-    data = data.values.map{|x| x.send(method) }
+    data = data.map{|x| x.send(method) }
     data.size == 5 ? data : data + ([filler] * (5 - data.size))
   end
 
