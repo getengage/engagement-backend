@@ -7,7 +7,6 @@ gem 'chartjs-ror'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'data_migrate'
 gem 'entypo-rails'
-gem 'hashie'
 gem 'high_voltage', '~> 3.0.0'
 gem 'influxdb-rails', git: 'https://github.com/influxdata/influxdb-rails'
 gem 'jbuilder', '~> 2.0'
@@ -20,7 +19,7 @@ gem 'powder'
 gem 'puma'
 gem 'rails', '4.2.7.1'
 gem "react_on_rails", "6.1.1"
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0.6'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'administrate'
@@ -55,6 +54,7 @@ group :development, :test do
 end
 group :test do
   gem 'capybara'
+  gem "codeclimate-test-reporter", require: nil
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'

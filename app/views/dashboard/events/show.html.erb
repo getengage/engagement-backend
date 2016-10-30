@@ -56,7 +56,7 @@
         </thead>
         <tbody>
           <% if @query_results.present? %>
-            <% @query_results.values.each_with_index do |event, index| %>
+            <% @query_results.each_with_index do |event, index| %>
               <tr>
                 <td><%= index + 1 %></td>
                 <td><%= event.time %></td>
