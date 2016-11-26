@@ -15,4 +15,8 @@ module InfluxQuery
   def influx_table
     model_name.route_key.tableize
   end
+
+  def influx_db
+    InfluxDB::Rails.configuration.influxdb_database
+  end
 end

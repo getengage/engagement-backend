@@ -29,11 +29,11 @@ module Event
     end
 
     def self.top_visits_by_source_url(api_key)
-      query("select top(count, 5) as count, source_url from #{influx_table}.autogen.unique_visits_1d")
+      query("select top(count, 5) as count, source_url from #{influx_db}.autogen.unique_visits_1d")
     end
 
     def self.top_scores_by_source_url(api_key)
-      query("select top(mean, 5) as count, source_url from #{influx_table}.autogen.mean_scores_1d")
+      query("select top(mean, 5) as count, source_url from #{influx_db}.autogen.mean_scores_1d")
     end
 
     def self.scores_from_30_days(source_url, api_key)
@@ -41,7 +41,7 @@ module Event
     end
 
     def self.top_referrals_by_source_url(api_key)
-      query("select top(count, 5) as count, source_url from #{influx_table}.autogen.referrals_1d")
+      query("select top(count, 5) as count, source_url from #{influx_db}.autogen.referrals_1d")
     end
   end
 end
