@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 
 export const $$initialState = Immutable.fromJS({
-  keys: [],
+  data: [],
 });
 
 export default function settingsReducer($$state = $$initialState, action = null) {

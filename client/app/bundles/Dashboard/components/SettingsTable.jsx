@@ -1,5 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import SettingsItem from './SettingsItem';
+
+function stateToProps(state) {
+  return {
+    data: state.$$settingsStore.get('data')
+  }
+}
 
 var SettingsTable = React.createClass({
   componentDidMount: function() {
@@ -17,6 +24,7 @@ var SettingsTable = React.createClass({
     return;
   },
   render: function() {
+    debugger;
     var listNodes = this.props.data.map(function (listItem) {
       return (
         <SettingsItem key={listItem.id} nodeId={listItem.id} name={listItem.name} uuid={listItem.uuid} removeNode={this.removeNode} source={listItem.source} />
@@ -40,4 +48,4 @@ var SettingsTable = React.createClass({
   }
 });
 
-export default SettingsTable;
+export default connect(stateToProps)(SettingsTable);

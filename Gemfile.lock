@@ -253,7 +253,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.3.0)
-    react_on_rails (6.1.1)
+    react_on_rails (6.2.1)
       addressable
       connection_pool
       execjs (~> 2.5)
@@ -392,7 +392,7 @@ DEPENDENCIES
   rails (= 4.2.7.1)
   rails_12factor
   rails_layout
-  react_on_rails (= 6.1.1)
+  react_on_rails (= 6.2.1)
   refills
   rspec-rails
   sass-rails (~> 5.0.6)
@@ -412,4 +412,4 @@ RUBY VERSION
    ruby 2.2.3p173
 
 BUNDLED WITH
-   1.13.2
+   1.13.6

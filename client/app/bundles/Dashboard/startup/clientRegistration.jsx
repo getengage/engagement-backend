@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
 import SettingsContainer from '../containers/Settings';
+import settingsStore from '../store/Settings';
 
-const SettingsContainerApp = (props) => (
-  <SettingsContainer {...props} />
-);
+ReactOnRails.register({ SettingsContainer });
 
-ReactOnRails.register({ SettingsContainerApp });
+ReactOnRails.registerStore({ settingsStore });
 
 ReactOnRails.setOptions({
  traceTurbolinks: true,

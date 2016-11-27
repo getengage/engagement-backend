@@ -14,5 +14,6 @@
     <%= render "sub_nav" unless subnav_hidden? || !user_signed_in? %>
     <%= render "flash" %>
     <%= yield %>
+    <%= redux_store_hydration_data %>
   </body>
 </html>
