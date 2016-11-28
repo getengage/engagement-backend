@@ -4,7 +4,7 @@ module Dashboard
 
     def index
       @api_keys = current_user.api_keys
-      redux_store("settingsStore", props: {
+      redux_store("SettingsStore", props: {
         user_id: current_user.id,
         source: v1_api_keys_path,
         data: @api_keys.map{ |x|

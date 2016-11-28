@@ -29,7 +29,7 @@ There are currently few tools that measure how engaged a user is when viewing on
 
 ### Contributing / Setup
 
-Please read [CONTRIBUTING.md](https://github.com/nicksoto/engagement-backend/CONTRIBUTING.md) for details on contributing as well as information on system setup
+Please read [CONTRIBUTING.md](https://github.com/nicksoto/engagement-backend/blob/master/CONTRIBUTING.md) for details on contributing as well as information on system setup
 
 ### License
 

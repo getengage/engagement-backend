@@ -1,29 +1,46 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { addKey } from '../actions';
+
+const stateToProps = (state) => {
+  return state.store.toJS()
+}
+
+const dispatchToProps = (dispatch) => ({
+  addKey: (key) => {
+    dispatch({type: 'ADD_KEY' , key})
+  }
+});
 
 var SettingsForm = React.createClass({
-  getInitialState: function() {
-    return {new_api_key_name: ''};
-  },
   componentDidMount: function() {
     if (this.refs.modal && !("zfPlugin" in $(this.refs.modal).data())) {
       new Foundation.Reveal($(this.refs.modal));
     }
   },
+
+  inputVal: function() {
+    return (this.state && 'inputVal' in this.state) ? this.state.inputVal : this.props.inputVal;
+  },
+
   handleTextChange: function(e) {
-    this.setState({new_api_key_name: e.target.value});
+    this.setState({inputVal: e.target.value});
   },
+
   apiKeySubmitted: function(data) {
-    this.props.onApiKeyNewSubmit(data);
+    this.props.addKey(data);
     $(this.refs.modal).foundation('close');
-    this.setState({new_api_key_name: ""});
+    this.setState({inputVal: ''});
   },
+
   doSubmit: function (e) {
     e.preventDefault();
     $.post(this.props.source, {
-      user_id: this.props.userId,
-      name: this.state.new_api_key_name
+      user_id: this.props.user_id,
+      name: this.state.inputVal
     }).then(this.apiKeySubmitted);
   },
+
   render: function() {
     return (
       <div className="SettingsForm">
@@ -39,8 +56,8 @@ var SettingsForm = React.createClass({
             <fieldset>
               <div className="form-group">
                 <label htmlFor="name">API Key Name</label>
-                <input name="name" value={this.state.new_api_key_name} onChange={this.handleTextChange} type="text"/>
-                <input className={"button close-reveal-modal " + (this.state.new_api_key_name === "" ? 'disabled' : 'enabled')} type="submit"/>
+                <input name="name" onChange={this.handleTextChange} type="text"/>
+                <input className={"button close-reveal-modal " + (this.inputVal() === '' ? 'disabled' : 'enabled')} type="submit"/>
               </div>
             </fieldset>
           </form>
@@ -51,4 +68,4 @@ var SettingsForm = React.createClass({
   }
 });
 
-export default SettingsForm;
+export default connect(stateToProps, dispatchToProps)(SettingsForm);

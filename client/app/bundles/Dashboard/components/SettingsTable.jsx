@@ -1,14 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SettingsItem from './SettingsItem';
+import { removeKey } from '../actions';
 
-function stateToProps(state) {
-  return {
-    data: state.$$settingsStore.get('data')
-  }
+const stateToProps = (state) => {
+  return state.store.toJS()
 }
 
+const dispatchToProps = (dispatch) => ({
+  removeKey: (key) => {
+    dispatch({type: 'REMOVE_KEY', key})
+  }
+});
+
 var SettingsTable = React.createClass({
+
   componentDidMount: function() {
     if (this.refs.table && !$.fn.DataTable.fnIsDataTable(this.refs.table)) {
       return $(this.refs.table).dataTable({
@@ -19,17 +25,24 @@ var SettingsTable = React.createClass({
       });
     }
   },
-  removeNode: function (nodeId) {
-    this.props.removeNode(nodeId);
-    return;
+
+  removeNode: function (key) {
+    this.props.removeKey(key);
   },
+
   render: function() {
-    debugger;
-    var listNodes = this.props.data.map(function (listItem) {
+    var listNodes = this.props.data.map(function (listItem, i) {
       return (
-        <SettingsItem key={listItem.id} nodeId={listItem.id} name={listItem.name} uuid={listItem.uuid} removeNode={this.removeNode} source={listItem.source} />
+        <SettingsItem
+          key={listItem.id}
+          nodeId={listItem.id}
+          name={listItem.name}
+          uuid={listItem.uuid}
+          removeNode={this.removeNode}
+          source={listItem.source} />
       );
-    },this);
+    }, this);
+
     return (
       <table id="settings-table" ref="table">
         <thead>
@@ -48,4 +61,4 @@ var SettingsTable = React.createClass({
   }
 });
 
-export default connect(stateToProps)(SettingsTable);
+export default connect(stateToProps, dispatchToProps)(SettingsTable);

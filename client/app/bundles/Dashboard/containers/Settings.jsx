@@ -5,7 +5,7 @@ import SettingsTable from '../components/SettingsTable';
 import SettingsForm from '../components/SettingsForm';
 
 export default (_props, _railsContext) => {
-  const store = ReactOnRails.getStore('settingsStore');
+  const store = ReactOnRails.getStore('SettingsStore');
 
   return (
     <Provider store={store}>
