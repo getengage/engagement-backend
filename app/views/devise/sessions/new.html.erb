@@ -7,13 +7,13 @@
           <span class="input-group-label">
             <i class="icon-user"></i>
           </span>
-          <%= f.email_field :email, :autofocus => true, class: 'input-group-field form-control' %>
+          <%= f.email_field :email, :autofocus => true, id: 'Email', class: 'input-group-field form-control' %>
         </div>
         <div class="input-group">
           <span class="input-group-label">
             <i class="icon-lock"></i>
           </span>
-          <%= f.password_field :password, class: 'input-group-field form-control' %>
+          <%= f.password_field :password, id: 'Password', class: 'input-group-field form-control' %>
         </div>
         <%= f.submit 'Sign in', :class => 'large expanded button' %>
         <% if devise_mapping.rememberable? -%>
