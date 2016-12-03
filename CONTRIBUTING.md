@@ -40,12 +40,8 @@ Because React is a dependency, it is recommended to install the [react developer
 ### Setup
 
 ```ruby
-  rake db:create
-  rake db:migrate:with_data
-  rake db:seed
+  bin/setup
 ```
-
-Please note - it may be essential to restart influxdb after seeding, as well as manually creating the [continuous queries](https://docs.influxdata.com/influxdb/v0.9/query_language/continuous_queries) from the command line
 
 ### Debugging
 

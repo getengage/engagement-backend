@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SettingsItem from './SettingsItem';
-import { removeKey } from '../actions';
 
 const stateToProps = (state) => {
   return state.store.toJS()
@@ -26,10 +25,6 @@ var SettingsTable = React.createClass({
     }
   },
 
-  removeNode: function (key) {
-    this.props.removeKey(key);
-  },
-
   render: function() {
     var listNodes = this.props.data.map(function (listItem, i) {
       return (
@@ -38,7 +33,7 @@ var SettingsTable = React.createClass({
           nodeId={listItem.id}
           name={listItem.name}
           uuid={listItem.uuid}
-          removeNode={this.removeNode}
+          removeNode={this.props.removeKey.bind(this)}
           source={listItem.source} />
       );
     }, this);

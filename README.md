@@ -4,6 +4,7 @@
   <a href="https://circleci.com/gh/nicksoto/engagement-backend"><img src="https://circleci.com/gh/nicksoto/engagement-backend.png?style=shield&circle-token=13e8f29fdd7502e8466f98ae36fd6f4624ba49c7"></a>
   <a href="https://codeclimate.com/github/nicksoto/engagement-backend"><img src="https://codeclimate.com/github/nicksoto/engagement-backend/badges/gpa.svg" /></a>
   <a href="https://codeclimate.com/github/nicksoto/engagement-backend/coverage"><img src="https://codeclimate.com/github/nicksoto/engagement-backend/badges/coverage.svg" /></a>
+  <a href='https://gemnasium.com/github.com/nicksoto/engagement-backend'><img src="https://gemnasium.com/badges/github.com/nicksoto/engagement-backend.svg" alt="Dependency Status" /></a>
 </p>
 <br>
 

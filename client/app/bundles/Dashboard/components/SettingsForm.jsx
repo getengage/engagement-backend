@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addKey } from '../actions';
 
 const stateToProps = (state) => {
   return state.store.toJS()
