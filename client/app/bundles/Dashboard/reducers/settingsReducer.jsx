@@ -9,19 +9,13 @@ export default function settingsReducer(state = $$initialState, action = null) {
 
   switch (type) {
     case 'ADD_KEY':
-      return {
-        store: state.store.updateIn(['data'], arr =>
-          arr.push(Immutable.Map(key))
-        ),
-        railsContext: state.railsContext,
-      }
+      return state.updateIn(['data'], arr =>
+        arr.push(Immutable.Map(key))
+      )
     case 'REMOVE_KEY':
-      return {
-        store: state.store.updateIn(['data'], arr =>
-          arr.filter(entry => entry.get('id') !== key.id)
-        ),
-        railsContext: state.railsContext,
-      }
+      return state.updateIn(['data'], arr =>
+        arr.filter(entry => entry.get('id') !== key.id)
+      )
     default:
       return state
   }

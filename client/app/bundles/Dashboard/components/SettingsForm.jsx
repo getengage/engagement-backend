@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Notifications from 'react-notification-system-redux';
 
 const stateToProps = (state) => {
   return state.store.toJS()
-}
+};
 
 const dispatchToProps = (dispatch) => ({
   addKey: (key) => {
+    dispatch(Notifications.success({message: 'Key Added: ' + key.name, position: 'br'}))
     dispatch({type: 'ADD_KEY' , key})
-  }
+  },
 });
 
 var SettingsForm = React.createClass({

@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SettingsItem from './SettingsItem';
+import Notifications from 'react-notification-system-redux';
 
 const stateToProps = (state) => {
   return state.store.toJS()
-}
+};
 
 const dispatchToProps = (dispatch) => ({
   removeKey: (key) => {
+    dispatch(Notifications.success({message: 'Key Removed', position: 'br'}))
     dispatch({type: 'REMOVE_KEY', key})
-  }
+  },
 });
 
 var SettingsTable = React.createClass({
