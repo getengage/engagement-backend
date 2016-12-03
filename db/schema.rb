@@ -39,12 +39,6 @@ ActiveRecord::Schema.define(version: 20161024141207) do
     t.string "name", null: false
   end
 
-  create_table "data_migrations", id: false, force: :cascade do |t|
-    t.string "version", null: false
-  end
-
-  add_index "data_migrations", ["version"], name: "unique_data_migrations", unique: true, using: :btree
-
   create_table "report_summaries", force: :cascade do |t|
     t.integer  "user_id",                null: false
     t.integer  "api_key_id",             null: false

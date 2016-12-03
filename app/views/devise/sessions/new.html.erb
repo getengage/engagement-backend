@@ -2,25 +2,28 @@
   <div class="row">
     <div class="authform">
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-        <h4>Sign in</h4>
         <%= devise_error_messages! %>
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+        <div class="input-group">
+          <span class="input-group-label">
+            <i class="icon-user"></i>
+          </span>
+          <%= f.email_field :email, :autofocus => true, id: 'Email', class: 'input-group-field form-control' %>
         </div>
-        <div class="form-group">
-          <%= f.label :password %>
-          <%= f.password_field :password, class: 'form-control' %>
+        <div class="input-group">
+          <span class="input-group-label">
+            <i class="icon-lock"></i>
+          </span>
+          <%= f.password_field :password, id: 'Password', class: 'input-group-field form-control' %>
         </div>
-          <%= f.submit 'Sign in', :class => 'button right' %>
-          <% if devise_mapping.rememberable? -%>
-            <div class="checkbox clearfix">
-              <label class="float-left">
-                <%= f.check_box :remember_me %> Remember me
-              </label>
-              <label class="float-right"><%= link_to "Forgot Your Password?", new_password_path('user'), class: "login-link" %></label>
-            </div>
-          <% end -%>
+        <%= f.submit 'Sign in', :class => 'large expanded button' %>
+        <% if devise_mapping.rememberable? -%>
+          <div class="checkbox clearfix">
+            <label class="float-left">
+              <%= f.check_box :remember_me %> Remember me
+            </label>
+            <label class="float-right"><%= link_to "Forgot Your Password?", new_password_path('user'), class: "login-link" %></label>
+          </div>
+        <% end -%>
       <% end %>
     </div>
     <%= devise_error_messages! %>

@@ -1,13 +1,15 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 var SettingsItem = React.createClass({
+
   removeNode: function (e) {
     e.preventDefault();
     $.ajax({
       url: this.props.source,
       type: 'DELETE'
-    }).then(this.props.removeNode(this.props.nodeId));
+    }).then(this.props.removeNode);
   },
+
   render: function() {
     return (
       <tr>
