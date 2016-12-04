@@ -128,8 +128,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    entypo-rails (2.2.3)
-      railties (>= 3.1, <= 5)
+    entypo-rails (3.0.0.pre.rc2)
+      railties (>= 4.1, <= 5)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -368,7 +368,7 @@ DEPENDENCIES
   data_migrate
   database_cleaner
   devise
-  entypo-rails
+  entypo-rails (~> 3.0.0.pre.rc2)
   factory_girl_rails
   faker
   foreman
