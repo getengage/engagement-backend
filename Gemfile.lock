@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/influxdata/influxdb-rails
-  revision: 96181c2b304d205317144b2bb60f33e4bad664c4
+  revision: e9e11a71e02698b45f0760a58194b0734a7398e0
   specs:
-    influxdb-rails (0.1.10)
-      influxdb (~> 0.2.0)
+    influxdb-rails (0.1.11)
+      influxdb (~> 0.3.0)
       railties
 
 GEM
@@ -94,6 +94,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    cause (0.1)
     chartjs-ror (3.0.2)
       rails (>= 3.1)
     childprocess (0.5.9)
@@ -150,7 +151,8 @@ GEM
     high_voltage (3.0.0)
     htmlentities (4.3.4)
     i18n (0.7.0)
-    influxdb (0.2.6)
+    influxdb (0.3.13)
+      cause
       json
     interception (0.5)
     jbuilder (2.5.0)
