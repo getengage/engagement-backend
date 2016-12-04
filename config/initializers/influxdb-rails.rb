@@ -6,6 +6,7 @@ InfluxDB::Rails.configure do |config|
   config.influxdb_port     = 8086
   config.logger            = Logger.new(STDERR)
   config.logger.level      = Logger::FATAL
+  config.async             = false
 
   # config.series_name_for_controller_runtimes = "rails.controller"
   # config.series_name_for_view_runtimes       = "rails.view"
