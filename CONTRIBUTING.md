@@ -9,7 +9,6 @@ Many of the development dependencies can be installed through [homebrew](http://
 ```unix
   brew install pg
   brew install redis
-  brew install influxdb
   brew install node
   brew install go
 

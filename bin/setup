@@ -5,37 +5,18 @@ require 'pathname'
 APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
 
 Dir.chdir APP_ROOT do
-  puts "\n== Checking Binaries ==\n"
-
-  if !system('command -v influx >/dev/null 2>&1')
-    puts <<-MSG
-      Aborting: InfluxDB is a required dependency and is not currently installed.
-      To continue, brew install influxdb and re-run this setup.
-    MSG
-    exit
-  end
-
-  puts "\n== Binary Check Complete ==\n"
-
   puts "\n== Installing App Dependencies ==\n"
   system "gem install bundler --conservative"
   system "bundle check || bundle install"
-
   puts "\n== Preparing DB ==\n"
   system "bin/rake db:create"
   system "bin/rake db:migrate"
-  system "bin/rake data:forward" # create influx table
   system "bin/rake db:seed"
-  system "bin/rake data:migrate" # run remainder of influx migrations
+  system "bin/rake data:migrate"
   system "npm run postinstall"
-
   puts "\n== Removing old logs and tempfiles =="
   system "rm -f log/*"
   system "rm -rf tmp/cache"
-
-  puts "\n== Restarting App server & InfluxDB ==\n"
   system "touch tmp/restart.txt"
-  system "brew services restart InfluxDB"
-
   puts "\n== DONE ==\n"
 end

@@ -8,7 +8,6 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'data_migrate'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'
 gem 'high_voltage', '~> 3.0.0'
-gem 'influxdb-rails', git: 'https://github.com/influxdata/influxdb-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'mini_magick'
@@ -33,6 +32,8 @@ gem 'sidekiq'
 gem 'sinatra', :require => false
 gem 'whenever', :require => false
 gem 'wkhtmltopdf-binary'
+gem 'hairtrigger'
+
 group :development do
   gem 'better_errors'
   gem 'letter_opener'

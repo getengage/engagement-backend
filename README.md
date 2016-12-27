@@ -8,7 +8,7 @@
 </p>
 <br>
 
-This is the home for the Engagement backend. Please note, this is an <b>Experimental</b> project that utilizes Influxdb as a Time-Series DB for the backend as well as a JS Client that utitlizes new HTML API's with fractured support across browsers.
+This is the home for the Engagement backend. Please note, this is an <b>Experimental</b> project that utilizes new tech as well as a JS Client that utitlizes new HTML API's with fractured support across browsers.
 
 ### Background
 

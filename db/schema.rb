@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024141207) do
+ActiveRecord::Schema.define(version: 20161227053955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,22 @@ ActiveRecord::Schema.define(version: 20161024141207) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name", null: false
+  end
+
+  create_table "events_raw", force: :cascade do |t|
+    t.string  "referrer"
+    t.float   "x_pos"
+    t.float   "y_pos"
+    t.boolean "is_visible"
+    t.boolean "in_viewport"
+    t.float   "top"
+    t.float   "bottom"
+    t.integer "word_count"
+    t.string  "remote_ip"
+    t.string  "user_agent"
+    t.string  "api_key_id"
+    t.string  "session_id"
+    t.string  "source_url"
   end
 
   create_table "report_summaries", force: :cascade do |t|
@@ -79,4 +95,26 @@ ActiveRecord::Schema.define(version: 20161024141207) do
 
   add_foreign_key "report_summaries", "api_keys"
   add_foreign_key "report_summaries", "users"
+  create_trigger("api_keys_after_insert_row_tr", :generated => true, :compatibility => 1).
+      on("api_keys").
+      after(:insert).
+      declare("partition text") do
+    <<-SQL_ACTIONS
+      partition := quote_ident('events_raw' || '_' || NEW.uuid);
+      EXECUTE 'CREATE TABLE ' || partition || ' (check (api_key_id = ''' || NEW.uuid || ''')) INHERITS (events_raw);';
+      RETURN NULL;
+    SQL_ACTIONS
+  end
+
+  create_trigger("events_raw_before_insert_row_tr", :generated => true, :compatibility => 1).
+      on("events_raw").
+      before(:insert).
+      declare("partition text") do
+    <<-SQL_ACTIONS
+        partition := quote_ident(TG_RELNAME || '_' || NEW.api_key_id);
+        EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
+        RETURN NULL;
+    SQL_ACTIONS
+  end
+
 end
