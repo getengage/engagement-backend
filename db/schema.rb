@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227053955) do
+ActiveRecord::Schema.define(version: 20161230192721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,20 +39,256 @@ ActiveRecord::Schema.define(version: 20161227053955) do
     t.string "name", null: false
   end
 
+  create_table "events_processed", force: :cascade do |t|
+    t.string   "api_key_id",             null: false
+    t.string   "source_url",             null: false
+    t.string   "session_id"
+    t.string   "referrer"
+    t.boolean  "reached_end_of_content"
+    t.integer  "total_in_viewport_time"
+    t.integer  "word_count"
+    t.float    "final_score",            null: false
+    t.string   "city"
+    t.string   "region"
+    t.string   "country"
+    t.string   "remote_ip"
+    t.datetime "created_at"
+  end
+
+  add_index "events_processed", ["api_key_id"], name: "index_events_processed_on_api_key_id", using: :btree
+  add_index "events_processed", ["source_url"], name: "index_events_processed_on_source_url", using: :btree
+
   create_table "events_raw", force: :cascade do |t|
-    t.string  "referrer"
-    t.float   "x_pos"
-    t.float   "y_pos"
-    t.boolean "is_visible"
-    t.boolean "in_viewport"
-    t.float   "top"
-    t.float   "bottom"
-    t.integer "word_count"
-    t.string  "remote_ip"
-    t.string  "user_agent"
-    t.string  "api_key_id"
-    t.string  "session_id"
-    t.string  "source_url"
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_1", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_10", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_11", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_12", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_2", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_3", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_4", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_5", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_6", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_7", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_8", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
+  end
+
+  create_table "events_raw_9", id: false, force: :cascade do |t|
+    t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.string   "referrer"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.boolean  "is_visible"
+    t.boolean  "in_viewport"
+    t.float    "top"
+    t.float    "bottom"
+    t.integer  "word_count"
+    t.string   "remote_ip"
+    t.string   "user_agent"
+    t.string   "api_key_id"
+    t.string   "session_id"
+    t.string   "source_url"
+    t.datetime "created_at"
   end
 
   create_table "report_summaries", force: :cascade do |t|
@@ -100,9 +336,20 @@ ActiveRecord::Schema.define(version: 20161227053955) do
       after(:insert).
       declare("partition text") do
     <<-SQL_ACTIONS
-      partition := quote_ident('events_raw' || '_' || NEW.uuid);
-      EXECUTE 'CREATE TABLE ' || partition || ' (check (api_key_id = ''' || NEW.uuid || ''')) INHERITS (events_raw);';
+      partition := quote_ident('events_processed' || '_' || NEW.uuid);
+      EXECUTE 'CREATE TABLE ' || partition || ' (check (api_key_id = ''' || NEW.uuid || ''')) INHERITS (events_processed);';
       RETURN NULL;
+    SQL_ACTIONS
+  end
+
+  create_trigger("events_processed_before_insert_row_tr", :generated => true, :compatibility => 1).
+      on("events_processed").
+      before(:insert).
+      declare("partition text") do
+    <<-SQL_ACTIONS
+          partition := quote_ident(TG_RELNAME || '_' || NEW.api_key_id);
+          EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
+          RETURN NULL;
     SQL_ACTIONS
   end
 
@@ -111,9 +358,9 @@ ActiveRecord::Schema.define(version: 20161227053955) do
       before(:insert).
       declare("partition text") do
     <<-SQL_ACTIONS
-        partition := quote_ident(TG_RELNAME || '_' || NEW.api_key_id);
-        EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
-        RETURN NULL;
+          partition := quote_ident(TG_RELNAME || '_' || date_part('month', NEW.created_at));
+          EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
+          RETURN NULL;
     SQL_ACTIONS
   end
 

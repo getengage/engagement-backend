@@ -14,6 +14,7 @@ class CreateEventsRaw < ActiveRecord::Migration
       t.string :api_key_id
       t.string :session_id
       t.string :source_url
+      t.datetime :created_at
     end
   end
 end

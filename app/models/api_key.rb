@@ -9,8 +9,8 @@ class ApiKey < ActiveRecord::Base
 
   trigger.after(:insert).declare("partition text") do
     <<-SQL
-      partition := quote_ident('events_raw' || '_' || NEW.uuid);
-      EXECUTE 'CREATE TABLE ' || partition || ' (check (api_key_id = ''' || NEW.uuid || ''')) INHERITS (events_raw);';
+      partition := quote_ident('events_processed' || '_' || NEW.uuid);
+      EXECUTE 'CREATE TABLE ' || partition || ' (check (api_key_id = ''' || NEW.uuid || ''')) INHERITS (events_processed);';
       RETURN NULL;
     SQL
   end
