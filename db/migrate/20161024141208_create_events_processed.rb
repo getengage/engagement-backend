@@ -1,8 +1,8 @@
 class CreateEventsProcessed < ActiveRecord::Migration
   def change
     create_table :events_processed do |t|
-      t.string :api_key_id, null: false, index: true
-      t.string :source_url, null: false, index: true
+      t.string :api_key_id, null: false
+      t.string :source_url, null: false
       t.string :session_id
       t.string :referrer
       t.boolean :reached_end_of_content

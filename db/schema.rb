@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230211024) do
+ActiveRecord::Schema.define(version: 20161231161658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,6 @@ ActiveRecord::Schema.define(version: 20161230211024) do
     t.string   "remote_ip"
     t.datetime "created_at"
   end
-
-  add_index "events_processed", ["api_key_id"], name: "index_events_processed_on_api_key_id", using: :btree
-  add_index "events_processed", ["source_url"], name: "index_events_processed_on_source_url", using: :btree
 
   create_table "events_raw", force: :cascade do |t|
     t.string   "referrer"
@@ -358,10 +355,14 @@ ActiveRecord::Schema.define(version: 20161230211024) do
   create_trigger("api_keys_after_insert_row_tr", :generated => true, :compatibility => 1).
       on("api_keys").
       after(:insert).
-      declare("partition text") do
+      declare("partition text; idx_api_key_id text; idx_source_url text") do
     <<-SQL_ACTIONS
       partition := quote_ident('events_processed' || '_' || NEW.uuid);
+      idx_api_key_id := quote_ident('idx_' || NEW.uuid || '_on_api_key_id');
+      idx_source_url := quote_ident('idx_' || NEW.uuid || '_on_source_url');
       EXECUTE 'CREATE TABLE ' || partition || ' (check (api_key_id = ''' || NEW.uuid || ''')) INHERITS (events_processed);';
+      EXECUTE 'CREATE INDEX ' || idx_api_key_id || ' ON ' || partition || ' (api_key_id);';
+      EXECUTE 'CREATE INDEX ' || idx_source_url || ' ON ' || partition || ' (source_url);';
       RETURN NULL;
     SQL_ACTIONS
   end
