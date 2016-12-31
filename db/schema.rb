@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161231161658) do
+ActiveRecord::Schema.define(version: 20161231200510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
   end
 
   create_table "events_raw", force: :cascade do |t|
-    t.datetime "timestamp"
+    t.datetime "timestamp",   null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -67,15 +67,15 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",  null: false
+    t.string   "session_id",  null: false
+    t.string   "source_url",  null: false
     t.datetime "created_at"
   end
 
   create_table "events_raw_1", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -86,9 +86,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_10", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -107,9 +107,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_11", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -128,9 +128,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_12", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -149,9 +149,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_2", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -170,9 +170,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_3", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -191,9 +191,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -201,7 +201,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_4", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -212,9 +212,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_5", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -233,9 +233,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -243,7 +243,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_6", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -254,9 +254,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -264,7 +264,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_7", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -275,9 +275,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -285,7 +285,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_8", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -296,9 +296,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -306,7 +306,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_9", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
-    t.datetime "timestamp"
+    t.datetime "timestamp",                                                      null: false
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -317,9 +317,9 @@ ActiveRecord::Schema.define(version: 20161231161658) do
     t.integer  "word_count"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "api_key_id"
-    t.string   "session_id"
-    t.string   "source_url"
+    t.string   "api_key_id",                                                     null: false
+    t.string   "session_id",                                                     null: false
+    t.string   "source_url",                                                     null: false
     t.datetime "created_at"
   end
 
@@ -365,6 +365,17 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   add_foreign_key "report_summaries", "api_keys"
   add_foreign_key "report_summaries", "users"
+  create_trigger("events_raw_before_insert_row_tr", :generated => true, :compatibility => 1).
+      on("events_raw").
+      before(:insert).
+      declare("partition text") do
+    <<-SQL_ACTIONS
+          partition := quote_ident(TG_RELNAME || '_' || date_part('month', NEW.timestamp));
+          EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
+          RETURN NULL;
+    SQL_ACTIONS
+  end
+
   create_trigger("api_keys_after_insert_row_tr", :generated => true, :compatibility => 1).
       on("api_keys").
       after(:insert).
@@ -386,17 +397,6 @@ ActiveRecord::Schema.define(version: 20161231161658) do
       declare("partition text") do
     <<-SQL_ACTIONS
           partition := quote_ident(TG_RELNAME || '_' || NEW.api_key_id);
-          EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
-          RETURN NULL;
-    SQL_ACTIONS
-  end
-
-  create_trigger("events_raw_before_insert_row_tr", :generated => true, :compatibility => 1).
-      on("events_raw").
-      before(:insert).
-      declare("partition text") do
-    <<-SQL_ACTIONS
-          partition := quote_ident(TG_RELNAME || '_' || date_part('month', NEW.created_at));
           EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
           RETURN NULL;
     SQL_ACTIONS

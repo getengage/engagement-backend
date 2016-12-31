@@ -1,7 +1,12 @@
 module Api::V1
   class MetricsController < ApiController
     def create
-      Event::EventsRaw.create(value_params)
+      insert          = Arel::Nodes::InsertStatement.new
+      insert.relation = Arel::Table.new(:events_raw)
+      insert.columns  = value_params.keys.map { |k| Arel::Table.new(:events_raw)[k] }
+      insert.values   = Arel::Nodes::Values.new(value_params.values, insert.columns)
+
+      ActiveRecord::Base.connection.execute(insert.to_sql)
     end
 
     def data_params
