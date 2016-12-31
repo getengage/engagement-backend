@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
   end
 
   create_table "events_raw", force: :cascade do |t|
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_1", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -94,6 +96,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_10", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -114,6 +117,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_11", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -134,6 +138,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_12", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -154,6 +159,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_2", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -174,6 +180,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_3", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -194,6 +201,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_4", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -214,6 +222,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_5", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -234,6 +243,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_6", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -254,6 +264,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_7", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -274,6 +285,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_8", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"
@@ -294,6 +306,7 @@ ActiveRecord::Schema.define(version: 20161231161658) do
 
   create_table "events_raw_9", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
+    t.datetime "timestamp"
     t.string   "referrer"
     t.float    "x_pos"
     t.float    "y_pos"

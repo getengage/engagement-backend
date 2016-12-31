@@ -1,6 +1,7 @@
 class CreateEventsRaw < ActiveRecord::Migration
   def change
     create_table :events_raw do |t|
+      t.datetime :timestamp
       t.string :referrer
       t.float :x_pos
       t.float :y_pos
