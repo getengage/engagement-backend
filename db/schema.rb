@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230192721) do
+ActiveRecord::Schema.define(version: 20161230211024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.datetime "created_at"
   end
 
+  add_index "events_raw_1", ["api_key_id"], name: "index_events_raw_1_on_api_key_id", using: :btree
+
   create_table "events_raw_10", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
     t.string   "referrer"
@@ -110,6 +112,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.string   "source_url"
     t.datetime "created_at"
   end
+
+  add_index "events_raw_10", ["api_key_id"], name: "index_events_raw_10_on_api_key_id", using: :btree
 
   create_table "events_raw_11", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
@@ -129,6 +133,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.datetime "created_at"
   end
 
+  add_index "events_raw_11", ["api_key_id"], name: "index_events_raw_11_on_api_key_id", using: :btree
+
   create_table "events_raw_12", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
     t.string   "referrer"
@@ -146,6 +152,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.string   "source_url"
     t.datetime "created_at"
   end
+
+  add_index "events_raw_12", ["api_key_id"], name: "index_events_raw_12_on_api_key_id", using: :btree
 
   create_table "events_raw_2", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
@@ -165,6 +173,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.datetime "created_at"
   end
 
+  add_index "events_raw_2", ["api_key_id"], name: "index_events_raw_2_on_api_key_id", using: :btree
+
   create_table "events_raw_3", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
     t.string   "referrer"
@@ -182,6 +192,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.string   "source_url"
     t.datetime "created_at"
   end
+
+  add_index "events_raw_3", ["api_key_id"], name: "index_events_raw_3_on_api_key_id", using: :btree
 
   create_table "events_raw_4", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
@@ -201,6 +213,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.datetime "created_at"
   end
 
+  add_index "events_raw_4", ["api_key_id"], name: "index_events_raw_4_on_api_key_id", using: :btree
+
   create_table "events_raw_5", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
     t.string   "referrer"
@@ -218,6 +232,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.string   "source_url"
     t.datetime "created_at"
   end
+
+  add_index "events_raw_5", ["api_key_id"], name: "index_events_raw_5_on_api_key_id", using: :btree
 
   create_table "events_raw_6", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
@@ -237,6 +253,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.datetime "created_at"
   end
 
+  add_index "events_raw_6", ["api_key_id"], name: "index_events_raw_6_on_api_key_id", using: :btree
+
   create_table "events_raw_7", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
     t.string   "referrer"
@@ -254,6 +272,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.string   "source_url"
     t.datetime "created_at"
   end
+
+  add_index "events_raw_7", ["api_key_id"], name: "index_events_raw_7_on_api_key_id", using: :btree
 
   create_table "events_raw_8", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
@@ -273,6 +293,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.datetime "created_at"
   end
 
+  add_index "events_raw_8", ["api_key_id"], name: "index_events_raw_8_on_api_key_id", using: :btree
+
   create_table "events_raw_9", id: false, force: :cascade do |t|
     t.integer  "id",          default: "nextval('events_raw_id_seq'::regclass)", null: false
     t.string   "referrer"
@@ -290,6 +312,8 @@ ActiveRecord::Schema.define(version: 20161230192721) do
     t.string   "source_url"
     t.datetime "created_at"
   end
+
+  add_index "events_raw_9", ["api_key_id"], name: "index_events_raw_9_on_api_key_id", using: :btree
 
   create_table "report_summaries", force: :cascade do |t|
     t.integer  "user_id",                null: false

@@ -5,9 +5,11 @@ client = Client.where(name: "FooCompany").first_or_create
 user.update(client: client)
 puts 'CREATED CLIENT: ' << client.name
 
-api_key = ApiKey.where(name: "test").first_or_create
-ClientApiKey.where(client: client, api_key: api_key).first_or_create
-puts 'CREATED API KEY: ' << api_key.name
+["my_key", "another_key", "another_one"].each do |key|
+  api_key = ApiKey.where(name: key).first_or_create
+  ClientApiKey.where(client: client, api_key: api_key).first_or_create
+  puts 'CREATED API KEY: ' << api_key.name
+end
 
 sources = ["usatoday.com", "newyorker.com", "huffingtonpost.com", "nytimes.com",
            "yahoo.com", "nbcnews.com", "reddit.com", "espn.com",
