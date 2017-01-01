@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161231200510) do
+ActiveRecord::Schema.define(version: 20170101172647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -371,6 +371,9 @@ ActiveRecord::Schema.define(version: 20161231200510) do
       declare("partition text") do
     <<-SQL_ACTIONS
           partition := quote_ident(TG_RELNAME || '_' || date_part('month', NEW.timestamp));
+          IF NEW.created_at IS NULL THEN
+              NEW.created_at := NOW();
+          END IF;
           EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
           RETURN NULL;
     SQL_ACTIONS
@@ -397,6 +400,9 @@ ActiveRecord::Schema.define(version: 20161231200510) do
       declare("partition text") do
     <<-SQL_ACTIONS
           partition := quote_ident(TG_RELNAME || '_' || NEW.api_key_id);
+          IF NEW.created_at IS NULL THEN
+              NEW.created_at := NOW();
+          END IF;
           EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
           RETURN NULL;
     SQL_ACTIONS
