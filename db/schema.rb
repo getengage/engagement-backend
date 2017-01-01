@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170101172647) do
+ActiveRecord::Schema.define(version: 20170101223646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -324,6 +324,15 @@ ActiveRecord::Schema.define(version: 20170101172647) do
   end
 
   add_index "events_raw_9", ["api_key_id"], name: "index_events_raw_9_on_api_key_id", using: :btree
+
+  create_table "imports", force: :cascade do |t|
+    t.integer  "status"
+    t.string   "message"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "report_summaries", force: :cascade do |t|
     t.integer  "user_id",                null: false
