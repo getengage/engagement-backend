@@ -8,7 +8,7 @@ Many of the development dependencies can be installed through [homebrew](http://
 
 ```unix
   brew install pg
-  brew install redis
+  brew install rabbitmq
   brew install node
   brew install go
 
