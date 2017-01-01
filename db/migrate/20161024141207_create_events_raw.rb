@@ -15,7 +15,7 @@ class CreateEventsRaw < ActiveRecord::Migration
       t.string :api_key_id, null: false
       t.string :session_id, null: false
       t.string :source_url, null: false
-      t.datetime :created_at
+      t.datetime :created_at, default: "now()"
     end
   end
 end
