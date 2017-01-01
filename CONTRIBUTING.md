@@ -12,6 +12,7 @@ Many of the development dependencies can be installed through [homebrew](http://
   brew install node
   brew install go
 
+  curl get.pow.cx/uninstall.sh | sh
   powder link api.engage
   touch .powenv
   rvm env -- 2.2.3@engagement > .powenv
