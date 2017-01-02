@@ -326,10 +326,12 @@ ActiveRecord::Schema.define(version: 20170101223646) do
   add_index "events_raw_9", ["api_key_id"], name: "index_events_raw_9_on_api_key_id", using: :btree
 
   create_table "imports", force: :cascade do |t|
-    t.integer  "status"
+    t.integer  "status",     default: 0, null: false
     t.string   "message"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.datetime "cutoff",                 null: false
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

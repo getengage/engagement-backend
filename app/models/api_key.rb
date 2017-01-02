@@ -4,8 +4,8 @@ class ApiKey < ActiveRecord::Base
 
   has_one :client_api_key
   has_one :client, through: :client_api_key
-  has_many :events_raw, class_name: "Event::EventsRaw"
-  has_many :events_processed, class_name: "Event::EventsProcessed"
+  has_many :events_raw, class_name: "Event::EventsRaw", primary_key: :uuid
+  has_many :events_processed, class_name: "Event::EventsProcessed", primary_key: :uuid
 
   trigger.after(:insert).declare("partition text; idx_api_key_id text; idx_source_url text") do
     <<-SQL
