@@ -8,7 +8,7 @@ Many of the development dependencies can be installed through [homebrew](http://
 
 ```unix
   brew install pg
-  brew install rabbitmq
+  brew install redis
   brew install node
   brew install go
 
@@ -41,6 +41,13 @@ Because React is a dependency, it is recommended to install the [react developer
 
 ```ruby
   bin/setup
+```
+
+postgresql.conf updates for better performance:
+
+```unix
+synchronous_commit = off
+checkpoint_timeout = 60min
 ```
 
 ### Debugging

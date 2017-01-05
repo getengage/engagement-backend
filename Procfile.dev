@@ -1,3 +1,2 @@
 web: rails s -p 4000 -b 0.0.0.0
 client: sh -c 'rm app/assets/webpack/* || true && cd client && npm run build:development'
-worker: bundle exec rake sneakers:run

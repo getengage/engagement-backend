@@ -5,7 +5,7 @@ package main
 import (
     "fmt"
     "github.com/jrallison/go-workers"
-    "github.com/sajari/regression"
+    _ "github.com/sajari/regression"
     "github.com/influxdata/influxdb/client/v2"
     "github.com/influxdata/influxdb/uuid"
     "github.com/ip2location/ip2location-go"

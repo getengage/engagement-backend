@@ -1,5 +1,5 @@
 # ...
 :queues:
-  - critical
   - default
   - go_queue
+  - go_queue_b

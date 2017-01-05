@@ -39,7 +39,8 @@ module EngagementBackend
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    # Sneakers - sneakers.io
-    config.active_job.queue_adapter = :sneakers
+
+    # Sidekiq
+    config.active_job.queue_adapter = :sidekiq
   end
 end
