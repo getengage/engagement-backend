@@ -1,5 +1,5 @@
 module Event
-  class EventProcessJob < ActiveJob::Base
+  class EventCleanup < ActiveJob::Base
     queue_as 'default'
 
     def perform(month)

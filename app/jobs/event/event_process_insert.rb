@@ -1,5 +1,5 @@
 module Event
-  class EventProcessJob < ActiveJob::Base
+  class EventProcessInsert < ActiveJob::Base
     queue_as 'go_queue_b'
 
     def perform(*args)
