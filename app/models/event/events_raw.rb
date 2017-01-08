@@ -16,11 +16,13 @@ module Event
 
     scope :with_aggregates, -> {
       select(
-        "distinct on (session_id, timestamp) *,
-        array_agg(x_pos) over (partition by session_id, timestamp order by id) as x_pos_arr,
-        array_agg(y_pos) over (partition by session_id, timestamp) as y_pos_arr,
-        array_agg(in_viewport) over (partition by session_id, timestamp) as in_viewport_arr,
-        array_agg(is_visible) over (partition by session_id, timestamp) as is_visible_arr"
+        "distinct on (timestamp) *,
+        row_number() over (partition by timestamp) as rownum,
+        json_agg(x_pos) over (partition by timestamp) as x_pos_arr,
+        json_agg(y_pos) over (partition by timestamp) as y_pos_arr,
+        json_agg(in_viewport) over (partition by timestamp) as in_viewport_arr,
+        json_agg(is_visible) over (partition by timestamp) as is_visible_arr,
+        count(id) over (partition by timestamp) as count"
       )
     }
 

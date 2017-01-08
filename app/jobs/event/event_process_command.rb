@@ -1,3 +1,5 @@
+require "#{Rails.root}/lib/simple_pg_cursor"
+
 module Event
   class EventProcessCommand < ActiveJob::Base
     queue_as 'default'
@@ -13,27 +15,23 @@ module Event
     end
 
     # ActiveRecord::Batches#find_in_batches doesn't allow select DISTINCT ON
-    # creates a pg CURSOR and fetches blocks of 1000 rows until result set exhausted.
+    # creates a pg CURSOR and fetches blocks of 100 rows until result set exhausted.
     def perform
-      Event::EventsRaw.transaction do
-        begin
-          cursor = PostgreSQLCursor::Cursor.new(sql, {})
-          cursor.open
-          while row = cursor.fetch_block
-            Sidekiq::Client.push_bulk("queue" => "go_queue",
-                                      "class" => "EventProcessWorker",
-                                      "args"  => row.map{|x|[x]}) # fix this
-            break if row.size < 1000
-          end
-        ensure
-          cursor.close
-        end
+      SimplePgCursor.new(Event::EventsRaw, sql).run do |block|
+        args = {
+          "queue" => "go_queue",
+          "class" => "EventProcessWorker",
+          "args"  => block.map{|x| Array.wrap(x) }
+        }
+        Sidekiq::Client.push_bulk(args)
       end
     end
 
     protected
     def sql
-      @sql ||= Event::EventsRaw.
+      return Event::EventsRaw.with_aggregates.limit(1).to_sql if Rails.env.development?
+      Event::EventsRaw.
+        by_month(Date.current.month).
         by_date_range(@old_import.cutoff, @new_import.cutoff).
         with_aggregates.
         to_sql

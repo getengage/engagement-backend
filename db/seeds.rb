@@ -10,39 +10,46 @@ puts 'CREATED CLIENT: ' << client.name
 ["my_key", "another_key", "another_one"].each do |key|
   api_key = ApiKey.where(name: key).first_or_create
   ClientApiKey.where(client: client, api_key: api_key).first_or_create
-  puts 'CREATED API KEY: ' << api_key.name
+
 end
 
 sources = ["usatoday.com", "newyorker.com", "huffingtonpost.com", "nytimes.com",
            "yahoo.com", "nbcnews.com", "reddit.com", "espn.com",
            "financialtimes.com", "slate.com"]
 
-# sources.each do |source|
-#   40.times do
-#     tags = {
-#       "uuid": SecureRandom.hex,
-#       "source_url": "#{source}/news/article-content-#{rand(5)}",
-#       "api_key": api_key.uuid
-#     }
-#
-#     values = {
-#       "session_id": SecureRandom.hex,
-#       "referrer": "google.com",
-#       "reached_end_of_content": true,
-#       "total_in_viewport_time": Random.new.rand(200..400),
-#       "word_count": Random.new.rand(200..400),
-#       "score": Random.new.rand(100..250),
-#       "remote_ip": IPAddr.new(rand(2**32),Socket::AF_INET).to_s,
-#       "city": ["New York", "Los Angeles", "Miami"].sample,
-#       "country": "United States"
-#     }
-#
-#     data = {
-#       tags: tags,
-#       values: values,
-#       timestamp: (Time.now.to_i - rand(20).days).to_i
-#     }
-#
-#     InfluxDB::Rails.client.write_point("event_scores", data)
-#   end
-# end
+timestamp        = Time.current
+second_timestamp = timestamp - 1.hour
+uuid             = ApiKey.first.uuid
+
+1.upto(100) do |n|
+
+  # First User Session
+  Event::EventsRaw.where(
+    timestamp: timestamp,
+    session_id: SecureRandom.uuid,
+    source_url: "example.com/1/#{n}",
+    x_pos: 10,
+    top: 0,
+    bottom: 1000,
+    y_pos: n * 10,
+    is_visible: true,
+    in_viewport: true,
+    api_key_id: uuid
+  ).first_or_create
+
+  # Second User Session
+  Event::EventsRaw.where(
+    timestamp: second_timestamp,
+    session_id: SecureRandom.uuid,
+    source_url: "example.com/2/#{n}",
+    x_pos: 10,
+    top: 0,
+    bottom: 1000,
+    y_pos: n * 9,
+    is_visible: true,
+    in_viewport: true,
+    api_key_id: uuid
+  ).first_or_create
+end
+
+puts 'CREATED EVENTS: ' << uuid
