@@ -1,7 +1,9 @@
 package models
 
 import (
+    "os"
     "encoding/json"
+    "github.com/nu7hatch/gouuid"
     "github.com/ip2location/ip2location-go"
 )
 
@@ -39,7 +41,17 @@ type EventsRaw struct {
 }
 
 func (e *EventsRaw) SetIP2() {
+    pwd, _ := os.Getwd()
+    ip2location.Open(pwd + "/lib/ip2location/IP2LOCATION-LITE-DB3.BIN")
     e.IP2 = ip2location.Get_all(e.RemoteIP)
+}
+
+func (e *EventsRaw) UUID() *uuid.UUID {
+    uuid, err := uuid.NewV4()
+    if err != nil {
+      panic(err)
+    }
+    return uuid
 }
 
 func (e *EventsRaw) XPositions() (xs []float64) {

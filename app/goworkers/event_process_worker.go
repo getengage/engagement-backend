@@ -3,14 +3,10 @@
 package main
 
 import (
-    "os"
     "fmt"
     "github.com/jrallison/go-workers"
     "github.com/sajari/regression"
-    "github.com/ip2location/ip2location-go"
     "encoding/json"
-    "crypto/rand"
-    "encoding/base32"
     "math"
     "./models"
 )
@@ -21,17 +17,7 @@ const (
     intervalInSeconds = 2.0 // time elapsed between each metrics
 )
 
-func getUUID(length int) string {
-    randomBytes := make([]byte, 32)
-    _, err := rand.Read(randomBytes)
-    if err != nil {
-        panic(err)
-    }
-    return base32.StdEncoding.EncodeToString(randomBytes)[:length]
-}
-
 func processEvent(e models.EventsRaw) (processed map[string]interface{}) {
-    uuid := getUUID(10)
     final_score := 0.0
     r := new(regression.Regression)
     r.SetObserved("Y Position")
@@ -53,6 +39,10 @@ func processEvent(e models.EventsRaw) (processed map[string]interface{}) {
 
     r.Run()
 
+    if e.ReachedEnd {
+      final_score += 25.0
+    }
+
     // gauge viewport time for user w/ avg reading speed
     estimated_in_viewport_threshold := ((e.WordCount / avgReadingSpeed) * 60.0)
     // total viewport time accounting for 2 second delay/gap and startup delay
@@ -71,9 +61,9 @@ func processEvent(e models.EventsRaw) (processed map[string]interface{}) {
     final_score += math.Min(estimated_total_read_through * 100.0, 100.0)
 
     processed = map[string]interface{}{
+        "uuid": e.UUID(),
         "source_url": e.SourceURL,
         "api_key": e.APIKeyID,
-        "uuid": uuid,
         "session_id": e.SessionID,
         "referrer": e.Referrer,
         "reached_end_of_content": e.ReachedEnd,
@@ -95,9 +85,6 @@ func buildEventsCollection(message *workers.Msg) (collection []models.EventsRaw)
 }
 
 func EventProcessWorker(message *workers.Msg) {
-    pwd, _ := os.Getwd()
-    ip2location.Open(pwd + "/lib/ip2location/IP2LOCATION-LITE-DB3.BIN")
-
     collection := buildEventsCollection(message)
 
     for i := 0; i < len(collection); i++ {
