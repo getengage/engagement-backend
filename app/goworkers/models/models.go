@@ -22,7 +22,7 @@ type EventsRaw struct {
     ReachedEnd bool
     Referrer string `json:"referrer"`
     RemoteIP string `json:"remote_ip"`
-    ScrollDepth struct {
+    Scroll struct {
         q1 float64  // top quadrant
         q2 float64
         q3 float64
@@ -44,6 +44,25 @@ func (e *EventsRaw) SetIP2() {
     pwd, _ := os.Getwd()
     ip2location.Open(pwd + "/lib/ip2location/IP2LOCATION-LITE-DB3.BIN")
     e.IP2 = ip2location.Get_all(e.RemoteIP)
+}
+
+func (e *EventsRaw) CheckScroll(pos float64) {
+  quartile := e.Bottom / 4.0
+
+  if pos <= quartile {
+    e.Scroll.q1++
+  } else if pos <= quartile * 2.0 {
+    e.Scroll.q2++
+  } else if pos <= quartile * 3.0 {
+    e.Scroll.q3++
+  } else {
+    e.Scroll.q4++
+  }
+}
+
+func (e *EventsRaw) GetScroll() (depths [4]float64) {
+  depths = [4]float64{e.Scroll.q1, e.Scroll.q2, e.Scroll.q3, e.Scroll.q4}
+  return
 }
 
 func (e *EventsRaw) UUID() *uuid.UUID {

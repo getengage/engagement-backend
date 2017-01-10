@@ -24,7 +24,10 @@ func processEvent(e models.EventsRaw) (processed map[string]interface{}) {
     r.SetVar(1, "Y Pos")
 
     for i := 0; i < e.Count; i++ {
-        if (e.YPositions()[i] >= e.Bottom && e.ReachedEnd != true) {
+        currentYPos := e.YPositions()[i]
+        e.CheckScroll(currentYPos)
+
+        if (currentYPos >= e.Bottom && e.ReachedEnd != true) {
           e.ReachedEnd = true
         }
 
@@ -33,7 +36,7 @@ func processEvent(e models.EventsRaw) (processed map[string]interface{}) {
         }
 
         elapsed := float64(i) + 1.0
-        dp := regression.DataPoint(e.YPositions()[i], []float64{elapsed * intervalInSeconds})
+        dp := regression.DataPoint(currentYPos, []float64{elapsed * intervalInSeconds})
         r.Train(dp)
     }
 
@@ -74,6 +77,7 @@ func processEvent(e models.EventsRaw) (processed map[string]interface{}) {
         "region": e.IP2.Region,
         "country": e.IP2.Country_long,
         "remote_ip": e.RemoteIP,
+        "scroll_depth": e.GetScroll(),
     }
 
     return
