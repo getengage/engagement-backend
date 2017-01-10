@@ -9,81 +9,41 @@ import (
     "github.com/sajari/regression"
     "github.com/ip2location/ip2location-go"
     "encoding/json"
+    "crypto/rand"
+    "encoding/base32"
+    "math"
+    "./models"
 )
 
 const (
+    initialDelay = 2.0
+    avgReadingSpeed = 270.0
     intervalInSeconds = 2.0 // time elapsed between each metrics
 )
 
-type EventsRaw struct {
-    APIKeyID string `json:"api_key_id"`
-    Bottom float64 `json:"bottom,string"`
-    Count int `json:"count,string"`
-    CreatedAt string `json:"created_at"`
-    ID string `json:"id"`
-    InViewport bool `json:"in_viewport"`
-    InViewportArr string `json:"in_viewport_arr"`
-    IsVisible bool `json:"is_visible"`
-    IsVisibleArr string `json:"is_visible_arr"`
-    Referrer string `json:"referrer"`
-    RemoteIP string `json:"remote_ip"`
-    SessionID string `json:"session_id"`
-    SourceURL string `json:"source_url"`
-    Timestamp string `json:"timestamp"`
-    Top float64 `json:"top,string"`
-    UserAgent string `json:"user_agent"`
-    WordCount int `json:"word_count,string"`
-    XPos float64 `json:"x_pos,string"`
-    XPosArr string `json:"x_pos_arr"`
-    YPos float64 `json:"y_pos,string"`
-    YPosArr string `json:"y_pos_arr"`
-    CoordinateMap struct {
-        q1 float64  // top quadrant
-        q2 float64
-        q3 float64
-        q4 float64  // bottom quadrant
+func getUUID(length int) string {
+    randomBytes := make([]byte, 32)
+    _, err := rand.Read(randomBytes)
+    if err != nil {
+        panic(err)
     }
-    reachedEnd bool
-    inViewportAndVisible float64
-    IP2 ip2location.IP2Locationrecord
+    return base32.StdEncoding.EncodeToString(randomBytes)[:length]
 }
 
-func (e *EventsRaw) SetIP2() {
-    e.IP2 = ip2location.Get_all(e.RemoteIP)
-}
-
-func (e *EventsRaw) XPositions() (xs []float64) {
-    json.Unmarshal([]byte(e.XPosArr), &xs)
-    return
-}
-
-func (e *EventsRaw) YPositions() (xy []float64) {
-    json.Unmarshal([]byte(e.YPosArr), &xy)
-    return
-}
-
-func (e *EventsRaw) Visible() (v []bool) {
-    json.Unmarshal([]byte(e.IsVisibleArr), &v)
-    return
-}
-
-func (e *EventsRaw) Viewport() (v []bool) {
-    json.Unmarshal([]byte(e.InViewportArr), &v)
-    return
-}
-
-func processEvent(e EventsRaw) (processed map[string]interface{}) {
+func processEvent(e models.EventsRaw) (processed map[string]interface{}) {
+    uuid := getUUID(10)
+    final_score := 0.0
     r := new(regression.Regression)
     r.SetObserved("Y Position")
     r.SetVar(1, "Y Pos")
 
     for i := 0; i < e.Count; i++ {
-        if (e.YPositions()[i] >= e.Bottom && e.reachedEnd != true) {
-          e.reachedEnd = true
+        if (e.YPositions()[i] >= e.Bottom && e.ReachedEnd != true) {
+          e.ReachedEnd = true
         }
 
         if (e.Visible()[i] == true && e.Viewport()[i] == true) {
-          e.inViewportAndVisible++
+          e.InViewportAndVisible++
         }
 
         elapsed := float64(i) + 1.0
@@ -93,12 +53,43 @@ func processEvent(e EventsRaw) (processed map[string]interface{}) {
 
     r.Run()
 
-    fmt.Println(r.R2)
+    // gauge viewport time for user w/ avg reading speed
+    estimated_in_viewport_threshold := ((e.WordCount / avgReadingSpeed) * 60.0)
+    // total viewport time accounting for 2 second delay/gap and startup delay
+    total_in_viewport_time := e.InViewportAndVisible * intervalInSeconds + initialDelay
+    estimated_total_read_through := total_in_viewport_time / estimated_in_viewport_threshold
+    rsquared_calculation := r.R2
+
+    // Regression Strength - max 50 points
+    if math.IsNaN(rsquared_calculation) {
+        final_score += 10.0
+    } else {
+        final_score += math.Min(rsquared_calculation * 50.0, 50.0)
+    }
+
+    // InViewPort Time - max 100 Points
+    final_score += math.Min(estimated_total_read_through * 100.0, 100.0)
+
+    processed = map[string]interface{}{
+        "source_url": e.SourceURL,
+        "api_key": e.APIKeyID,
+        "uuid": uuid,
+        "session_id": e.SessionID,
+        "referrer": e.Referrer,
+        "reached_end_of_content": e.ReachedEnd,
+        "total_in_viewport_time": e.InViewportAndVisible,
+        "word_count": e.WordCount,
+        "score": final_score,
+        "city": e.IP2.City,
+        "region": e.IP2.Region,
+        "country": e.IP2.Country_long,
+        "remote_ip": e.RemoteIP,
+    }
 
     return
 }
 
-func buildEventsCollection(message *workers.Msg) (collection []EventsRaw) {
+func buildEventsCollection(message *workers.Msg) (collection []models.EventsRaw) {
     json.Unmarshal([]byte(message.Args().ToJson()), &collection)
     return
 }
@@ -113,6 +104,7 @@ func EventProcessWorker(message *workers.Msg) {
       collection[i].SetIP2()
       processedEvent := processEvent(collection[i])
       fmt.Println(processedEvent)
+      workers.Enqueue("default", "Event::EventProcessInsert", []string{"test"})
     }
 }
 

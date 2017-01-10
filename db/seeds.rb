@@ -34,7 +34,9 @@ uuid             = ApiKey.first.uuid
     y_pos: n * 10,
     is_visible: true,
     in_viewport: true,
-    api_key_id: uuid
+    api_key_id: uuid,
+    word_count: 200,
+    referrer: "example.com/1/#{n}"
   ).first_or_create
 
   # Second User Session
@@ -48,7 +50,9 @@ uuid             = ApiKey.first.uuid
     y_pos: n * 9,
     is_visible: true,
     in_viewport: true,
-    api_key_id: uuid
+    api_key_id: uuid,
+    word_count: 200,
+    referrer: "example.com/1/#{n}"
   ).first_or_create
 end
 

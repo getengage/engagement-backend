@@ -2,7 +2,7 @@ require "#{Rails.root}/lib/simple_pg_cursor"
 
 module Event
   class EventProcessCommand < ActiveJob::Base
-    queue_as 'default'
+    queue_as 'go_queue'
 
     before_perform do |job|
       @old_import  = Import.latest
@@ -29,7 +29,7 @@ module Event
 
     protected
     def sql
-      return Event::EventsRaw.with_aggregates.limit(1).to_sql if Rails.env.development?
+      return Event::EventsRaw.with_aggregates.limit(4).to_sql if Rails.env.development?
       Event::EventsRaw.
         by_month(Date.current.month).
         by_date_range(@old_import.cutoff, @new_import.cutoff).

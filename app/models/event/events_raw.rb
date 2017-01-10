@@ -17,7 +17,7 @@ module Event
     scope :with_aggregates, -> {
       select(
         "distinct on (timestamp) *,
-        row_number() over (partition by timestamp) as rownum,
+        row_number() over (partition by timestamp order by id) as rownum,
         json_agg(x_pos) over (partition by timestamp) as x_pos_arr,
         json_agg(y_pos) over (partition by timestamp) as y_pos_arr,
         json_agg(in_viewport) over (partition by timestamp) as in_viewport_arr,

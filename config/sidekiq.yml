@@ -1,5 +1,3 @@
 # ...
 :queues:
   - default
-  - go_queue
-  - go_queue_b
