@@ -3,7 +3,6 @@ package models
 import (
     "os"
     "encoding/json"
-    "github.com/nu7hatch/gouuid"
     "github.com/ip2location/ip2location-go"
 )
 
@@ -23,10 +22,10 @@ type EventsRaw struct {
     Referrer string `json:"referrer"`
     RemoteIP string `json:"remote_ip"`
     Scroll struct {
-        q1 float64  // top quadrant
-        q2 float64
-        q3 float64
-        q4 float64  // bottom quadrant
+        Q1 float64  // top quadrant
+        Q2 float64
+        Q3 float64
+        Q4 float64  // bottom quadrant
     }
     SessionID string `json:"session_id"`
     SourceURL string `json:"source_url"`
@@ -50,27 +49,14 @@ func (e *EventsRaw) CheckScroll(pos float64) {
   quartile := e.Bottom / 4.0
 
   if pos <= quartile {
-    e.Scroll.q1++
+    e.Scroll.Q1++
   } else if pos <= quartile * 2.0 {
-    e.Scroll.q2++
+    e.Scroll.Q2++
   } else if pos <= quartile * 3.0 {
-    e.Scroll.q3++
+    e.Scroll.Q3++
   } else {
-    e.Scroll.q4++
+    e.Scroll.Q4++
   }
-}
-
-func (e *EventsRaw) GetScroll() (depths [4]float64) {
-  depths = [4]float64{e.Scroll.q1, e.Scroll.q2, e.Scroll.q3, e.Scroll.q4}
-  return
-}
-
-func (e *EventsRaw) UUID() *uuid.UUID {
-    uuid, err := uuid.NewV4()
-    if err != nil {
-      panic(err)
-    }
-    return uuid
 }
 
 func (e *EventsRaw) XPositions() (xs []float64) {

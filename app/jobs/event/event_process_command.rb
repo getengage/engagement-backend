@@ -1,5 +1,10 @@
 require "#{Rails.root}/lib/simple_pg_cursor"
 
+# ActiveRecord::Batches#find_in_batches doesn't allow select DISTINCT ON, so
+# this creates a pg CURSOR and fetches blocks of 100 rows until result set exhausted.
+# Sidekiq Pro batches would be helpful here - writing processed events
+# to csv(s) or non WAL-logged tables and then doing a pg COPY after batch finishes
+
 module Event
   class EventProcessCommand < ActiveJob::Base
     queue_as 'go_queue'
@@ -14,16 +19,14 @@ module Event
       @new_import.successful!
     end
 
-    # ActiveRecord::Batches#find_in_batches doesn't allow select DISTINCT ON
-    # creates a pg CURSOR and fetches blocks of 100 rows until result set exhausted.
     def perform
       SimplePgCursor.new(Event::EventsRaw, sql).run do |block|
         args = {
           "queue" => "go_queue",
           "class" => "EventProcessWorker",
-          "args"  => block.map{|x| Array.wrap(x) }
+          "args"  => block
         }
-        Sidekiq::Client.push_bulk(args)
+        Sidekiq::Client.push(args)
       end
     end
 

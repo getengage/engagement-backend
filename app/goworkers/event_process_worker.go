@@ -64,20 +64,22 @@ func processEvent(e models.EventsRaw) (processed map[string]interface{}) {
     final_score += math.Min(estimated_total_read_through * 100.0, 100.0)
 
     processed = map[string]interface{}{
-        "uuid": e.UUID(),
         "source_url": e.SourceURL,
-        "api_key": e.APIKeyID,
+        "api_key_id": e.APIKeyID,
         "session_id": e.SessionID,
         "referrer": e.Referrer,
         "reached_end_of_content": e.ReachedEnd,
         "total_in_viewport_time": e.InViewportAndVisible,
         "word_count": e.WordCount,
-        "score": final_score,
+        "final_score": final_score,
         "city": e.IP2.City,
         "region": e.IP2.Region,
         "country": e.IP2.Country_long,
         "remote_ip": e.RemoteIP,
-        "scroll_depth": e.GetScroll(),
+        "q1_time": e.Scroll.Q1,
+        "q2_time": e.Scroll.Q2,
+        "q3_time": e.Scroll.Q3,
+        "q4_time": e.Scroll.Q4,
     }
 
     return
@@ -90,13 +92,18 @@ func buildEventsCollection(message *workers.Msg) (collection []models.EventsRaw)
 
 func EventProcessWorker(message *workers.Msg) {
     collection := buildEventsCollection(message)
+    processed_events := make([]string,len(collection))
 
     for i := 0; i < len(collection); i++ {
       collection[i].SetIP2()
       processedEvent := processEvent(collection[i])
-      fmt.Println(processedEvent)
-      workers.Enqueue("default", "Event::EventProcessInsert", []string{"test"})
+      encoded_event, _ := json.Marshal(processedEvent)
+      processed_events[i] = string(encoded_event)
     }
+
+    fmt.Println(processed_events)
+    encoded_payload, _ := json.Marshal(processed_events)
+    workers.Enqueue("default", "Event::EventProcessInsert", string(encoded_payload))
 }
 
 func main() {
