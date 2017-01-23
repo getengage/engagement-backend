@@ -14,11 +14,13 @@ class CreateEventsProcessed < ActiveRecord::Migration
       t.string :region
       t.string :country
       t.string :remote_ip
+      t.string :user_agent
       t.float :q1_time
       t.float :q2_time
       t.float :q3_time
       t.float :q4_time
       t.datetime :created_at
+      t.datetime :timestamp
     end
   end
 end

@@ -53,11 +53,13 @@ ActiveRecord::Schema.define(version: 20170101223646) do
     t.string   "region"
     t.string   "country"
     t.string   "remote_ip"
+    t.string   "user_agent"
     t.float    "q1_time"
     t.float    "q2_time"
     t.float    "q3_time"
     t.float    "q4_time"
     t.datetime "created_at"
+    t.datetime "timestamp"
   end
 
   create_table "events_raw", force: :cascade do |t|
