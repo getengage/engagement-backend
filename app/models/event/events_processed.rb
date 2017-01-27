@@ -6,9 +6,9 @@ module Event
 
     scope :top_scores_and_visits, ->(api_key_id, limit=5) {
       select(
-        "json_agg(json_build_array(source_url, top_score) order by final_score_rk asc) FILTER (where final_score_rk <= #{limit}) as top_scores,
-         json_agg(json_build_array(source_url, top_referrer) order by referrer_rk asc) FILTER (where referrer_rk <= #{limit}) as top_referrers,
-         json_agg(json_build_array(source_url, source_urL_ct) order by source_url_rk asc) FILTER (where source_url_rk <= #{limit}) as top_visits"
+        "json_agg(json_build_object('source_url', source_url, 'count', top_score) order by final_score_rk asc) FILTER (where final_score_rk <= #{limit}) as top_scores,
+         json_agg(json_build_object('source_url', top_referrer, 'count', referrer_rk) order by referrer_rk asc) FILTER (where referrer_rk <= #{limit}) as top_referrers,
+         json_agg(json_build_object('source_url', source_url, 'count', source_urL_ct) order by source_url_rk asc) FILTER (where source_url_rk <= #{limit}) as top_visits"
       ).
       from(aggregate_counts(api_key_id))
     }
@@ -25,6 +25,45 @@ module Event
       ).
       group(:source_url).
       where(api_key_id: api_key_id)
+    }
+
+    scope :mean_scores_from_past_days, ->(api_key_id, source_url, days=7) {
+      select("date(series) as day, avg(final_score) as mean_score").
+      from(
+        "GENERATE_SERIES(
+          DATE('#{Date.current}') - INTERVAL '#{days} days',
+          DATE('#{Date.current}'),
+          '1 day'
+        ) series"
+      ).
+      joins(
+        "left outer join events_processed ON date(events_processed.created_at) = series and
+         source_url = '#{source_url}'"
+      ).
+      group(:day).
+      order(:day)
+    }
+
+    scope :unique_visits_from_past_days, ->(api_key_id, source_url, days=15) {
+      select("date(series) as day, count(distinct session_id) as unique_visits").
+      from(
+        "GENERATE_SERIES(
+          DATE('#{Date.current}') - INTERVAL '#{days} days',
+          DATE('#{Date.current}'),
+          '1 day'
+        ) series"
+      ).
+      joins(
+        "left outer join events_processed ON date(events_processed.created_at) = series and
+         source_url = '#{source_url}'"
+      ).
+      group(:day).
+      order(:day)
+    }
+
+    scope :median_score_alltime, ->(api_key_id, source_url) {
+      select("avg(final_score) as mean_score").
+      where(api_key_id: api_key_id, source_url: source_url)
     }
 
     include Base

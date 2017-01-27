@@ -74,7 +74,7 @@
             <% @query_results.each_with_index do |event, index| %>
               <tr>
                 <td><%= index + 1 %></td>
-                <td><%= event.time %></td>
+                <td><%= event.timestamp %></td>
                 <td><%= event.source_url %></td>
                 <td><%= event.referrer || "N/A" %></td>
                 <td><%= link_to("View", dashboard_event_detail_path(@api_key.uuid, event.uuid)) %></td>

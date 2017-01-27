@@ -23,7 +23,7 @@
         <i class="icon-up-bold" style="float: right; font-size: 2rem; color: rgba(132, 212, 212, 1);"></i>
       </span>
       <small>Visits</small>
-      <span style="color: #7F8AA2;">There were <strong><%= @unique_visits_from_15_days.map(&:count).sum %></strong> visits in the last 15 days: <strong><%= @unique_visits_from_15_days[1].count %></strong> today and <strong><%= @unique_visits_from_15_days[2].count %></strong> the day before.</span>
+      <span style="color: #7F8AA2;">There were <strong><%= @unique_visits_from_15_days %></strong> visits in the last 15 days: <strong><%= @unique_visits_from_15_days[1].count %></strong> today and <strong><%= @unique_visits_from_15_days[2].count %></strong> the day before.</span>
     </div>
   </div>
   <div class="large-6 columns">
@@ -101,16 +101,5 @@
 <div class="row">
   <div class="large-12 columns">
     <h6 class="category">History</h6>
-  </div>
-</div>
-<div class="row">
-  <div class="large-12 columns">
-    <div class="callout clearfix">
-      <small class="float-left">Last 30 Day Score Plot</small>
-      <small class="float-right">X</small>
-      <div class="float-center callout-inner">
-        <%= scatter_chart @scatter_chart.data, @scatter_chart.options %>
-      </div>
-    </div>
   </div>
 </div>
