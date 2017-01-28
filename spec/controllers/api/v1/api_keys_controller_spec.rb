@@ -51,7 +51,7 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
       end
 
       it "sets expired_at column" do
-        time = Time.current
+        time = Date.current
         Timecop.freeze(time) do
           delete :destroy, { user_id: user.id, uuid: api_key.uuid }
           expect(api_key.reload.expired_at).to eq time
