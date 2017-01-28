@@ -9,10 +9,10 @@ Many of the development dependencies can be installed through [homebrew](http://
 ```unix
   brew install pg
   brew install redis
-  brew install influxdb
   brew install node
   brew install go
 
+  curl get.pow.cx/uninstall.sh | sh
   powder link api.engage
   touch .powenv
   rvm env -- 2.2.3@engagement > .powenv
@@ -41,6 +41,13 @@ Because React is a dependency, it is recommended to install the [react developer
 
 ```ruby
   bin/setup
+```
+
+postgresql.conf updates for better performance:
+
+```unix
+synchronous_commit = off
+checkpoint_timeout = 60min
 ```
 
 ### Debugging
