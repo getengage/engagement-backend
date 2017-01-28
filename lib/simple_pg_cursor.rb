@@ -1,6 +1,8 @@
 class SimplePgCursor
   attr_reader :sql, :cursor, :connection, :opts, :model
 
+  delegate :execute, to: :connection
+
   def initialize(model, sql, **opts)
     @model      = model
     @sql        = sql
@@ -40,12 +42,12 @@ class SimplePgCursor
 
   def open_cursor
     @cursor = SecureRandom.uuid.gsub("-","")
-    hold = opts[:hold] ? 'with hold ' : ''
-    connection.execute("declare cursor_#{@cursor} no scroll cursor #{hold}for #{sql}")
+    hold  = opts[:hold] ? 'with hold ' : ''
+    execute("declare cursor_#{@cursor} no scroll cursor #{hold}for #{sql}")
   end
 
   def close_cursor
-    connection.execute("close cursor_#{cursor}")
+    execute("close cursor_#{cursor}")
   end
 
   def optional_transaction
