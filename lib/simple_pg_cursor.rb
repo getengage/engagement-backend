@@ -1,7 +1,7 @@
 class SimplePgCursor
   attr_reader :sql, :cursor, :connection, :opts, :model
 
-  delegate :execute, to: :connection
+  delegate :execute, :exec_query, to: :connection
 
   def initialize(model, sql, **opts)
     @model      = model
@@ -37,12 +37,12 @@ class SimplePgCursor
   end
 
   def fetch_rows
-    connection.exec_query("fetch #{opts[:fetch_count]} from cursor_#{cursor}").to_hash
+    exec_query("fetch #{opts[:fetch_count]} from cursor_#{cursor}").to_hash
   end
 
   def open_cursor
     @cursor = SecureRandom.uuid.gsub("-","")
-    hold  = opts[:hold] ? 'with hold ' : ''
+    hold = opts[:hold] ? 'with hold ' : ''
     execute("declare cursor_#{@cursor} no scroll cursor #{hold}for #{sql}")
   end
 
