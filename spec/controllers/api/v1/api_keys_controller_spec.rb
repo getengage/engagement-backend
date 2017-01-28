@@ -54,8 +54,8 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
         time = Time.current
         Timecop.freeze(time) do
           delete :destroy, { user_id: user.id, uuid: api_key.uuid }
+          expect(api_key.reload.expired_at).to eq time
         end
-        expect(api_key.reload.expired_at).to eq time
       end
     end
 
