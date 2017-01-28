@@ -14,12 +14,12 @@ class SimplePgCursor
     optional_transaction do
       begin
         open_cursor
-        while rows = fetch_rows
+        while (rows = fetch_rows)
           break if rows.size==0
           block.call(rows)
           break if rows.size < opts[:fetch_count]
         end
-      rescue Exception => e
+      rescue PGError => e
          raise e
       ensure
         close_cursor
@@ -41,7 +41,7 @@ class SimplePgCursor
   end
 
   def open_cursor
-    @cursor = SecureRandom.uuid.gsub("-","")
+    @cursor = SecureRandom.uuid.delete("-")
     hold = opts[:hold] ? 'with hold ' : ''
     execute("declare cursor_#{@cursor} no scroll cursor #{hold}for #{sql}")
   end
