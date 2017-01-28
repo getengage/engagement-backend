@@ -12,11 +12,13 @@ module Event
     before_perform do |job|
       @old_import  = Import.latest
       @new_import  = Import.create(start_time: Time.current, cutoff: 30.minutes.ago)
+      Rails.logger.info "(event import - start) time=#{Date.current} queue=#{job.queue_name}"
     end
 
     after_perform do |job|
       @new_import.end_time = Time.current
       @new_import.successful!
+      Rails.logger.info "(event import - end) time=#{Date.current} queue=#{job.queue_name}"
     end
 
     def perform

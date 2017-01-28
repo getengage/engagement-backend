@@ -36,8 +36,8 @@ module Event
       ).
       from(
         "GENERATE_SERIES(
-          DATE('#{Date.current}') - INTERVAL '#{days} days',
-          DATE('#{Date.current}'),
+          DATE(#{sanitize(Date.current)}) - INTERVAL '#{days} days',
+          DATE(#{sanitize(Date.current)}),
           '1 day'
         ) series"
       ).
