@@ -7,6 +7,8 @@
 //= require dataTables.foundation.min
 //= require Chart.bundle.min
 
+Chart.defaults.global.defaultFontFamily = "FreeSet, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"
+
 document.addEventListener("turbolinks:load", function() {
   var doc      = $(document),
       table    = doc.find('table'),

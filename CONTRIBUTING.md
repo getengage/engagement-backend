@@ -9,10 +9,10 @@ Many of the development dependencies can be installed through [homebrew](http://
 ```unix
   brew install pg
   brew install redis
-  brew install influxdb
   brew install node
   brew install go
 
+  curl get.pow.cx/uninstall.sh | sh
   powder link api.engage
   touch .powenv
   rvm env -- 2.2.3@engagement > .powenv
@@ -40,12 +40,15 @@ Because React is a dependency, it is recommended to install the [react developer
 ### Setup
 
 ```ruby
-  rake db:create
-  rake db:migrate:with_data
-  rake db:seed
+  bin/setup
 ```
 
-Please note - it may be essential to restart influxdb after seeding, as well as manually creating the [continuous queries](https://docs.influxdata.com/influxdb/v0.9/query_language/continuous_queries) from the command line
+postgresql.conf updates for better performance:
+
+```unix
+synchronous_commit = off
+checkpoint_timeout = 60min
+```
 
 ### Debugging
 

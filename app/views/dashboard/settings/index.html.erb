@@ -48,6 +48,6 @@
 </div>
 <div class="row">
   <div class="small-6 small-centered">
-    <%= react_component("SettingsContainerApp", props: {user_id: current_user.id, source: v1_api_keys_path, data: @api_keys.map{|x| x.attributes.merge(source: v1_api_key_path(x.uuid, user_id: current_user.id)) }}, prerender: false) %>
+    <%= react_component("SettingsContainer", props: {}, prerender: false) %>
   </div>
 </div>

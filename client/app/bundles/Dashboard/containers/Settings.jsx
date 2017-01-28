@@ -1,37 +1,18 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import ReactOnRails from 'react-on-rails';
+import { Provider } from 'react-redux';
 import SettingsTable from '../components/SettingsTable';
 import SettingsForm from '../components/SettingsForm';
 
-var SettingsContainer = React.createClass({
-  getInitialState: function () {
-    return {
-      data: this.props.data,
-      source: this.props.source,
-      userId: this.props.user_id
-    };
-  },
-  handleNodeRemoval: function (nodeId) {
-    var data = this.state.data;
-    data = data.filter(function (el) {
-      return el.id !== nodeId;
-    });
-    this.setState({data});
-    return;
-  },
-  handleSubmit: function (newVals) {
-    var data = this.state.data;
-    newVals.id = this.state.data.length+1;
-    data = data.concat([newVals]);
-    this.setState({data});
-  },
-  render: function() {
-    return (
-      <div className="callout">
-        <SettingsTable data={this.state.data} removeNode={this.handleNodeRemoval} />
-        <SettingsForm userId={this.state.userId} source={this.state.source} onApiKeyNewSubmit={this.handleSubmit} />
-      </div>
-    );
-  }
-});
+export default (_props, _railsContext) => {
+  const store = ReactOnRails.getStore('SettingsStore');
 
-export default SettingsContainer;
+  return (
+    <Provider store={store}>
+      <div className="callout">
+        <SettingsTable />
+        <SettingsForm />
+      </div>
+    </Provider>
+  );
+};

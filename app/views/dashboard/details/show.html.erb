@@ -5,7 +5,7 @@
         <li><%= link_to "Events", dashboard_events_path %></li>
         <li><%= link_to @api_key.name, dashboard_event_path(@api_key.uuid) %></li>
         <li style="color: #7F8AA2">
-          <span class="show-for-sr">Current</span><%= @result.values.first.source_url %>
+          <span class="show-for-sr">Current</span><%= @result.source_url %>
         </li>
       </ul>
     </nav>
@@ -23,14 +23,21 @@
         <i class="icon-up-bold" style="float: right; font-size: 2rem; color: rgba(132, 212, 212, 1);"></i>
       </span>
       <small>Visits</small>
-      <span style="color: #7F8AA2;">There were <strong><%= @unique_visits_from_15_days.values.map(&:count).sum %></strong> visits in the last 15 days: <strong><%= @unique_visits_from_15_days.values[1].count %></strong> today and <strong><%= @unique_visits_from_15_days.values[2].count %></strong> the day before.</span>
+      <span style="color: #7F8AA2;">
+        There were <strong><%= @scores_from_past_days.map(&:visits).sum %></strong>
+        visits in the last 15 days: <strong><%= @scores_from_past_days[-1].visits %></strong> today
+        and <strong><%= @scores_from_past_days[-2].visits %></strong> the day before.
+      </span>
     </div>
   </div>
   <div class="large-6 columns">
     <div class="callout clearfix">
       <i class="icon-up-bold" style="float: right; font-size: 2rem; color: rgba(132, 212, 212, 1);"></i>
       <small>Engagement</small>
-      <span style="color: #7F8AA2;"><strong><%= @scores_from_30_days.values.select{|x| x.score > 200 }.size %></strong> of users visiting in the last 30 days were engaged.</span>
+      <span style="color: #7F8AA2;">
+        <strong><%= pluralize(@scores_from_past_days.map(&:engaged_visits).sum, 'user') %></strong>
+        visiting in the last 15 days <%= @scores_from_past_days.map(&:engaged_visits).sum == 1 ? "was" : "were"  %> engaged.
+      </span>
     </div>
   </div>
 </div>
@@ -56,9 +63,9 @@
       <div class="float-center callout-inner">
         <div class="counter">
           <span class="speedometer"></span>
-          <span class="needle" style="transform: rotate(<%= (-45 + ((@result.values.first.score / 250) * 100)).to_i %>deg)"></span>
+          <span class="needle" style="transform: rotate(<%= (-45 + ((@result.final_score / 250) * 100)).to_i %>deg)"></span>
         </div>
-        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.values.first.score, precision: 2) %> / 250 </h4>
+        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.final_score, precision: 2) %> / 250 </h4>
       </div>
     </div>
   </div>
@@ -69,9 +76,9 @@
       <div class="float-center callout-inner">
         <div class="counter" style="display:inline-block">
           <span class="speedometer"></span>
-          <span class="needle" style="transform: rotate(<%= (-45 + ((@median_score.values.first.score / 250) * 100)).to_i %>deg)"></span>
+          <span class="needle" style="transform: rotate(<%= (-45 + ((@mean_score / 250) * 100)).to_i %>deg)"></span>
         </div>
-        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@median_score.values.first.score, precision: 2) %> / 250 </h4>
+        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@mean_score, precision: 2) %> / 250 </h4>
       </div>
     </div>
   </div>
@@ -79,10 +86,10 @@
     <div class="callout clearfix">
       <div class="stats">
         <ul>
-          <li><%= distance_of_time_in_words(@result.values.first.total_in_viewport_time) %><span>Content On Page</span></li>
-          <li><%= @result.values.first.word_count %><span>Word Count</span></li>
-          <li><%= @result.values.first.reached_end_of_content ? "Yes" : "No" %><span>Reached End?</span></li>
-          <li style="font-size:1rem"><%= strip_url(@result.values.first.referrer).truncate(20) || "N/A" %><span>Referrer</span></li>
+          <li><%= distance_of_time_in_words(@result.total_in_viewport_time) %><span>Content On Page</span></li>
+          <li><%= @result.word_count %><span>Word Count</span></li>
+          <li><%= @result.reached_end_of_content ? "Yes" : "No" %><span>Reached End?</span></li>
+          <li style="font-size:1rem"><%= strip_url(@result.referrer).truncate(20) || "N/A" %><span>Referrer</span></li>
         </ul>
       </div>
     </div>
@@ -91,7 +98,7 @@
     <div class="callout clearfix">
       <span style="display:inline-block" class="stats">
         <ul>
-          <li><%= @result.values.first.city || "N/A" %><span><%= @result.values.first.country || "Location" %></span></li>
+          <li><%= @result.city || "N/A" %><span><%= @result.country || "Location" %></span></li>
         </ul>
       </span>
       <%= image_tag('us-map.png', size: '150x90') %>
@@ -101,16 +108,5 @@
 <div class="row">
   <div class="large-12 columns">
     <h6 class="category">History</h6>
-  </div>
-</div>
-<div class="row">
-  <div class="large-12 columns">
-    <div class="callout clearfix">
-      <small class="float-left">Last 30 Day Score Plot</small>
-      <small class="float-right">X</small>
-      <div class="float-center callout-inner">
-        <%= scatter_chart @scatter_chart.data, @scatter_chart.options %>
-      </div>
-    </div>
   </div>
 </div>
