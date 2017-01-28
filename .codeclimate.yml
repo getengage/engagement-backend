@@ -7,6 +7,8 @@ exclude_paths:
 - "app/assets/stylesheets/email.css"
 - "app/assets/stylesheets/print.css"
 - "db/data/"
+- "db/schema.rb"
+- "db/seeds.rb"
 - "public/*"
 - "script/*"
 - "spec/*"
