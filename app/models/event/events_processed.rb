@@ -43,7 +43,7 @@ module Event
       ).
       joins(
         "left outer join events_processed ON date(events_processed.created_at) = series and
-         source_url = #{sanitize(source_url)}"
+         api_key_id = #{sanitize(api_key_id)} and source_url = #{sanitize(source_url)}"
       ).
       group('day').
       order('day')

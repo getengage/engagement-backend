@@ -1,3 +1,9 @@
+---
+engines:
+  brakeman:
+    enabled: true
+    exclude_fingerprints:
+    - 0d8d2c7a20ed25b35e7e9286ae06222256a91d1ac381ed9fdfd70d3b65e0e622
 languages:
   Ruby: true
   JavaScript: true
