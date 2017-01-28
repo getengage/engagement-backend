@@ -27,8 +27,13 @@ module Event
       where(api_key_id: api_key_id)
     }
 
-    scope :mean_scores_from_past_days, ->(api_key_id, source_url, days=7) {
-      select("date(series) as day, avg(final_score) as mean_score").
+    scope :scores_from_past_days, ->(api_key_id, source_url, days=7) {
+      select(
+        "date(series) as day,
+         avg(final_score) as mean_score,
+         count(distinct session_id) as visits,
+         count(distinct session_id) FILTER (where final_score >= #{ENGAGED_TRESHOLD}) as engaged_visits"
+      ).
       from(
         "GENERATE_SERIES(
           DATE('#{Date.current}') - INTERVAL '#{days} days',
@@ -40,28 +45,11 @@ module Event
         "left outer join events_processed ON date(events_processed.created_at) = series and
          source_url = '#{source_url}'"
       ).
-      group(:day).
-      order(:day)
+      group('day').
+      order('day')
     }
 
-    scope :unique_visits_from_past_days, ->(api_key_id, source_url, days=15) {
-      select("date(series) as day, count(distinct session_id) as unique_visits").
-      from(
-        "GENERATE_SERIES(
-          DATE('#{Date.current}') - INTERVAL '#{days} days',
-          DATE('#{Date.current}'),
-          '1 day'
-        ) series"
-      ).
-      joins(
-        "left outer join events_processed ON date(events_processed.created_at) = series and
-         source_url = '#{source_url}'"
-      ).
-      group(:day).
-      order(:day)
-    }
-
-    scope :median_score_alltime, ->(api_key_id, source_url) {
+    scope :mean_score_alltime, ->(api_key_id, source_url) {
       select("avg(final_score) as mean_score").
       where(api_key_id: api_key_id, source_url: source_url)
     }
