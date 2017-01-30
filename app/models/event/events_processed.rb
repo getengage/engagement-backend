@@ -31,6 +31,7 @@ module Event
       select(
         "date(series) as day,
          avg(final_score) as mean_score,
+         avg(total_in_viewport_time) as mean_viewport_time,
          count(distinct session_id) as visits,
          count(distinct session_id) FILTER (where final_score >= #{ENGAGED_TRESHOLD}) as engaged_visits"
       ).

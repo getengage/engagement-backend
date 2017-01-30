@@ -6,10 +6,17 @@ module Dashboard
         @source_url = @result.source_url
         @scores_from_past_days = Event::EventsProcessed.scores_from_past_days(@api_key.uuid, @source_url)
         @mean_score = Event::EventsProcessed.mean_score_alltime(@api_key.uuid, @source_url)[0].mean_score
-        @line_chart = LineChartPresenter.new(title: "Last 15 Day Engagement Scores",
+        @line_chart = LineChartPresenter.new(titles: ["Engage Score", "Time on Page"],
                                     labels: @scores_from_past_days.map(&:day),
-                                    data: @scores_from_past_days.map{|x| x.mean_score.to_f})
+                                    data: datasets)
       end
+    end
+
+    def datasets
+      [
+        @scores_from_past_days.map{|x| x.mean_score.to_f},
+        @scores_from_past_days.map{|x| x.mean_viewport_time.to_f}
+      ]
     end
 
     def uid_param

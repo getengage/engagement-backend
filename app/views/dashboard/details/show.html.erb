@@ -11,97 +11,50 @@
     </nav>
   </div>
 </div>
-<div class="row" style="margin-top: 1rem">
-  <div class="large-12 columns">
-    <h6 class="category">Summary</h6>
-  </div>
-</div>
-<div class="row">
-  <div class="large-6 columns">
-    <div class="callout clearfix">
-      <span>
-        <i class="icon-up-bold" style="float: right; font-size: 2rem; color: rgba(132, 212, 212, 1);"></i>
-      </span>
-      <small>Visits</small>
-      <span style="color: #7F8AA2;">
-        There were <strong><%= @scores_from_past_days.map(&:visits).sum %></strong>
-        visits in the last 15 days: <strong><%= @scores_from_past_days[-1].visits %></strong> today
-        and <strong><%= @scores_from_past_days[-2].visits %></strong> the day before.
-      </span>
-    </div>
-  </div>
-  <div class="large-6 columns">
-    <div class="callout clearfix">
-      <i class="icon-up-bold" style="float: right; font-size: 2rem; color: rgba(132, 212, 212, 1);"></i>
-      <small>Engagement</small>
-      <span style="color: #7F8AA2;">
-        <strong><%= pluralize(@scores_from_past_days.map(&:engaged_visits).sum, 'user') %></strong>
-        visiting in the last 15 days <%= @scores_from_past_days.map(&:engaged_visits).sum == 1 ? "was" : "were"  %> engaged.
-      </span>
-    </div>
-  </div>
-</div>
 <div class="row">
   <div class="large-12 columns">
-    <h6 class="category">Stats</h6>
-  </div>
-</div>
-<div class="row">
-  <div class="large-6 columns">
     <div class="callout clearfix">
-      <small class="float-left">Avg Scores From Past 15 Days</small>
-      <small class="float-right">X</small>
       <div class="float-center callout-inner">
         <%= line_chart @line_chart.data, @line_chart.options %>
       </div>
-    </div>
-  </div>
-  <div class="large-3 columns">
-    <div class="callout clearfix">
-      <small class="float-left">Latest Engage Score</small>
-      <small class="float-right">X</small>
-      <div class="float-center callout-inner">
-        <div class="counter">
-          <span class="speedometer"></span>
-          <span class="needle" style="transform: rotate(<%= (-45 + ((@result.final_score / 250) * 100)).to_i %>deg)"></span>
+      <div class="large-3 columns">
+        <div class="callout clearfix">
+          <small class="float-left">Latest Engage Score</small>
+          <small class="float-right">X</small>
+          <div class="float-center callout-inner">
+            <div class="counter">
+              <span class="speedometer"></span>
+              <span class="needle" style="transform: rotate(<%= (-45 + ((@result.final_score / 250) * 100)).to_i %>deg)"></span>
+            </div>
+            <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.final_score, precision: 2) %> / 250 </h4>
+          </div>
         </div>
-        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.final_score, precision: 2) %> / 250 </h4>
       </div>
-    </div>
-  </div>
-  <div class="large-3 columns">
-    <div class="callout clearfix">
-      <small class="float-left">Average Engage Score</small>
-      <small class="float-right">X</small>
-      <div class="float-center callout-inner">
-        <div class="counter" style="display:inline-block">
-          <span class="speedometer"></span>
-          <span class="needle" style="transform: rotate(<%= (-45 + ((@mean_score / 250) * 100)).to_i %>deg)"></span>
+      <div class="large-3 columns">
+        <div class="callout clearfix">
+          <small class="float-left">Average Engage Score</small>
+          <small class="float-right">X</small>
+          <div class="float-center callout-inner">
+            <div class="counter" style="display:inline-block">
+              <span class="speedometer"></span>
+              <span class="needle" style="transform: rotate(<%= (-45 + ((@mean_score / 250) * 100)).to_i %>deg)"></span>
+            </div>
+            <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@mean_score, precision: 2) %> / 250 </h4>
+          </div>
         </div>
-        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@mean_score, precision: 2) %> / 250 </h4>
       </div>
-    </div>
-  </div>
-  <div class="large-6 columns">
-    <div class="callout clearfix">
-      <div class="stats">
-        <ul>
-          <li><%= distance_of_time_in_words(@result.total_in_viewport_time) %><span>Content On Page</span></li>
-          <li><%= @result.word_count %><span>Word Count</span></li>
-          <li><%= @result.reached_end_of_content ? "Yes" : "No" %><span>Reached End?</span></li>
-          <li style="font-size:1rem"><%= strip_url(@result.referrer).truncate(20) || "N/A" %><span>Referrer</span></li>
-        </ul>
+      <div class="large-6 columns">
+        <div class="callout clearfix">
+          <div class="stats">
+            <ul>
+              <li><%= @scores_from_past_days[-1].visits %><span>Visits in last 15 Days</span></li>
+              <li><%= @scores_from_past_days.map(&:engaged_visits).sum %><span>Users Engaged</span></li>
+              <li><%= @result.city || @result.country || "N/A" %><span>Top Location</span></li>
+            </ul>
+          </div>
+          <%= image_tag('us-map.png', size: '150x90') %>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="large-6 columns">
-    <div class="callout clearfix">
-      <span style="display:inline-block" class="stats">
-        <ul>
-          <li><%= @result.city || "N/A" %><span><%= @result.country || "Location" %></span></li>
-        </ul>
-      </span>
-      <%= image_tag('us-map.png', size: '150x90') %>
     </div>
   </div>
 </div>
