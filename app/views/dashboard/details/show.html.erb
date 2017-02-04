@@ -52,13 +52,13 @@
   <div class="large-3 columns">
     <div class="callout">
       <small class="float-left">Average Engage Score</small>
-      <small class="float-right">X</small>
+      <small class="float-right"><%= number_to_percentage(@scores_from_past_week.pt_change, precision: 0) %></small>
       <div class="float-center callout-inner">
         <div class="counter" style="display:inline-block">
           <span class="speedometer"></span>
-          <span class="needle" style="transform: rotate(<%= (-45 + ((@mean_score / 250) * 100)).to_i %>deg)"></span>
+          <span class="needle" style="transform: rotate(<%= (-45 + ((@scores_from_past_week.mean_score / 250) * 100)).to_i %>deg)"></span>
         </div>
-        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@mean_score, precision: 2) %>
+        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@scores_from_past_week.mean_score, precision: 2) %>
           / 250
         </h4>
       </div>

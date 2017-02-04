@@ -5,7 +5,7 @@ module Dashboard
         @result = Event::EventsProcessed.find_by(uuid: uid_param)
         @source_url = @result.source_url
         @scores_from_past_days = Event::EventsProcessed.scores_from_past_days(@api_key.uuid, @source_url, past_days)
-        @mean_score = Event::EventsProcessed.mean_score_alltime(@api_key.uuid, @source_url)[0].mean_score
+        @scores_from_past_week = Event::EventsProcessed.scores_from_past_week(@api_key.uuid, @source_url)[0]
         @line_chart = LineChartPresenter.new(titles: ["Engage Score", "Time on Page"],
                                     labels: @scores_from_past_days.map(&:day),
                                     data: datasets)

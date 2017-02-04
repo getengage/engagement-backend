@@ -50,11 +50,22 @@ module Event
       order('day')
     }
 
-    scope :mean_score_alltime, ->(api_key_id, source_url) {
+    scope :scores_from_past_week, ->(api_key_id, source_url, limit=4) {
       select(
-        "avg(final_score) as mean_score"
+        "*,
+        round((mean_score / lag(mean_score, 1) over (order by day)) * 100) as pt_change"
       ).
-      where(api_key_id: api_key_id, source_url: source_url)
+      from(
+        select(
+          "avg(final_score) as mean_score,
+          date_trunc('week', timestamp) as day"
+        ).
+        where(api_key_id: api_key_id, source_url: source_url).
+        group('day').
+        order('day')
+      ).
+      order('day desc').
+      limit(limit)
     }
 
     include Base
