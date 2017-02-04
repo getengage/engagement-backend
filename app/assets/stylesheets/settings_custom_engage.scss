@@ -1,0 +1,33 @@
+@font-face {
+   font-family: 'FreeSet';
+    src: asset-url('FreeSet-Regular.eot');
+    src: asset-url('FreeSet-Regular.eot?#iefix') format('embedded-opentype'),
+         asset-url('FreeSet-Regular.woff') format('woff'),
+         asset-url('FreeSet-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$whitesmoke: whitesmoke;
+$light-purple: #857fa2;
+$dark-purple: #67608b;
+$ultra-light-purple: #f9f8fb;
+$purple: #766f96;
+$body-font-family: 'FreeSet', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-background: #fafafa;
+
+// 10. Breadcrumbs
+// ---------------
+
+$breadcrumbs-item-uppercase: false;
+
+// 18. Dropdown Menu
+// -----------------
+
+$dropdownmenu-arrow-color: $whitesmoke;
+
+// 37. Top Bar
+// -----------
+
+$topbar-background: $purple;
+$topbar-submenu-background: $topbar-background;

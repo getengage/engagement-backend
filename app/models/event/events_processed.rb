@@ -43,7 +43,7 @@ module Event
         ) series"
       ).
       joins(
-        "left outer join events_processed ON date(events_processed.created_at) = series and
+        "left outer join events_processed ON date(events_processed.timestamp) = series and
          api_key_id = #{sanitize(api_key_id)} and source_url = #{sanitize(source_url)}"
       ).
       group('day').
@@ -51,7 +51,9 @@ module Event
     }
 
     scope :mean_score_alltime, ->(api_key_id, source_url) {
-      select("avg(final_score) as mean_score").
+      select(
+        "avg(final_score) as mean_score"
+      ).
       where(api_key_id: api_key_id, source_url: source_url)
     }
 

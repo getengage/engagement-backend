@@ -12,12 +12,11 @@ class LineChartPresenter
 
   def mapped_datasets(titles, datasets)
     datasets.map do |data|
-      color = cycled_colors
       {
           tension: 0,
           label: titles.shift,
-          backgroundColor: color,
-          borderColor: color,
+          backgroundColor: cycled_colors,
+          borderColor: cycled_colors,
           data: data
       }
     end
@@ -25,13 +24,29 @@ class LineChartPresenter
 
   def cycled_colors
     cycle(
-      "rgba(52, 152, 219, 0.5)",
-      "rgba(41, 128, 185, 0.5)"
+      "rgba(243, 156, 18,0.3)",
+      "rgba(241, 196, 15,0.3)"
     )
   end
 
   def default_options
     {
+      bands: {
+        yValue: 100,
+        bandLine: {
+            stroke: 1.0,
+            colour: 'rgba(0, 0, 0, 1.0)',
+            type: 'solid',
+            label: 'Medium',
+            fontSize: '12',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontStyle: 'normal'
+        },
+        belowThresholdColour: [
+          "rgba(243, 156, 18,0.3)",
+          "rgba(243, 156, 18,0.3)"
+        ]
+      },
       height: "80",
       legend: { display: false },
       scales: {

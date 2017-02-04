@@ -6,6 +6,7 @@
 //= require jquery.dataTables.min
 //= require dataTables.foundation.min
 //= require Chart.bundle.min
+//= require Chart.Custom
 
 Chart.defaults.global.defaultFontFamily = "FreeSet, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"
 

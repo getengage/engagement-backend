@@ -12,54 +12,86 @@
   </div>
 </div>
 <div class="row">
-  <div class="large-12 columns">
-    <div class="callout clearfix">
-      <div class="float-center callout-inner">
-        <%= line_chart @line_chart.data, @line_chart.options %>
-      </div>
-      <div class="large-3 columns">
-        <div class="callout clearfix">
-          <small class="float-left">Latest Engage Score</small>
-          <small class="float-right">X</small>
-          <div class="float-center callout-inner">
-            <div class="counter">
-              <span class="speedometer"></span>
-              <span class="needle" style="transform: rotate(<%= (-45 + ((@result.final_score / 250) * 100)).to_i %>deg)"></span>
-            </div>
-            <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.final_score, precision: 2) %> / 250 </h4>
-          </div>
-        </div>
-      </div>
-      <div class="large-3 columns">
-        <div class="callout clearfix">
-          <small class="float-left">Average Engage Score</small>
-          <small class="float-right">X</small>
-          <div class="float-center callout-inner">
-            <div class="counter" style="display:inline-block">
-              <span class="speedometer"></span>
-              <span class="needle" style="transform: rotate(<%= (-45 + ((@mean_score / 250) * 100)).to_i %>deg)"></span>
-            </div>
-            <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@mean_score, precision: 2) %> / 250 </h4>
-          </div>
-        </div>
-      </div>
-      <div class="large-6 columns">
-        <div class="callout clearfix">
-          <div class="stats">
-            <ul>
-              <li><%= @scores_from_past_days[-1].visits %><span>Visits in last 15 Days</span></li>
-              <li><%= @scores_from_past_days.map(&:engaged_visits).sum %><span>Users Engaged</span></li>
-              <li><%= @result.city || @result.country || "N/A" %><span>Top Location</span></li>
-            </ul>
-          </div>
-          <%= image_tag('us-map.png', size: '150x90') %>
-        </div>
-      </div>
+  <div class="large-10 columns">
+    <h4 class="category">Stats</h4>
+  </div>
+  <div class="large-2 columns">
+    <div class="callout clearfix text-center" style="border-radius:2em;padding:0.4em">
+      <ul class="menu">
+        <li style="width:50%;border-radius:2em;background-color:whitesmoke"><%= link_to("7 days", url_for(params.merge(past_days: 7)), style: "color:#857fa2;padding:0.5rem 1rem") %></li>
+        <li style="padding:0 0.2em"></li>
+        <li style="width:50%;border-radius:2em;background-color:whitesmoke"><%= link_to("15 days", url_for(params.merge(past_days: 15)), style: "color:#857fa2;padding:0.5rem 1rem") %></li>
+      </ul>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="large-12 columns">
-    <h6 class="category">History</h6>
+    <div class="float-center callout-inner">
+      <div class="actions"></div>
+      <%= chart 'line', @line_chart.data, @line_chart.options %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-3 columns">
+    <div class="callout">
+      <small class="float-left">Latest Engage Score</small>
+      <small class="float-right">X</small>
+      <div class="float-center callout-inner">
+        <div class="counter">
+          <span class="speedometer"></span>
+          <span class="needle" style="transform: rotate(<%= (-45 + ((@result.final_score / 250) * 100)).to_i %>deg)"></span>
+        </div>
+        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@result.final_score, precision: 2) %>
+          / 250
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="callout">
+      <small class="float-left">Average Engage Score</small>
+      <small class="float-right">X</small>
+      <div class="float-center callout-inner">
+        <div class="counter" style="display:inline-block">
+          <span class="speedometer"></span>
+          <span class="needle" style="transform: rotate(<%= (-45 + ((@mean_score / 250) * 100)).to_i %>deg)"></span>
+        </div>
+        <h4 style="display: inline-block; vertical-align: top"><%= number_with_precision(@mean_score, precision: 2) %>
+          / 250
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="large-6 columns">
+    <div class="callout">
+      <div class="stats">
+        <ul>
+          <li>
+            <h2><%= @scores_from_past_days.map(&:visits).sum %></h2>
+            <span>Visits in last 15 Days</span>
+          </li>
+          <li>
+            <h2><%= @scores_from_past_days.map(&:engaged_visits).sum %></h2>
+            <span>Users Engaged</span>
+          </li>
+          <li><%= @result.city || @result.country || "N/A" %>
+            <span>Top Location</span>
+          </li>
+        </ul>
+      </div>
+      <%= image_tag('us-map.png', size: '150x90') %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h4 class="category">History</h4>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <div class="float-center callout-inner"></div>
   </div>
 </div>
