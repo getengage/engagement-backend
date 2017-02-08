@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   authenticated :user do
     namespace :dashboard do
       resources :events, only: [:index, :show] do
-        resources :details, only: [:show, :index]
+        resources :details, only: [:show, :index], param: :uuid
       end
       resources :settings, only: [:index]
       resources :reports, only: [:index, :create]

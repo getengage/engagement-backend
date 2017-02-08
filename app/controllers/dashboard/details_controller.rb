@@ -1,8 +1,11 @@
 module Dashboard
   class DetailsController < ApplicationController
+    def index
+    end
+
     def show
       if @api_key = ApiKey.find_by_uuid(api_key_param)
-        @result = Event::EventsProcessed.find_by(uuid: uid_param)
+        @result = Event::EventsProcessed.find_by(uuid: uuid_param)
         @source_url = @result.source_url
         @scores_from_past_days = Event::EventsProcessed.scores_from_past_days(@api_key.uuid, @source_url, past_days)
         @scores_from_past_week = Event::EventsProcessed.scores_from_past_week(@api_key.uuid, @source_url)[0]
@@ -20,11 +23,11 @@ module Dashboard
     end
 
     def past_days
-      params.fetch(:past_days, 7).to_i
+      @past_days = params.fetch(:past_days, 7).to_i
     end
 
-    def uid_param
-      params.require(:id)
+    def uuid_param
+      params.require(:uuid)
     end
 
     def api_key_param

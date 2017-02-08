@@ -8,7 +8,7 @@ module Event
       select(
         "json_agg(json_build_object('source_url', source_url, 'count', top_score) order by final_score_rk asc) FILTER (where final_score_rk <= #{limit}) as top_scores,
          json_agg(json_build_object('source_url', top_referrer, 'count', referrer_rk) order by referrer_rk asc) FILTER (where referrer_rk <= #{limit}) as top_referrers,
-         json_agg(json_build_object('source_url', source_url, 'count', source_urL_ct) order by source_url_rk asc) FILTER (where source_url_rk <= #{limit}) as top_visits"
+         json_agg(json_build_object('source_url', source_url, 'count', source_url_ct) order by source_url_rk asc) FILTER (where source_url_rk <= #{limit}) as top_visits"
       ).
       from(aggregate_counts(api_key_id))
     }
@@ -16,8 +16,12 @@ module Event
     scope :aggregate_counts, ->(api_key_id) {
       select(
         "source_url,
+         avg(final_score) as mean_score,
+         min(uuid::varchar) as uuid,
          max(final_score) as top_score,
          max(referrer) as top_referrer,
+         min(timestamp) as first_timestamp,
+         max(timestamp) as last_timestamp,
          count(source_url) as source_url_ct,
          row_number() over (order by max(final_score) desc) as final_score_rk,
          row_number() over (order by max(referrer) desc) as referrer_rk,
@@ -53,7 +57,7 @@ module Event
     scope :scores_from_past_week, ->(api_key_id, source_url, limit=4) {
       select(
         "*,
-        round((mean_score / lag(mean_score, 1) over (order by day)) * 100) as pt_change"
+        round(coalesce((mean_score / lag(mean_score, 1) over (order by day)) * 100, 0)) as pt_change"
       ).
       from(
         select(

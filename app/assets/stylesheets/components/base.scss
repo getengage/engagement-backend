@@ -4,7 +4,9 @@ small {
   font-size: 0.7rem !important;
 }
 
-.callout {
+.callout, .table {
+  box-shadow: 4px 4px #edecec;
+
   ol, li {
     font-size: 0.75rem;
   }

@@ -17,10 +17,10 @@
   </div>
   <div class="large-2 columns">
     <div class="callout clearfix text-center" style="border-radius:2em;padding:0.4em">
-      <ul class="menu">
-        <li style="width:50%;border-radius:2em;background-color:whitesmoke"><%= link_to("7 days", url_for(params.merge(past_days: 7)), style: "color:#857fa2;padding:0.5rem 1rem") %></li>
-        <li style="padding:0 0.2em"></li>
-        <li style="width:50%;border-radius:2em;background-color:whitesmoke"><%= link_to("15 days", url_for(params.merge(past_days: 15)), style: "color:#857fa2;padding:0.5rem 1rem") %></li>
+      <ul class="menu line-chart-menu">
+        <%= menu_link("7 days", url_for(params.merge(past_days: 7))) %>
+        <li></li>
+        <%= menu_link("15 days", url_for(params.merge(past_days: 15))) %>
       </ul>
     </div>
   </div>
@@ -52,7 +52,7 @@
   <div class="large-3 columns">
     <div class="callout">
       <small class="float-left">Average Engage Score</small>
-      <small class="float-right"><%= number_to_percentage(@scores_from_past_week.pt_change, precision: 0) %></small>
+      <small class="float-right">+ <%= number_to_percentage(@scores_from_past_week.pt_change, precision: 0) %></small>
       <div class="float-center callout-inner">
         <div class="counter" style="display:inline-block">
           <span class="speedometer"></span>
@@ -66,22 +66,28 @@
   </div>
   <div class="large-6 columns">
     <div class="callout">
-      <div class="stats">
+      <div class="stats clearfix">
         <ul>
           <li>
-            <h2><%= @scores_from_past_days.map(&:visits).sum %></h2>
-            <span>Visits in last 15 Days</span>
+            <h4><%= @scores_from_past_days.map(&:visits).sum %></h4>
+            <span>Visits in last <%= @past_days %> Days</span>
           </li>
           <li>
-            <h2><%= @scores_from_past_days.map(&:engaged_visits).sum %></h2>
+            <h4><%= @scores_from_past_days.map(&:engaged_visits).sum %></h4>
             <span>Users Engaged</span>
           </li>
-          <li><%= @result.city || @result.country || "N/A" %>
+          <li>
+            <h4><%= @result.city || @result.country || "N/A" %></h4>
             <span>Top Location</span>
+
+          </li>
+          <li>
+            <span>
+              <%= image_tag('us-map.png', size: '112x67') %>
+            </span>
           </li>
         </ul>
       </div>
-      <%= image_tag('us-map.png', size: '150x90') %>
     </div>
   </div>
 </div>

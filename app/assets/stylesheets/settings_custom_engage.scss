@@ -13,18 +13,48 @@ $light-purple: #857fa2;
 $dark-purple: #67608b;
 $ultra-light-purple: #f9f8fb;
 $purple: #766f96;
+
+// 1. Global
+// ---------
+
 $body-font-family: 'FreeSet', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-background: #fafafa;
+$foundation-palette: (
+  primary: #16a085,
+  secondary: #767676,
+  success: #3adb76,
+  warning: #ffae00,
+  alert: #cc4b37,
+);
+
+// 4. Base Typography
+// ------------------
+
+$anchor-color: get-color(primary);
 
 // 10. Breadcrumbs
 // ---------------
 
 $breadcrumbs-item-uppercase: false;
 
+// 11. Button
+// ----------
+
+$button-background: get-color(primary);
+$button-margin: 0;
+
 // 18. Dropdown Menu
 // -----------------
 
 $dropdownmenu-arrow-color: $whitesmoke;
+
+// 32. Table
+// ---------
+
+$table-background: $whitesmoke;
+$table-border: none;
+// $table-is-striped: false;
+// $table-padding: rem-calc(0);
 
 // 37. Top Bar
 // -----------
