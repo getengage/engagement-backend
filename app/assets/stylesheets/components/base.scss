@@ -1,3 +1,10 @@
+.text-img {
+  background: asset-url('paper.svg') no-repeat;
+  background-size: cover;
+  min-height: calc(100px + 2rem);
+  background-position: top;
+}
+
 small {
   color: #8a8a8a;
   display: block;

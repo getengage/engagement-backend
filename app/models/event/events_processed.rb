@@ -57,12 +57,18 @@ module Event
     scope :scores_from_past_week, ->(api_key_id, source_url, limit=4) {
       select(
         "*,
-        round(coalesce((mean_score / lag(mean_score, 1) over (order by day)) * 100, 0)) as pt_change"
+        round(coalesce((mean_score / lag(mean_score, 1) over (order by day)) * 100, 0)) as mean_score_pt_change,
+        round(coalesce((top_score / lag(top_score, 1) over (order by day)) * 100, 0)) as top_score_pt_change"
       ).
       from(
         select(
           "avg(final_score) as mean_score,
-          date_trunc('week', timestamp) as day"
+           max(final_score) as top_score,
+           avg(q1_time) as q1_time,
+           avg(q1_time) as q2_time,
+           avg(q1_time) as q3_time,
+           avg(q1_time) as q4_time,
+           date_trunc('week', timestamp) as day"
         ).
         where(api_key_id: api_key_id, source_url: source_url).
         group('day').

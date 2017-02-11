@@ -42,17 +42,43 @@ div.dataTables_paginate {
 }
 
 table.dataTable {
-  border-collapse: collapse;
+  box-shadow: none;
+  border-collapse: separate;
+  border-spacing: 0 1em;
   font-size: 0.75rem;
   clear: both;
   margin: 0.5em 0 !important;
   max-width: none !important;
   width: 100%;
-  border: 1px solid rgba(10, 10, 10, 0.25);
 }
 
 table.dataTable thead, table.dataTable tbody {
   color: #766f96;
+}
+
+table.dataTable thead tr {
+  background-color: #fafafa;
+}
+
+table.dataTable tbody tr {
+  box-shadow: 4px 4px #edecec;
+
+  &.odd {
+    background-color: white;
+  }
+}
+
+table.dataTable tbody td {
+  border-top: 1px solid rgba(10, 10, 10, 0.25);
+  border-bottom: 1px solid rgba(10, 10, 10, 0.25);
+}
+
+table.dataTable tbody td:first-child {
+  border-left: 1px solid rgba(10, 10, 10, 0.25);
+}
+
+table.dataTable tbody td:last-child {
+  border-right: 1px solid rgba(10, 10, 10, 0.25);
 }
 
 table.dataTable thead .sorting,

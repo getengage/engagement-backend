@@ -16,11 +16,12 @@
     color: $stats-color;
     display: inline;
     float: left;
-    line-height: 1.1em;
-    padding: 0 0.7em;
+    padding: 0 0.75rem;
 
-    h4 {
+    h4, h2 {
       letter-spacing: -1px;
+      color: #67608b;
+      margin-bottom: 0;
     }
 
     &:first-child {

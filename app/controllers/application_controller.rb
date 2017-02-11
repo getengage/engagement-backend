@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
     ["events", "notifications", "reports", "insights"]
   end
   helper_method :dashboard_sections
+
+  def hide_subnav
+    @subnav_hidden = true
+  end
 end
