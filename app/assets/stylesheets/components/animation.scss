@@ -1,5 +1,22 @@
+// Mixin that allows staggering of animation
+@mixin stagger-anim-delay($i, $stagger-delay, $color: transparent) {
+	@while $i > 0 {
+		&:nth-of-type(#{$i}) {
+			animation-delay: $stagger-delay * $i;
+      background-color: lighten($color, percentage($i / 10));
+		}
+		$i: $i - 1;
+	}
+}
+
 .slide_and_fade {
    @include mui-animation(fade, slide($direction: down));
    animation-duration: 0.5s;
    margin-top: 20px;
+}
+
+.chart-bar-anim {
+  @include mui-animation(fade, slide($direction: down));
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
 }

@@ -11,6 +11,11 @@ small {
   font-size: 0.7rem !important;
 }
 
+.callout h4, .callout h6 {
+  letter-spacing: -0.05em;
+  color: $light-purple;
+}
+
 .callout, .table {
   box-shadow: 4px 4px #edecec;
 

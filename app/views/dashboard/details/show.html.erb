@@ -92,3 +92,53 @@
     </div>
   </div>
 </div>
+<hr>
+<div class="row">
+  <div class="medium-10 columns">
+    <h4 class="category">Details</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-6 columns">
+    <div class="callout">
+      <div class="media-object">
+        <small class="float-left">Reading Analysis (Lifetime)</small>
+        <div class="callout-inner">
+          <div class="media-object-section middle" style="position:relative;height:100%">
+            <ul class="tabs vertical" id="reading-tabs" style="border:0;padding-right:1rem;position:absolute;height:inherit;width:100%" data-tabs>
+              <li style="height:25%" class="tabs-title is-active"><a style="padding:0.75em;height:100%;width:100%" href="#panel1v" aria-selected="true"></a></li>
+              <li style="height:25%" class="tabs-title"><a style="padding:0.75em;height:100%;width:100%" href="#panel2v"></a></li>
+              <li style="height:25%" class="tabs-title"><a style="padding:0.75em;height:100%;width:100%" href="#panel3v"></a></li>
+              <li style="height:25%" class="tabs-title"><a style="padding:0.75em;height:100%;width:100%" href="#panel4v"></a></li>
+            </ul>
+            <%= image_tag "paper.svg", size: '100x100' %>
+          </div>
+          <div class="media-object-section" style="width:100%">
+            <div class="tabs-content vertical" data-tabs-content="reading-tabs" style="overflow:hidden;color:rgba(22, 160, 133,1.0)">
+              <div class="tabs-panel chart-bar-anim" id="panel1v">
+                <h4>Section 1</h4>
+                <h6>Average Time in Section: <%= @scores_from_past_week.q1_time %> s</h6>
+              </div>
+              <div class="tabs-panel chart-bar-anim" id="panel2v">
+                <h4>Section 2</h4>
+                <h6>Average Time in Section: <%= @scores_from_past_week.q2_time %> s</h6>
+              </div>
+              <div class="tabs-panel chart-bar-anim" id="panel3v">
+                <h4>Section 3</h4>
+                <h6>Average Time in Section: <%= @scores_from_past_week.q3_time %> s</h6>
+              </div>
+              <div class="tabs-panel chart-bar-anim" id="panel4v">
+                <h4>Section 4</h4>
+                <h6>Average Time in Section: <%= @scores_from_past_week.q4_time %> s</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="medium-6 columns">
+    <div class="callout">
+    </div>
+  </div>
+</div>

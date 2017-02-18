@@ -65,9 +65,13 @@ module Event
           "avg(final_score) as mean_score,
            max(final_score) as top_score,
            avg(q1_time) as q1_time,
-           avg(q1_time) as q2_time,
-           avg(q1_time) as q3_time,
-           avg(q1_time) as q4_time,
+           avg((q1_time / total_in_viewport_time) * 100) as q1_time_pt,
+           avg(q2_time) as q2_time,
+           avg((q2_time / total_in_viewport_time) * 100) as q2_time_pt,
+           avg(q3_time) as q3_time,
+           avg((q3_time / total_in_viewport_time) * 100) as q3_time_pt,
+           avg(q4_time) as q4_time,
+           avg((q4_time / total_in_viewport_time) * 100) as q4_time_pt,
            date_trunc('week', timestamp) as day"
         ).
         where(api_key_id: api_key_id, source_url: source_url).
