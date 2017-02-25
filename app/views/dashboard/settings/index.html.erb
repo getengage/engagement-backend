@@ -20,7 +20,7 @@
     <div class="callout">
       <%= form_for(current_user, url: v1_user_path(current_user.id), html: { :method => :put }, remote: true) do |f| %>
         <div class="form-group">
-          <%= f.label :first_name, "First name" %>
+          <%= f.label :first_name, "Name" %>
           <%= f.text_field :name, class: "form-control inline-editable" %>
           <%= f.label :permissions, "Permissions" %>
           <fieldset>
