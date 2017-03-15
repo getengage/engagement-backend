@@ -1,13 +1,23 @@
+.text-img {
+  background: asset-url('paper.svg') no-repeat;
+  background-size: cover;
+  min-height: calc(100px + 2rem);
+  background-position: top;
+}
+
 small {
   color: #8a8a8a;
   display: block;
   font-size: 0.7rem !important;
 }
 
-.callout {
-  -webkit-box-shadow: 0px 1px 1px #e1e2fb;
-  -moz-box-shadow: 0px 1px 1px #e1e2fb;
-  box-shadow: 0px 1px 1px #e1e2fb;
+.callout h4, .callout h6 {
+  letter-spacing: -0.05em;
+  color: $light-purple;
+}
+
+.callout, .table {
+  box-shadow: 4px 4px #edecec;
 
   ol, li {
     font-size: 0.75rem;
@@ -24,10 +34,14 @@ small {
   display: inline-block;
   padding: 0rem 0.1rem;
   color: $dark-purple;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.05rem;
 }
 
 .turbolinks-progress-bar {
   height: 5px;
   background-color: $ultra-light-purple;
+}
+
+.main-tutorial p, .main-tutorial a {
+  font-size: 0.85rem;
 }

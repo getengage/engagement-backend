@@ -6,6 +6,8 @@
 //= require jquery.dataTables.min
 //= require dataTables.foundation.min
 //= require Chart.bundle.min
+//= require Chart.Custom
+//= require prism
 
 Chart.defaults.global.defaultFontFamily = "FreeSet, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"
 
@@ -14,9 +16,11 @@ document.addEventListener("turbolinks:load", function() {
       table    = doc.find('table'),
       dropDown = doc.find('.dropdown_profile');
 
-  doc.foundation();
+  doc.foundation(); // init foundation
 
-  table.each(function() {
+  Prism.highlightAll(); // init highlights
+
+  table.each(function() { // init datatables
     $(this).dataTable({
       "bFilter": false,
       "bLengthChange": false,

@@ -9,75 +9,40 @@
       </ul>
     </nav>
   </div>
-  <div class="large-6 columns">
-    <div class="callout">
-    </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h4 class="category">Content Links</h4>
   </div>
 </div>
 <div class="row">
   <div class="large-12 columns">
-    <h6 class="category">Scoreboards</h6>
-  </div>
-</div>
-<div class="row">
-  <div class="large-4 columns">
-    <div class="callout">
-      <%= bar_chart @visits_bar_chart.data, @visits_bar_chart.options %>
-      <ol>
-        <% @visits_bar_chart.data[:labels].each do |label| %>
-          <li><%= label %></li>
-        <% end %>
-      </ol>
-    </div>
-  </div>
-  <div class="large-4 columns">
-    <div class="callout">
-      <%= bar_chart @scores_bar_chart.data, @scores_bar_chart.options %>
-      <ol>
-        <% @scores_bar_chart.data[:labels].each do |label| %>
-          <li><%= label %></li>
-        <% end %>
-      </ol>
-    </div>
-  </div>
-  <div class="large-4 columns">
-    <div class="callout">
-      <%= bar_chart @referrals_bar_chart.data, @referrals_bar_chart.options %>
-      <ol>
-        <% @referrals_bar_chart.data[:labels].each do |label| %>
-          <li><%= label %></li>
-        <% end %>
-      </ol>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="large-12 columns">
-    <h6 class="category">Latest Page Visits</h6>
-  </div>
-</div>
-<div class="row">
-  <div class="large-12 columns">
-    <div class="callout">
-      <table>
+    <div class="table-wrapper">
+      <table class="table">
         <thead>
           <tr>
-            <th>Row Id</th>
-            <th>Created At</th>
+            <th>#</th>
             <th>Source URL</th>
-            <th>Referrer</th>
+            <th>First Seen</th>
+            <th>Last Seen</th>
+            <th>Top Referrer</th>
+            <th>Avg Score</th>
+            <th>Top Score</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <% if @query_results.present? %>
-            <% @query_results.each_with_index do |event, index| %>
+          <% if @url_aggregates.present? %>
+            <% @url_aggregates.each_with_index do |event, index| %>
               <tr>
                 <td><%= index + 1 %></td>
-                <td><%= event.timestamp %></td>
                 <td><%= event.source_url %></td>
-                <td><%= event.referrer || "N/A" %></td>
-                <td><%= link_to("View", dashboard_event_detail_path(@api_key.uuid, event.uuid)) %></td>
+                <td><%= time_ago_in_words(event.first_timestamp) %></td>
+                <td><%= time_ago_in_words(event.last_timestamp) %></td>
+                <td><%= event.top_referrer || "N/A" %></td>
+                <td class="text-center"><button class="button round"><%= event.mean_score.round %></button</td>
+                <td class="text-center"><button class="button round"><%= event.top_score.round %></button</td>
+                <td class="text-center"><%= link_to("View", dashboard_event_detail_path(@api_key.uuid, event.uuid)) %></td>
               </tr>
             <% end %>
           <% else %>

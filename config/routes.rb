@@ -26,16 +26,16 @@ Rails.application.routes.draw do
   authenticated :user do
     namespace :dashboard do
       resources :events, only: [:index, :show] do
-        resources :details, only: [:show, :index]
+        resources :details, only: :show, param: :uuid
       end
-      resources :settings, only: [:index]
+      resources :settings, only: :index
       resources :reports, only: [:index, :create]
-      resources :notifications, only: [:index]
-      resources :insights, only: [:index]
-      resource :main, only: :index
+      resources :notifications, only: :index
+      resources :insights, only: :index
+      resources :tutorials, path: "help", only: :index
     end
 
-    root to: "dashboard/main#index", as: :dashboard
+    root to: "dashboard/events#index", as: :dashboard
   end
 
   devise_for :users

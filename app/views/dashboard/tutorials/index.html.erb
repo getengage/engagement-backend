@@ -1,0 +1,115 @@
+<div class="row main-tutorial"style="margin-top:2rem">
+  <div class="medium-12 columns">
+    <div class="row">
+      <div class="medium-2 columns">
+        <div data-sticky-container>
+          <div class="sticky" id="example" data-sticky data-top-anchor="tutorial-content">
+            <nav data-magellan>
+              <ul class="vertical menu expanded">
+                <li><a href="#welcome">Welcome</a></li>
+                <li><a href="#setup">Setup</a></li>
+                <li><a href="#engage">Start Engaging</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="medium-10 columns" id="tutorial-content">
+        <div class="sections">
+          <section id="welcome" data-magellan-target="welcome">
+            <div class="media-object">
+              <div class="media-object-section middle">
+                  <span style="font-size:3em" class="icon-key"></span>
+              </div>
+              <div class="media-object-section middle stats">
+                <h4>Welcome! Let's Get Started.</h4>
+              </div>
+            </div>
+            <div class="setup-content">
+              <p>
+                Let's explore the system and basics you'll need to know in order to get the most out of Engage.
+              </p>
+              <p>As you know, Engage provides real-time, content engagement metrics. To do this, Engage adds a snippet of javascript on page load and at regular intervals, sends metrics back to the Engage server. This is done in the background. As metrics are fed to the engage server, a user will continue to read their content uninterrupted.
+              </p>
+              <p>Through the engage Dashboard, you'll be able to view engage metrics. Key to these metrics is the Engage score. Using a number of variables, the Engage score is measure of how engaged a user is in a given session (session is a unique and continuous viewing of a single article).</p>
+            </div>
+          </section>
+          <hr>
+          <section id="setup" data-magellan-target="setup">
+            <div class="media-object">
+              <div class="media-object-section middle">
+                  <span style="font-size:3em" class="icon-key"></span>
+              </div>
+              <div class="media-object-section middle stats">
+                <h4>Setup</h4>
+              </div>
+            </div>
+            <div class="setup-content">
+              <p>To get setup, you'll first need to generate an API key. The
+                API key is what is used to associate user events from your site to the project
+                you are managing within Engage. The API key should represent a single website or content
+                system that you'll be tracking (tip: if you are tracking multiple sites, generate a key for each of these separately).
+              </p>
+              <p>
+                Navigate to <%= link_to "Settings", dashboard_settings_path %> to create a new key:
+              </p>
+            </div>
+          </section>
+          <hr>
+          <section id="engage" data-magellan-target="engage">
+            <div class="media-object">
+              <div class="media-object-section middle">
+                <span style="font-size:3em" class="icon-key"></span>
+              </div>
+              <div class="media-object-section middle stats">
+                <h4>Engage</h4>
+              </div>
+            </div>
+            <div class="setup-content">
+              <p>
+                If you have successfully created an API Key, congratulations - you are now one step closer!
+                You can begin to track events with the following script, placed before the closing body tag of the page:
+                <br>
+              </p>
+              <div class="language-javascript">
+                <pre><code class="float-left">
+
+  // within a script tag
+
+  engageConfig = {
+    element: '.text_content',
+    api_key: 'YOUR_API_KEY',
+  };
+  (function() {
+    var e = document.createElement('script');
+    e.src = 'https://cdn.rawgit.com/nicksoto/engagement/3e3a6705/dist/engage.min.js';
+    e.type = 'text/javascript';
+    e.async = 'true';
+    e.onload = e.onreadystatechange = function() {
+      var rs = this.readyState;
+      if (rs && rs != 'complete' && rs != 'loaded') return;
+      try { engage.run(engageConfig) } catch (e) {}
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(e, s);
+  })();
+
+                </code></pre>
+                <br>
+                <p>There are two required fields: <b>element</b> and <b>api_key</b>. Element is the class or id of the content that you intend to analyze. For example, let's say you have news articles with paragraphs of content denoted by section HTML tags. Within each section, there should be paragraphs of text identified by some unique class or id. An example of text content would be the following</p>
+                <pre><code class="float-left">
+  < p class="text-content" > This is some paragraph text content. < /p >
+                </code></pre>
+                <br>
+                <p>Now that you have mastered the basics and created an API key, Navigate to <%= link_to "your dashboard", dashboard_events_path %> to start analyzing your content.</p>
+                <br>
+                <br>
+                <br>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

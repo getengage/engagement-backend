@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  store_accessor :notifications
+
   belongs_to :client
   has_many :client_api_keys, foreign_key: :client_id, primary_key: :client_id
   has_many :api_keys, through: :client_api_keys
