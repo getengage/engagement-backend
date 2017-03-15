@@ -7,6 +7,7 @@
           <a><%= current_user.name %></a>
           <ul class="menu">
             <li><%= link_to 'Settings', dashboard_settings_path %></li>
+            <li><%= link_to 'Help', dashboard_tutorials_path %></li>
             <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
            </ul>
          </li>

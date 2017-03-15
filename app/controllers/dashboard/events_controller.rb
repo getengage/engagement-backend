@@ -9,6 +9,7 @@ module Dashboard
 
     def index
       @api_keys = current_user.api_keys
+      redirect_to dashboard_tutorials_path if @api_keys.blank?
     end
 
     def api_key_param
