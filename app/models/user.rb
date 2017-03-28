@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  store_accessor :notifications
+  store_accessor :metadata, :viewed_notifications_at
 
   belongs_to :client
   has_many :client_api_keys, foreign_key: :client_id, primary_key: :client_id
@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, if: :new_record?
 
   mount_uploader :avatar, AvatarUploader
+
+  delegate :all_notifications, to: :client
 
   def set_default_role
     self.role ||= :user

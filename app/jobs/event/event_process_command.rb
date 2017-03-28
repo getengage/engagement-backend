@@ -12,13 +12,14 @@ module Event
     before_perform do |job|
       @old_import  = Import.latest
       @new_import  = Import.create(start_time: Time.current, cutoff: 30.minutes.ago)
-      Rails.logger.info "(event import - start) time=#{Date.current} queue=#{job.queue_name}"
+      log("started", job)
     end
 
     after_perform do |job|
       @new_import.end_time = Time.current
       @new_import.successful!
-      Rails.logger.info "(event import - end) time=#{Date.current} queue=#{job.queue_name}"
+      log("complete", job)
+      Notification::Import.create(created_by: "Engage System")
     end
 
     def perform
@@ -33,6 +34,11 @@ module Event
     end
 
     protected
+
+    def log(event, job)
+      Rails.logger.info "(#{job.class.name} - #{event}) time=#{Date.current} queue=#{job.queue_name}"
+    end
+
     def sql
       return Event::EventsRaw.with_aggregates.limit(4).to_sql if Rails.env.development?
       Event::EventsRaw.
