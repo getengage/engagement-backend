@@ -1,13 +1,13 @@
 FactoryGirl.define do
   factory :events_processed, class: Event::EventsProcessed do
-    timestamp { '2017-08-19' }
+    timestamp { Time.current }
     uuid { SecureRandom.uuid }
     api_key
     source_url Faker::Internet.url
     session_id { SecureRandom.uuid }
     referrer Faker::Internet.url
     reached_end_of_content true
-    total_in_viewport_time { rand(200) }
+    total_in_viewport_time 200
     word_count { rand(500) }
     final_score { rand(250) }
     city "New York"
