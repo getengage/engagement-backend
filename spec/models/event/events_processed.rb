@@ -81,7 +81,7 @@ describe Event::EventsProcessed do
         end
 
         travel_to("2017-01-3") do
-          FactoryGirl.create_list(:events_processed, 20, attrs.merge(total_in_viewport_time: 140))
+          FactoryGirl.create_list(:events_processed, 20, attrs.merge(total_in_viewport_time: 140, final_score: 100))
         end
       end
 
@@ -102,7 +102,7 @@ describe Event::EventsProcessed do
       it "returns either top score or nil for given days as array" do
         travel_to("2017-01-4") do
           expect(aggregs.map(&:mean_score).to_s).to eq(
-            "[nil, nil, nil, 200.0, 200.0, 200.0, nil]"
+            "[nil, nil, nil, 200.0, 200.0, 100.0, nil]"
           )
         end
       end
@@ -123,10 +123,17 @@ describe Event::EventsProcessed do
         end
       end
 
+      it "returns count of engaged visits as integer" do
+        travel_to("2017-01-4") do
+          expect(aggregs.map(&:engaged_visits).to_s).to eq(
+            "[0, 0, 0, 20, 20, 0, 0]"
+          )
+        end
+      end
+
     end
 
     describe "#scores_from_past_week" do
-
     end
 
   end
