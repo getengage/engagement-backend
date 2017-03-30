@@ -1,12 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
-
-  namespace :admin do
-    resources :users
-    root to: "users#index"
-  end
+  devise_for :users
 
   # constraints subdomain: "api" do
     scope module: "api", path: nil, defaults: {format: :json} do
@@ -23,7 +18,16 @@ Rails.application.routes.draw do
     root to: 'pages#show', id: 'home'
   end
 
-  authenticated :user do
+  authenticate :user do
+    constraints AdminRouteConstraint.new do
+      mount Sidekiq::Web => '/sidekiq'
+
+      namespace :admin do
+        resources :users
+        root to: "users#index"
+      end
+    end
+
     namespace :dashboard do
       resources :events, only: [:index, :show] do
         resources :details, only: :show, param: :uuid
@@ -37,6 +41,4 @@ Rails.application.routes.draw do
 
     root to: "dashboard/events#index", as: :dashboard
   end
-
-  devise_for :users
 end

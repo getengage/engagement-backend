@@ -1,7 +1,5 @@
 module Dashboard
   class SettingsController < ApplicationController
-    include ReactOnRails::Controller
-
     def index
       @api_keys = current_user.api_keys
       redux_store("SettingsStore", props: {
