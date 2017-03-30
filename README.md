@@ -32,8 +32,6 @@ There are currently few tools that measure how engaged a user is when viewing on
 
 Please read [CONTRIBUTING.md](https://github.com/nicksoto/engagement-backend/blob/master/CONTRIBUTING.md) for details on contributing as well as information on system setup
 
-[architecture](https://gist.github.com/dbalatero/d3e0ead69724aaaa1cb4) 
-
 ### License
 
 Copyright (c) [Nick Soto](http://github.com/nicksoto)
