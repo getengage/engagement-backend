@@ -72,7 +72,7 @@ module Event
            avg((q3_time / total_in_viewport_time) * 100) as q3_time_pt,
            avg(q4_time) as q4_time,
            avg((q4_time / total_in_viewport_time) * 100) as q4_time_pt,
-           date_trunc('week', timestamp) as day"
+           date(timestamp) as day"
         ).
         where(api_key_id: api_key_id, source_url: source_url).
         group('day').

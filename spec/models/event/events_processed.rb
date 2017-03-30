@@ -21,7 +21,7 @@ describe Event::EventsProcessed do
 
     before do
       travel_to("2017-01-01") do
-        FactoryGirl.create_list(:events_processed, 20, attrs)
+        @first_day_events = FactoryGirl.create_list(:events_processed, 20, attrs)
         FactoryGirl.create_list(:events_processed, 20, other_attrs)
       end
     end
@@ -134,6 +134,65 @@ describe Event::EventsProcessed do
     end
 
     describe "#scores_from_past_week" do
+      let(:aggregs) { described_class.scores_from_past_week(api_key.uuid, source_url) }
+
+      before do
+        travel_to("2017-01-2") do
+          @second_day_events = FactoryGirl.create_list(:events_processed, 20, attrs.merge(total_in_viewport_time: 150, final_score: 140))
+        end
+
+        travel_to("2017-01-3") do
+          @third_day_events = FactoryGirl.create_list(:events_processed, 20, attrs.merge(total_in_viewport_time: 140, final_score: 100))
+        end
+      end
+
+      it "returns previous days with available data" do
+        travel_to("2017-01-4") do
+          expect(aggregs.map(&:day).to_s).to eq(
+            "[Tue, 03 Jan 2017,
+              Mon, 02 Jan 2017,
+              Sun, 01 Jan 2017]".squish
+          )
+        end
+      end
+
+      it "returns the percent change of the mean score over the previous day as array" do
+        travel_to("2017-01-4") do
+          third_day_avg_final_score = @third_day_events.map(&:final_score).sum / @third_day_events.size
+          second_day_avg_final_score = @second_day_events.map(&:final_score).sum / @second_day_events.size
+          first_day_avg_final_score = @first_day_events.map(&:final_score).sum / @first_day_events.size
+
+          expect(aggregs.map(&:mean_score_pt_change).to_s).to eq(
+            [
+              ((third_day_avg_final_score / second_day_avg_final_score) * 100.0).round.to_f,
+              ((second_day_avg_final_score / first_day_avg_final_score) * 100.0).round.to_f,
+              0.0
+            ].to_s
+          )
+        end
+      end
+
+      it "returns the percent changed of the top score over the previous day as array" do
+        travel_to("2017-01-1") do
+          @first_day_events << FactoryGirl.create_list(:events_processed, 20, attrs.merge(final_score: 250))
+          @first_day_events.flatten!
+        end
+
+        travel_to("2017-01-4") do
+          third_day_top_final_score = @third_day_events.map(&:final_score).max
+          second_day_top_final_score = @second_day_events.map(&:final_score).max
+          first_day_top_final_score = @first_day_events.map(&:final_score).max
+
+          expect(aggregs.map(&:top_score_pt_change).to_s).to eq(
+            [
+              ((third_day_top_final_score / second_day_top_final_score) * 100.0).round.to_f,
+              ((second_day_top_final_score / first_day_top_final_score) * 100.0).round.to_f,
+              0.0
+            ].to_s
+          )
+        end
+      end
+
     end
 
   end
