@@ -13,15 +13,27 @@ feature 'Sign in', :devise do
     expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'Email'
   end
 
-  # Scenario: User can sign in with valid credentials
-  #   Given I exist as a user
+  # Scenario: User without api keys can sign in with valid credentials
+  #   Given I exist as a user without an api key
   #   And I am not signed in
   #   When I sign in with valid credentials
-  #   Then I see a success message
-  scenario 'user can sign in with valid credentials' do
+  #   Then I am redirected to the tutorial section
+  scenario 'user without api keys can sign in with valid credentials' do
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
-    expect(page).to have_content "Welcome!"
+    expect(page.current_path).to eq(dashboard_tutorials_path)
+  end
+
+  # Scenario: User with api keys can sign in with valid credentials
+  #   Given I exist as a user with an api key
+  #   And I am not signed in
+  #   When I sign in with valid credentials
+  #   Then I am redirected to the dashboard section
+  scenario 'user with api keys can sign in with valid credentials' do
+    user = FactoryGirl.create(:user, client: FactoryGirl.create(:client))
+    user.api_keys << FactoryGirl.create(:api_key)
+    signin(user.email, user.password)
+    expect(page.current_path).to eq(root_path)
   end
 
   # Scenario: User cannot sign in with wrong email

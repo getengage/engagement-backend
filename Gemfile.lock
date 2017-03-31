@@ -53,6 +53,8 @@ GEM
       rails (>= 4.2, < 5.1)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
+    archive-zip (0.7.0)
+      io-like (~> 0.3.0)
     arel (6.0.3)
     autoprefixer-rails (6.6.0)
       execjs
@@ -90,6 +92,9 @@ GEM
       rails (>= 3.1)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
+    chromedriver-helper (1.1.0)
+      archive-zip (~> 0.7.0)
+      nokogiri (~> 1.6)
     chronic (0.10.2)
     codeclimate-test-reporter (1.0.3)
       simplecov
@@ -147,6 +152,7 @@ GEM
     htmlentities (4.3.4)
     i18n (0.7.0)
     interception (0.5)
+    io-like (0.3.0)
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -364,6 +370,7 @@ DEPENDENCIES
   capybara-screenshot
   carrierwave
   chartjs-ror
+  chromedriver-helper
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   data_migrate

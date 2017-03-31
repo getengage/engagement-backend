@@ -57,6 +57,7 @@ end
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
+  gem "chromedriver-helper"
   gem "codeclimate-test-reporter", require: nil
   gem 'database_cleaner'
   gem 'launchy'

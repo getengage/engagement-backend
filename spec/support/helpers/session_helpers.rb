@@ -14,5 +14,10 @@ module Features
       fill_in 'Password', with: password
       click_button 'Sign in'
     end
+
+    def notification_msg
+      store = page.find('.js-react-on-rails-store', :visible => false)
+      JSON.parse(store['data-props'])['notifications'][0]['message']
+    end
   end
 end
