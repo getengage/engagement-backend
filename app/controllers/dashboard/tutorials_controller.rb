@@ -1,5 +1,5 @@
 module Dashboard
-  class MainController < ApplicationController
+  class TutorialsController < ApplicationController
     def index
       @subnav_hidden = true
     end

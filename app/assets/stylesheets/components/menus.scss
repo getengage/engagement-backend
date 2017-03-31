@@ -1,0 +1,26 @@
+.line-chart-menu {
+
+  li:nth-child(odd) {
+    width: 50%;
+    border-radius: 2em;
+    background-color: $whitesmoke;
+
+    &.is-active {
+      background-color: $light-purple;
+
+      a {
+        color: $whitesmoke;
+      }
+    }
+
+    a {
+      padding: 0.5rem 1rem;
+      color: $purple;
+    }
+  }
+
+  li:nth-child(even) {
+    padding:0 0.2em;
+  }
+
+}

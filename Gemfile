@@ -10,7 +10,7 @@ gem 'data_migrate'
 gem 'devise'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'
 gem 'foreman'
-gem 'foundation-rails', '6.2.3.0'
+gem 'foundation-rails', '6.3.0.0'
 gem 'hairtrigger'
 gem 'high_voltage', '~> 3.0.0'
 gem 'jbuilder', '~> 2.0'
@@ -57,6 +57,7 @@ end
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
+  gem "chromedriver-helper"
   gem "codeclimate-test-reporter", require: nil
   gem 'database_cleaner'
   gem 'launchy'

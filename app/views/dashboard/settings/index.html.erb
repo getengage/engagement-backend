@@ -9,14 +9,10 @@
       </ul>
     </nav>
   </div>
-  <div class="large-6 columns">
-    <div class="callout">
-    </div>
-  </div>
 </div>
 <div class="row">
   <div class="large-12 columns">
-    <h6 class="category">Manage Profile</h6>
+    <h4 class="category">Manage Profile</h4>
   </div>
 </div>
 <div class="row">
@@ -24,7 +20,7 @@
     <div class="callout">
       <%= form_for(current_user, url: v1_user_path(current_user.id), html: { :method => :put }, remote: true) do |f| %>
         <div class="form-group">
-          <%= f.label :first_name, "First name" %>
+          <%= f.label :first_name, "Name" %>
           <%= f.text_field :name, class: "form-control inline-editable" %>
           <%= f.label :permissions, "Permissions" %>
           <fieldset>
@@ -43,7 +39,7 @@
 </div>
 <div class="row">
   <div class="large-12 columns">
-    <h6 class="category">Manage API Keys</h6>
+    <h4 class="category">Manage API Keys</h4>
   </div>
 </div>
 <div class="row">

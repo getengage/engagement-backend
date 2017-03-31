@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170101223646) do
+ActiveRecord::Schema.define(version: 20170327012600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -319,6 +319,16 @@ ActiveRecord::Schema.define(version: 20170101223646) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.jsonb    "data",       default: {}, null: false
+    t.string   "url"
+    t.string   "created_by",              null: false
+    t.integer  "client_id"
+    t.string   "type",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "report_summaries", force: :cascade do |t|
     t.integer  "user_id",                null: false
     t.integer  "api_key_id",             null: false
@@ -352,9 +362,11 @@ ActiveRecord::Schema.define(version: 20170101223646) do
     t.integer  "client_id"
     t.string   "avatar"
     t.integer  "permissions",            default: 0,  null: false
+    t.jsonb    "metadata",               default: {}, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["metadata"], name: "index_users_on_metadata", using: :gin
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "report_summaries", "api_keys"
