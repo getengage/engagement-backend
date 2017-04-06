@@ -8,7 +8,7 @@ gem 'chartjs-ror'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'data_migrate'
 gem 'devise'
-gem 'entypo-rails', '~> 3.0.0.pre.rc2'
+gem 'entypo-rails', '~> 3.0.0.pre.rc2'  # /entypo/charmap
 gem 'foreman'
 gem 'foundation-rails', '6.3.0.0'
 gem 'hairtrigger'

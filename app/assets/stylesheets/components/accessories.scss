@@ -1,0 +1,36 @@
+$ribbon-size: 2em;
+$ribbon-colors: (
+  lightgreen: #1abc9c,
+  green: #16a085,
+  yellow: #f1c40f,
+  orange: #f39c12
+);
+
+@each $name, $color in $ribbon-colors {
+  .arrow-accessory-#{$name} {
+    right: 1em;
+    position: absolute;
+    z-index: 10;
+    font-family: "entypo";
+    color: $color;
+    width: $ribbon-size;
+    height: $ribbon-size;
+    border-bottom: solid $ribbon-size transparent;
+    border-left: solid $ribbon-size transparent;
+    border-right: solid $ribbon-size $color;
+    border-top: solid $ribbon-size $color;
+  }
+}
+
+.accessory:before {
+  content: '\e75e';
+  color: white;
+  position: absolute;
+  left: $ribbon-size / 4;
+  bottom: 0;
+  font-size: $ribbon-size / 2;
+}
+
+.menu-item-wrapper {
+  position: relative;
+}

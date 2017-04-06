@@ -3,7 +3,7 @@
     <nav aria-label="You are here:" role="navigation">
       <ul class="breadcrumbs">
         <li>
-          <span class="show-for-sr">Current: </span> Events
+          <span class="show-for-sr">Current: </span> Projects
         </li>
       </ul>
     </nav>
@@ -11,7 +11,7 @@
 </div>
 <div class="row">
   <div class="large-12 columns">
-    <h4 class="category">API Keys</h4>
+    <h4 class="category">Active Projects</h4>
   </div>
 </div>
 <div class="row">
@@ -30,7 +30,7 @@
             <tr>
               <td><%= key.display_name %></td>
               <td>ACTIVE</td>
-              <td><%= link_to "Go to Events", dashboard_event_path(key.uuid) %></td>
+              <td><%= link_to "Go to Project", dashboard_project_path(key.uuid) %></td>
             </tr>
           <% end %>
         </tbody>

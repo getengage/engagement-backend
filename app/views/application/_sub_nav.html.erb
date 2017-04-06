@@ -7,10 +7,9 @@
   <div class="top-bar-center">
     <span>
       <ul>
-        <li><i class="icon-line-graph"></i><%= link_to "Events", dashboard_events_path %></li><em>•</em>
-        <li><i class="icon-mail"></i><%= link_to "Notifications", dashboard_notifications_path %></li><em>•</em>
-        <li><i class="icon-text-doc"></i><%= link_to "Reports", dashboard_reports_path %></li><em>•</em>
-        <li><i class="icon-light-bulb"></i><%= link_to "Insights", dashboard_insights_path %></li>
+        <li><i class="icon-line-graph"></i><%= link_to "Content Links", dashboard_event_path(@api_key.uuid) %></li><em>•</em>
+        <li><i class="icon-mail"></i><%= link_to "Notifications", dashboard_notification_path(@api_key.uuid) %></li><em>•</em>
+        <li><i class="icon-light-bulb"></i><%= link_to "Insights", dashboard_insight_path(@api_key.uuid) %></li>
       </ul>
     </span>
   </div>

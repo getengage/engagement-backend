@@ -14,7 +14,7 @@
       <% end %>
     </ul>
   </li>
-  <li><%= image_tag(current_user.avatar_url(:thumb).to_s, size: '50x50') %></li>
+  <li><%= image_tag(current_user.avatar_url(:thumb).to_s, size: '40x40') %></li>
 <% else %>
   <li><%= link_to 'Log in', new_user_session_path, class: "nav_link" %></li>
   <li><%= link_to 'Sign up', new_user_registration_path, class: "nav_link" %></li>

@@ -2,8 +2,9 @@
   <div class="medium-12 columns">
     <nav aria-label="You are here:" role="navigation">
       <ul class="breadcrumbs">
-        <li><%= link_to "Events", dashboard_events_path %></li>
-        <li><%= link_to @api_key.name, dashboard_event_path(@api_key.uuid) %></li>
+        <li><%= link_to "Projects", dashboard_projects_path %></li>
+        <li><%= link_to @api_key.display_name, dashboard_project_path(@api_key.uuid) %></li>
+        <li><%= link_to "Content Links", dashboard_event_path(@api_key.uuid) %></li>
         <li style="color: #7F8AA2">
           <span class="show-for-sr">Current</span><%= @result.source_url %>
         </li>
