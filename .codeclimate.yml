@@ -4,9 +4,20 @@ engines:
     enabled: true
     exclude_fingerprints:
     - 0d8d2c7a20ed25b35e7e9286ae06222256a91d1ac381ed9fdfd70d3b65e0e622
-languages:
-  Ruby: true
-  JavaScript: true
+  reek:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        ruby:
+          mass_threshold: 18
+ratings:
+   paths:
+   - "app/**/*"
+   - "lib/**/*"
+   - "**.rb"
+   - "**.go"
 exclude_paths:
 - "app/assets/javascripts/dataTables.foundation.min.js"
 - "app/assets/javascripts/jquery.dataTables.min.js"

@@ -6,9 +6,9 @@ module Event
 
     scope :top_scores_and_visits, ->(api_key_id, limit=5) {
       select(
-        "json_agg(json_build_object('source_url', source_url, 'count', top_score) order by final_score_rk asc) FILTER (where final_score_rk <= #{limit}) as top_scores,
-         json_agg(json_build_object('source_url', top_referrer, 'count', referrer_rk) order by referrer_rk asc) FILTER (where referrer_rk <= #{limit}) as top_referrers,
-         json_agg(json_build_object('source_url', source_url, 'count', source_url_ct) order by source_url_rk asc) FILTER (where source_url_rk <= #{limit}) as top_visits"
+        "json_agg(json_build_object('source_url', source_url, 'count', top_score) order by final_score_rk asc) FILTER (where final_score_rk <= #{sanitize(limit)}) as top_scores,
+         json_agg(json_build_object('source_url', top_referrer, 'count', referrer_rk) order by referrer_rk asc) FILTER (where referrer_rk <= #{sanitize(limit)}) as top_referrers,
+         json_agg(json_build_object('source_url', source_url, 'count', source_url_ct) order by source_url_rk asc) FILTER (where source_url_rk <= #{sanitize(limit)}) as top_visits"
       ).
       from(aggregate_counts(api_key_id))
     }
@@ -80,6 +80,15 @@ module Event
       ).
       order('day desc').
       limit(limit)
+    }
+
+    scope :project_stats, ->(api_key_id) {
+      where(api_key_id: api_key_id).
+      select(
+        "count(distinct source_url) as source_url_ct,
+        min(timestamp) as first_timestamp,
+        max(timestamp) as last_timestamp"
+      )
     }
 
     include Base

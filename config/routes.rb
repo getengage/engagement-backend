@@ -29,16 +29,17 @@ Rails.application.routes.draw do
     end
 
     namespace :dashboard do
-      resources :events, only: [:index, :show] do
+      resources :events, only: [:show] do
         resources :details, only: :show, param: :uuid
       end
+      resources :projects, only: [:index, :show]
       resources :settings, only: :index
       resources :reports, only: [:index, :create]
-      resources :notifications, only: :index
-      resources :insights, only: :index
+      resources :notifications, only: :show
+      resources :insights, only: :show
       resources :tutorials, path: "help", only: :index
     end
 
-    root to: "dashboard/events#index", as: :dashboard
+    root to: "dashboard/projects#index", as: :dashboard
   end
 end

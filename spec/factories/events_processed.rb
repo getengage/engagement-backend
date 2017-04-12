@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :events_processed, class: Event::EventsProcessed do
-    timestamp { Time.current }
+    timestamp { '2017-08-19' }
     uuid { SecureRandom.uuid }
     api_key
     source_url Faker::Internet.url

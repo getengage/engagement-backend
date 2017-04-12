@@ -2,10 +2,8 @@
   <div class="large-6 columns">
     <nav aria-label="You are here:" role="navigation">
       <ul class="breadcrumbs">
-        <li><%= link_to "Events", dashboard_events_path %></li>
-        <li>
-          <span class="show-for-sr">Current: </span> <%= @api_key.name %>
-        </li>
+        <li><%= link_to "Projects", dashboard_projects_path %></li>
+        <li><%= link_to @api_key.display_name, dashboard_project_path(@api_key.uuid) %></li>
       </ul>
     </nav>
   </div>

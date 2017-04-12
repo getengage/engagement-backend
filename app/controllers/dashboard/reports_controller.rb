@@ -1,5 +1,7 @@
 module Dashboard
   class ReportsController < ApplicationController
+    before_action :hide_subnav
+
     def index
       @report_summaries = current_user.report_summaries.includes(:api_key)
       @api_keys = current_user.api_keys.where.not(id: @report_summaries.pluck(:api_key_id))

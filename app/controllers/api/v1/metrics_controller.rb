@@ -17,7 +17,8 @@ module Api::V1
       data_params.
         permit(:timestamp, :api_key_id, :session_id, :source_url,
                :referrer, :x_pos, :y_pos, :is_visible,
-               :in_viewport, :top, :bottom, :word_count).
+               :in_viewport, :top, :bottom, :word_count,
+               :tags).
         merge(remote_ip: request.remote_ip, user_agent: request.user_agent)
     end
   end

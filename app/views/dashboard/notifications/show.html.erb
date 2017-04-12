@@ -1,0 +1,39 @@
+<div class="row" style="margin-top: 2rem">
+  <div class="medium-12 columns">
+    <nav aria-label="You are here:" role="navigation">
+      <ul class="breadcrumbs">
+        <li><%= link_to "Projects", dashboard_projects_path %></li>
+        <li><%= link_to @api_key.display_name, dashboard_project_path(@api_key.uuid) %></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h4 class="category">Notifications</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Message</th>
+            <th>Time</th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @notifications.each do |notification| %>
+            <tr>
+              <td><%= notification.message %></td>
+              <td><%= notification.created_at.to_s(:date_and_time) %></td>
+              <td><%= notification.created_by %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

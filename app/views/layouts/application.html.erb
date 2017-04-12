@@ -11,7 +11,7 @@
   </head>
   <body class="<%= controller_name %>">
     <%= render "nav" %>
-    <%= render "sub_nav" unless subnav_hidden? || !user_signed_in? %>
+    <%= render "sub_nav" unless hide_subnav? %>
     <%= yield %>
     <%= react_component("Notifications", props: {}, prerender: false) %>
     <%= redux_store_hydration_data %>

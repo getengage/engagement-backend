@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327012600) do
+ActiveRecord::Schema.define(version: 20170412005357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,10 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.float    "q4_time"
     t.datetime "created_at"
     t.datetime "timestamp"
+    t.text     "tags",                   default: [],                                array: true
   end
+
+  add_index "events_processed", ["tags"], name: "index_events_processed_on_tags", using: :gin
 
   create_table "events_raw", force: :cascade do |t|
     t.datetime "timestamp",   null: false
@@ -78,6 +81,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",  null: false
     t.string   "source_url",  null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_1", id: false, force: :cascade do |t|
@@ -97,6 +101,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_10", id: false, force: :cascade do |t|
@@ -116,6 +121,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_11", id: false, force: :cascade do |t|
@@ -135,6 +141,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_12", id: false, force: :cascade do |t|
@@ -154,6 +161,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_2", id: false, force: :cascade do |t|
@@ -173,6 +181,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_3", id: false, force: :cascade do |t|
@@ -192,6 +201,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_4", id: false, force: :cascade do |t|
@@ -211,6 +221,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_5", id: false, force: :cascade do |t|
@@ -230,6 +241,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_6", id: false, force: :cascade do |t|
@@ -249,6 +261,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_7", id: false, force: :cascade do |t|
@@ -268,6 +281,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_8", id: false, force: :cascade do |t|
@@ -287,6 +301,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "events_raw_9", id: false, force: :cascade do |t|
@@ -306,6 +321,7 @@ ActiveRecord::Schema.define(version: 20170327012600) do
     t.string   "session_id",                                                     null: false
     t.string   "source_url",                                                     null: false
     t.datetime "created_at"
+    t.string   "tags"
   end
 
   create_table "imports", force: :cascade do |t|
