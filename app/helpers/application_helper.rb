@@ -13,6 +13,10 @@ module ApplicationHelper
     end
   end
 
+  def hide_subnav?
+    !user_signed_in? || subnav_hidden? || devise_controller?
+  end
+
   def time_in_words(time)
     distance_of_time_in_words(Time.at(0), Time.at(time))
   end
