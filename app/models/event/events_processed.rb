@@ -82,6 +82,15 @@ module Event
       limit(limit)
     }
 
+    scope :project_stats, ->(api_key_id) {
+      where(api_key_id: api_key_id).
+      select(
+        "count(distinct source_url) as source_url_ct,
+        min(timestamp) as first_timestamp,
+        max(timestamp) as last_timestamp"
+      )
+    }
+
     include Base
   end
 end

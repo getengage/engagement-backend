@@ -16,4 +16,9 @@ module ApplicationHelper
   def time_in_words(time)
     distance_of_time_in_words(Time.at(0), Time.at(time))
   end
+
+  def format_time(time, format: :day_and_mo)
+    return "N/A" unless time
+    time.to_s(format)
+  end
 end

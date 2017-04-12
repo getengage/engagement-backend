@@ -31,21 +31,21 @@
       <div class="medium-3 columns">
         <div class="callout">
           <h6>Links Tracked:
-            <b><%= @aggregate_counts.present? ? @aggregate_counts.source_url_ct : 0 %></b>
+            <b><%= @aggregate_counts.source_url_ct %></b>
           </h6>
         </div>
       </div>
       <div class="medium-3 columns">
         <div class="callout">
           <h6>First Event:
-            <b><%= @aggregate_counts.present? ? @aggregate_counts.first_timestamp.to_s(:day_and_mo) : "N/A" %></b>
+            <b><%= format_time(@aggregate_counts.first_timestamp) %></b>
           </h6>
         </div>
       </div>
       <div class="medium-3 columns">
         <div class="callout">
           <h6>Latest Event:
-            <b><%= @aggregate_counts.present? ? @aggregate_counts.last_timestamp.to_s(:day_and_mo) : "N/A" %></b>
+            <b><%= format_time(@aggregate_counts.last_timestamp) %></b>
           </h6>
         </div>
       </div>

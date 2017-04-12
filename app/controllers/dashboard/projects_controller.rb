@@ -5,7 +5,7 @@ module Dashboard
 
     def show
       @api_key = ApiKey.find_by_uuid(api_key_param)
-      @aggregate_counts = Event::EventsProcessed.aggregate_counts(@api_key.uuid)
+      @aggregate_counts = Event::EventsProcessed.project_stats(@api_key.uuid)[0]
     end
 
     def index

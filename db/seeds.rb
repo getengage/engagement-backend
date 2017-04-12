@@ -39,7 +39,8 @@ number_of_events = 200
     api_key_id: uuid,
     word_count: 200,
     referrer: "example.com/1/#{n}",
-    remote_ip: "24.29.18.175"
+    remote_ip: "24.29.18.175",
+    tags: "news, opinion"
   ).first_or_create
 
   # Second User Session, didn't reach end
@@ -56,7 +57,8 @@ number_of_events = 200
     api_key_id: uuid,
     word_count: 200,
     referrer: "example.com/1/#{n}",
-    remote_ip: "24.29.18.175"
+    remote_ip: "24.29.18.175",
+    tags: "news, opinion"
   ).first_or_create
 end
 
