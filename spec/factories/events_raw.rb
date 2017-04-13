@@ -14,5 +14,6 @@ FactoryGirl.define do
     session_id { SecureRandom.uuid }
     source_url Faker::Internet.url
     api_key
+    tags "content tags here"
   end
 end
