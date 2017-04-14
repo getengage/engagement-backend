@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.3.3'
 # gem 'acts_as_paranoid' # Rails 5.1
 gem 'administrate'
 gem 'bourbon'
@@ -9,7 +9,7 @@ gem 'devise'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'  # /entypo/charmap
 gem 'foreman'
 gem 'foundation-rails', '6.3.0.0'
-gem 'hairtrigger'
+gem 'hairtrigger', '>= 0.2.19'
 gem 'high_voltage', '~> 3.0.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
