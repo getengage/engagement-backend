@@ -1,8 +1,8 @@
 module Dashboard
   class DetailsController < ApplicationController
     def show
-      @scores_from_past_days = Event::EventsProcessed.scores_from_past_days(api_key.uuid, source_url, past_days)
-      @scores_from_past_week = Event::EventsProcessed.scores_from_past_week(api_key.uuid, source_url)[0]
+      @scores_from_past_days = Event::EventsProcessed.scores_from_past_days(api_key_uuid, source_url, past_days)
+      @scores_from_past_week = Event::EventsProcessed.scores_from_past_week(api_key_uuid, source_url)[0]
       @mean_viewport_time = @scores_from_past_days.map(&:mean_viewport_time).compact
       @line_chart = LineChartPresenter.new(titles: ["Engage Score", "Time on Page"],
                                   labels: @scores_from_past_days.map(&:day),
@@ -10,6 +10,10 @@ module Dashboard
     end
 
     protected
+
+    def api_key_uuid
+      @api_key_uuid ||= api_key.uuid
+    end
 
     def api_key
       @api_key ||= ApiKey.find_by_uuid(api_key_param)
