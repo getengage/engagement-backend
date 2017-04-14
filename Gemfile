@@ -5,7 +5,6 @@ gem 'administrate'
 gem 'bourbon'
 gem 'carrierwave'
 gem 'chartjs-ror'
-gem 'data_migrate'
 gem 'devise'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'  # /entypo/charmap
 gem 'foreman'

@@ -102,8 +102,6 @@ GEM
     connection_pool (2.2.1)
     css_parser (1.4.7)
       addressable
-    data_migrate (3.0.1)
-      rails (>= 4.0)
     database_cleaner (1.5.3)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
@@ -363,7 +361,6 @@ DEPENDENCIES
   chartjs-ror
   chromedriver-helper
   codeclimate-test-reporter
-  data_migrate
   database_cleaner
   devise
   entypo-rails (~> 3.0.0.pre.rc2)
