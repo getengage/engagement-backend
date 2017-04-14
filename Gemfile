@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.2.3'
-gem 'acts_as_paranoid'
+# gem 'acts_as_paranoid' # Rails 5.1
 gem 'administrate'
 gem 'bourbon'
 gem 'carrierwave'
