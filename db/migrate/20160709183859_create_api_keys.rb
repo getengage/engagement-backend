@@ -1,4 +1,4 @@
-class CreateApiKeys < ActiveRecord::Migration
+class CreateApiKeys < ActiveRecord::Migration[4.1]
   def change
     create_table :api_keys do |t|
       t.string :name, null: false
