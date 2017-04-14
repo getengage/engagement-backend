@@ -24,10 +24,9 @@ module Dashboard
     end
 
     def datasets
-      [
-        @scores_from_past_days.map{|x| x.mean_score.to_f},
-        @scores_from_past_days.map{|x| x.mean_viewport_time.to_f}
-      ]
+      @scores_from_past_days.map do |val|
+        [val.mean_score.to_f, val.mean_viewport_time.to_f]
+      end.transpose
     end
 
     def past_days
