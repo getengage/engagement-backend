@@ -1,4 +1,4 @@
-class ApiKey < ActiveRecord::Base
+class ApiKey < ApplicationRecord
   include Reportable
   acts_as_paranoid column: :expired_at
 

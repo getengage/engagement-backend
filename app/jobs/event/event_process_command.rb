@@ -6,7 +6,7 @@ require "#{Rails.root}/lib/simple_pg_cursor"
 # to csv(s) or non WAL-logged tables and then doing a pg COPY after batch finishes
 
 module Event
-  class EventProcessCommand < ActiveJob::Base
+  class EventProcessCommand < ApplicationJob
     queue_as 'go_queue'
 
     before_perform do |job|

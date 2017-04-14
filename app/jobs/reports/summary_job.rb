@@ -1,4 +1,4 @@
-class Reports::SummaryJob < ActiveJob::Base
+class Reports::SummaryJob < ApplicationJob
   queue_as :default
 
   def perform(frequency)

@@ -1,4 +1,4 @@
-class Import < ActiveRecord::Base
+class Import < ApplicationRecord
   enum status: [:in_progress, :successful, :failed]
 
   scope :latest, -> {

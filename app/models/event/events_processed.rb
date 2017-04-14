@@ -1,5 +1,5 @@
 module Event
-  class EventsProcessed < ActiveRecord::Base
+  class EventsProcessed < ApplicationRecord
     def self.partition_key
       'NEW.api_key_id'
     end
