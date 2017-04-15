@@ -1,4 +1,4 @@
-class CreateReportSummaries < ActiveRecord::Migration[4.1]
+class CreateReportSummaries < ActiveRecord::Migration[4.2]
   def change
     create_table :report_summaries do |t|
       t.references :user, index: true, foreign_key: true, null: false

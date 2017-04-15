@@ -1,4 +1,4 @@
-class CreateEventsProcessed < ActiveRecord::Migration[4.1]
+class CreateEventsProcessed < ActiveRecord::Migration[4.2]
   def change
     create_table :events_processed do |t|
       t.uuid :uuid, default: 'uuid_generate_v4()'

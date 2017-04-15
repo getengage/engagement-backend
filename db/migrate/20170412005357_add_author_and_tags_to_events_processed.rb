@@ -1,4 +1,4 @@
-class AddAuthorAndTagsToEventsProcessed < ActiveRecord::Migration[4.1]
+class AddAuthorAndTagsToEventsProcessed < ActiveRecord::Migration[4.2]
   def change
     add_column :events_raw, :tags, :string
     add_column :events_processed, :tags, :text, array: true, default: []

@@ -4,6 +4,17 @@ module Event
     included do
       belongs_to :api_key, primary_key: :uuid
       self.table_name = self.table_name.singularize
+
+      trigger.before(:insert).declare("partition text") do
+        <<-SQL
+          partition := quote_ident(TG_RELNAME || '_' || #{partition_key});
+          IF NEW.created_at IS NULL THEN
+              NEW.created_at := NOW();
+          END IF;
+          EXECUTE 'INSERT INTO ' || partition || ' SELECT(' || TG_RELNAME || ' ' || quote_literal(NEW) || ').* RETURNING id;';
+          RETURN NULL;
+        SQL
+      end
     end
   end
 end

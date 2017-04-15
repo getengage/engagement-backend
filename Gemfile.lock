@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/nicksoto/hair_trigger.git
+  revision: 21ee5422819382fe907634c1deb0bf010e9bd2eb
+  specs:
+    hairtrigger (0.2.19)
+      activerecord (>= 2.3)
+      ruby2ruby (~> 2.3)
+      ruby_parser (~> 3.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -267,6 +276,11 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    ruby2ruby (2.3.2)
+      ruby_parser (~> 3.1)
+      sexp_processor (~> 4.6)
+    ruby_parser (3.9.0)
+      sexp_processor (~> 4.1)
     rubyzip (1.2.0)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -280,6 +294,7 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    sexp_processor (4.9.0)
     sidekiq (4.2.7)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -357,6 +372,7 @@ DEPENDENCIES
   faker
   foreman
   foundation-rails (= 6.3.0.0)
+  hairtrigger!
   high_voltage (~> 3.0.0)
   jbuilder (~> 2.0)
   jquery-rails

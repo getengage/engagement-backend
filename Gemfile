@@ -9,11 +9,11 @@ gem 'devise'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'  # /entypo/charmap
 gem 'foreman'
 gem 'foundation-rails', '6.3.0.0'
-# gem 'hairtrigger' # Rails 5.1
 gem 'high_voltage', '~> 3.0.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'mini_magick'
+gem 'hairtrigger', git: "git://github.com/nicksoto/hair_trigger.git"
 gem 'oj'
 gem 'oj_mimic_json'
 gem 'pdfkit'

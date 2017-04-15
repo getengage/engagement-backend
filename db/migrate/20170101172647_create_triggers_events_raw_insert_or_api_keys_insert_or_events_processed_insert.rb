@@ -2,7 +2,7 @@
 # While you can edit this file, any changes you make to the definitions here
 # will be undone by the next auto-generated trigger migration.
 
-class CreateTriggersEventsRawInsertOrApiKeysInsertOrEventsProcessedInsert < ActiveRecord::Migration[4.1]
+class CreateTriggersEventsRawInsertOrApiKeysInsertOrEventsProcessedInsert < ActiveRecord::Migration[4.2]
   def up
     create_trigger("events_raw_before_insert_row_tr", :generated => true, :compatibility => 1).
         on("events_raw").

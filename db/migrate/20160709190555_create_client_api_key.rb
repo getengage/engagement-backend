@@ -1,4 +1,4 @@
-class CreateClientApiKey < ActiveRecord::Migration[4.1]
+class CreateClientApiKey < ActiveRecord::Migration[4.2]
   def change
     create_table :client_api_keys, id: false do |t|
       t.references :client, index: true, null: false
