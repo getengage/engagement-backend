@@ -3,7 +3,7 @@ ruby '2.3.3'
 # gem 'acts_as_paranoid' # Rails 5.1
 gem 'administrate'
 gem 'bourbon'
-gem 'carrierwave'
+gem 'carrierwave', '~> 1.0'
 gem 'chartjs-ror'
 gem 'devise'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'  # /entypo/charmap
