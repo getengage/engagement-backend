@@ -9,7 +9,7 @@ gem 'devise'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'  # /entypo/charmap
 gem 'foreman'
 gem 'foundation-rails', '6.3.0.0'
-gem 'hairtrigger', '>= 0.2.19'
+gem 'hairtrigger'
 gem 'high_voltage', '~> 3.0.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
