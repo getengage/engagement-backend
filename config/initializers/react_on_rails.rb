@@ -1,3 +1,17 @@
+module RenderingExtension
+  # Return a Hash that contains custom values from the view context that will get passed to
+  # all calls to react_component and redux_store for rendering
+  def self.custom_context(view_context)
+    if view_context.controller.is_a?(ActionMailer::Base)
+      {}
+    else
+      {
+        somethingUseful: view_context.session[:something_useful]
+      }
+    end
+  end
+end
+
 ReactOnRails.configure do |config|
   # Directory where your generated assets go. All generated assets must go to the same directory.
   # Configure this in your webpack config files. This relative to your Rails root directory.
