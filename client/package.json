@@ -7,7 +7,6 @@
     "npm": "4.1.1"
   },
   "scripts": {
-    "start": "node ./server.js -s webpack-bundle.js",
     "build:test": "webpack --config webpack.config.js",
     "build:production": "NODE_ENV=production webpack --config webpack.config.js",
     "build:development": "webpack -w --config webpack.config.js"
@@ -30,7 +29,7 @@
     "imports-loader": "^0.7.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-on-rails": "<%= VersionSyntaxConverter.new.rubygem_to_npm %>",
+    "react-on-rails": "6.10.0",
     "react-redux": "^5.0.4",
     "react-notification-system": "^0.2.10",
     "react-notification-system-redux": "^1.0.9",
