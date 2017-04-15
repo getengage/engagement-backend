@@ -24,7 +24,7 @@ gem 'premailer-rails'
 gem 'puma'
 gem 'pundit'
 gem 'rails', '>= 5.1.0.rc1'
-gem "react_on_rails", "6.2.1"
+gem "react_on_rails", "6.10.0"
 gem 'sass-rails', '~> 5.0.6'
 gem 'sidekiq'
 gem 'sinatra', :require => false
