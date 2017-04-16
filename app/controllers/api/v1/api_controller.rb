@@ -12,7 +12,6 @@ class Api::V1::ApiController < ActionController::Metal
 
   include ActionController::RequestForgeryProtection
   include AbstractController::Callbacks
-  include ActionController::RackDelegation
   include ActionController::StrongParameters
 
   private
