@@ -6,10 +6,10 @@ module ApplicationHelper
     url
   end
 
-  def menu_link(text, path, link_class="", **options)
+  def menu_link(text, path, **options)
     options.merge!(class: "is-active") if current_page?(path)
     content_tag(:li, options) do
-      link_to text, path, class: link_class
+      link_to(text, path, class: options[:link_class] || "")
     end
   end
 
