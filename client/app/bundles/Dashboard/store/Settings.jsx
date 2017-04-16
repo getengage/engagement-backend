@@ -1,5 +1,5 @@
 import { compose, createStore, applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger'
 import allReducers from '../reducers';
 import { $$initialState } from '../reducers/settingsReducer';
 

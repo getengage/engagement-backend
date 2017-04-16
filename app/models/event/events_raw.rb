@@ -1,5 +1,5 @@
 module Event
-  class EventsRaw < ActiveRecord::Base
+  class EventsRaw < ApplicationRecord
     def self.partition_key
       "date_part('month', NEW.timestamp)"
     end

@@ -21,12 +21,14 @@ document.addEventListener("turbolinks:load", function() {
   Prism.highlightAll(); // init highlights
 
   table.each(function() { // init datatables
-    $(this).dataTable({
-      "bFilter": false,
-      "bLengthChange": false,
-      "bInfo": false,
-      "bPaginate": true
-    });
+    if (!$.fn.DataTable.fnIsDataTable(this)) {
+      $(this).dataTable({
+        "bFilter": false,
+        "bLengthChange": false,
+        "bInfo": false,
+        "bPaginate": true
+      });
+    }
   });
 
   $('.inline-editable').on('change', function(e) {

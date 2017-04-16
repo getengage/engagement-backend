@@ -1,4 +1,4 @@
-class CreateEventsRaw < ActiveRecord::Migration
+class CreateEventsRaw < ActiveRecord::Migration[4.2]
   def change
     create_table :events_raw do |t|
       t.datetime :timestamp, null: false
