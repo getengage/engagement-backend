@@ -1,5 +1,5 @@
 module Event
-  class EventCleanup < ActiveJob::Base
+  class EventCleanup < ApplicationJob
     queue_as 'go_queue'
 
     def perform(month)

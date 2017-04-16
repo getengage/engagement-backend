@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   store_accessor :metadata, :viewed_notifications_at
 
   belongs_to :client

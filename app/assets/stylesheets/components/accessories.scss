@@ -1,9 +1,9 @@
 $ribbon-size: 2em;
 $ribbon-colors: (
-  lightgreen: #1abc9c,
-  green: #16a085,
-  yellow: #f1c40f,
-  orange: #f39c12
+  "lightgreen": #1abc9c,
+  "green": #16a085,
+  "yellow": #f1c40f,
+  "orange": #f39c12
 );
 
 @each $name, $color in $ribbon-colors {

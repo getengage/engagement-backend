@@ -1,6 +1,6 @@
-class ApiKey < ActiveRecord::Base
+class ApiKey < ApplicationRecord
   include Reportable
-  acts_as_paranoid column: :expired_at
+  # acts_as_paranoid column: :expired_at
 
   has_one :client_api_key
   has_one :client, through: :client_api_key

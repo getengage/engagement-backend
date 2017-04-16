@@ -12,7 +12,6 @@ Dir.chdir APP_ROOT do
   system "bin/rake db:create"
   system "bin/rake db:migrate"
   system "bin/rake db:seed"
-  system "bin/rake data:migrate"
   system "npm run postinstall"
   puts "\n== Removing old logs and tempfiles =="
   system "rm -f log/*"
