@@ -19,9 +19,9 @@
   <div class="medium-2 columns">
     <div class="callout clearfix text-center" style="border-radius:2em;padding:0.4em">
       <ul class="menu line-chart-menu">
-        <%= menu_link("7 days", url_for(params.merge(past_days: 7))) %>
+        <%= menu_link("7 days", url_for(params.permit!.merge(past_days: 7))) %>
         <li></li>
-        <%= menu_link("15 days", url_for(params.merge(past_days: 15))) %>
+        <%= menu_link("15 days", url_for(params.permit!.merge(past_days: 15))) %>
       </ul>
     </div>
   </div>
