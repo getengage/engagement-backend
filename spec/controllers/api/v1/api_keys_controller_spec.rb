@@ -45,9 +45,8 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
 
     describe "with valid params" do
       it "soft deletes api key" do
-        expect {
-          delete :destroy, params: { user_id: user.id, uuid: api_key.uuid }
-        }.to change(ApiKey.unscoped, :count).by(1)
+        delete :destroy, params: { user_id: user.id, uuid: api_key.uuid }
+        expect(ApiKey.count).to eq(0)
       end
 
       it "sets expired_at column" do
