@@ -16,8 +16,8 @@ module Features
     end
 
     def notification_msg
-      store = page.find('.js-react-on-rails-store', :visible => false)
-      JSON.parse(store['data-props'])['notifications'][0]['message']
+      store = page.find('script[data-js-react-on-rails-store]', :visible => false)
+      JSON.parse(store.text(:all))['notifications'][0]['message']
     end
   end
 end
