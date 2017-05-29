@@ -9,15 +9,12 @@ import (
 
 type EventsRaw struct {
 	APIKeyID             string  `json:"api_key_id"`
-	Bottom               float64 `json:"bottom,string"`
-	Count                int     `json:"count,string"`
+	Bottom               float64 `json:"bottom"`
+	Count                int     `json:"count"`
 	CreatedAt            string  `json:"created_at"`
-	ID                   string  `json:"id"`
-	InViewport           bool    `json:"in_viewport"`
 	InViewportAndVisible float64
 	InViewportArr        string `json:"in_viewport_arr"`
 	IP2                  ip2location.IP2Locationrecord
-	IsVisible            bool   `json:"is_visible"`
 	IsVisibleArr         string `json:"is_visible_arr"`
 	ReachedEnd           bool
 	Referrer             string `json:"referrer"`
@@ -30,14 +27,12 @@ type EventsRaw struct {
 	}
 	SessionID string  `json:"session_id"`
 	SourceURL string  `json:"source_url"`
-	Tags      string  `json:"tags_arr"`
+	Tags      string  `json:"tags"`
 	Timestamp string  `json:"timestamp"`
 	Top       float64 `json:"top,string"`
 	UserAgent string  `json:"user_agent"`
 	WordCount float64 `json:"word_count,string"`
-	XPos      float64 `json:"x_pos,string"`
 	XPosArr   string  `json:"x_pos_arr"`
-	YPos      float64 `json:"y_pos,string"`
 	YPosArr   string  `json:"y_pos_arr"`
 }
 
