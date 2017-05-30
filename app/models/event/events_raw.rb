@@ -16,7 +16,7 @@ module Event
 
     scope :with_aggregates, -> {
       select(
-        "distinct on (timestamp) *, string_to_array(tags, ',') as tags_arr,
+        "distinct on (timestamp) *,
         row_number() over (partition by timestamp order by id) as rownum,
         json_agg(x_pos) over (partition by timestamp) as x_pos_arr,
         json_agg(y_pos) over (partition by timestamp) as y_pos_arr,
