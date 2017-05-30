@@ -17,3 +17,8 @@ general:
 test:
   pre:
     - cd client && npm run build:test
+  override:
+    - bundle exec rspec spec --color:
+        parallel: true
+        files:
+          - "spec/**/*_spec.rb"
