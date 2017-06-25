@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 20170412005357) do
     t.float "q4_time"
     t.datetime "created_at"
     t.datetime "timestamp"
-    t.text "tags", default: [], array: true
-    t.index ["tags"], name: "index_events_processed_on_tags", using: :gin
+    t.string "tags"
+    t.index "to_tsvector('english'::regconfig, (tags)::text)", name: "events_processed_gin_tags", using: :gin
   end
 
   create_table "events_raw", id: :serial, force: :cascade do |t|

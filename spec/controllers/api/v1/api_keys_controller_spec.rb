@@ -7,12 +7,12 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
     describe "with valid params" do
       it "creates a new ApiKey" do
         expect {
-          post :create, { user_id: user.id, name: "FooBar" }
+          post :create, params: { user_id: user.id, name: "FooBar" }
         }.to change(ApiKey, :count).by(1)
       end
 
       it "responds with json" do
-        post :create, { user_id: user.id, name: "FooBar" }
+        post :create, params: { user_id: user.id, name: "FooBar" }
         expect response.content_type == "application/json"
       end
     end
@@ -20,21 +20,21 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
     describe "with invalid params" do
       it "raises error w/ missing name" do
         expect {
-          post :create, { user_id: user.id, huh: "wah" }
+          post :create, params: { user_id: user.id, huh: "wah" }
         }.to raise_error ActionController::ParameterMissing
 
         expect {
-          post :create, { user_id: user.id, name: "" }
+          post :create, params: { user_id: user.id, name: "" }
         }.to raise_error ActionController::ParameterMissing
       end
 
       it "raises error w/ missing user_id" do
         expect {
-          post :create, { name: "FooBar" }
+          post :create, params: { name: "FooBar" }
         }.to raise_error ActionController::ParameterMissing
 
         expect {
-          post :create, { user_id: "", name: "FooBar" }
+          post :create, params: { user_id: "", name: "FooBar" }
         }.to raise_error ActionController::ParameterMissing
       end
     end
@@ -45,15 +45,14 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
 
     describe "with valid params" do
       it "soft deletes api key" do
-        expect {
-          delete :destroy, { user_id: user.id, uuid: api_key.uuid }
-        }.to change(ApiKey.unscoped, :count).by(1)
+        delete :destroy, params: { user_id: user.id, uuid: api_key.uuid }
+        expect(ApiKey.count).to eq(0)
       end
 
       it "sets expired_at column" do
         time = Date.current
         Timecop.freeze(time) do
-          delete :destroy, { user_id: user.id, uuid: api_key.uuid }
+          delete :destroy, params: { user_id: user.id, uuid: api_key.uuid }
           expect(api_key.reload.expired_at).to eq time
         end
       end
@@ -62,7 +61,7 @@ RSpec.describe Api::V1::ApiKeysController, type: :controller do
     describe "with invalid params" do
       it "raises error w/ invalid uuid" do
         expect {
-          delete :destroy, { user_id: user.id, uuid: SecureRandom.hex }
+          delete :destroy, params: { user_id: user.id, uuid: SecureRandom.hex }
         }.to raise_error ActiveRecord::RecordNotFound
       end
     end

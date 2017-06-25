@@ -1,3 +1,7 @@
+machine:
+  node:
+    version: 7.8.0
+
 # or else bundler will fail
 dependencies:
   pre:
@@ -13,3 +17,8 @@ general:
 test:
   pre:
     - cd client && npm run build:test
+  override:
+    - bundle exec rspec spec --color:
+        parallel: true
+        files:
+          - "spec/**/*_spec.rb"

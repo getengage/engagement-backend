@@ -10,7 +10,7 @@ RSpec.describe Api::V1::MetricsController, type: :controller do
   describe '#create' do
     describe "with valid params" do
       it "creates a new EventsRaw" do
-        post :create, { data: events_raw }
+        post :create, params: { data: events_raw }
         expect(response.status).to eq(200)
       end
     end
