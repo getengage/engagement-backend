@@ -5,7 +5,7 @@ gem 'administrate'
 gem 'bourbon'
 gem 'carrierwave', '~> 1.1.0'
 gem 'chartjs-ror'
-gem 'devise', '4.2.1'
+gem 'devise', '4.6.1'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'  # /entypo/charmap
 gem 'foreman'
 gem 'foundation-rails', '6.3.0.0'
