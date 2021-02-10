@@ -3,7 +3,7 @@ ruby '2.3.3'
 gem "paranoia", "~> 2.2"
 gem 'administrate'
 gem 'bourbon'
-gem 'carrierwave', '~> 1.1.0'
+gem 'carrierwave', '~> 1.3.2'
 gem 'chartjs-ror'
 gem 'devise', '4.2.1'
 gem 'entypo-rails', '~> 3.0.0.pre.rc2'  # /entypo/charmap
