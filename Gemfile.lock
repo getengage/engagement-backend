@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/nicksoto/hair_trigger.git
+  remote: https://github.com/nicksoto/hair_trigger.git
   revision: 21ee5422819382fe907634c1deb0bf010e9bd2eb
   specs:
     hairtrigger (0.2.19)
@@ -215,7 +215,7 @@ GEM
     puma (3.6.2)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    rack (2.0.1)
+    rack (2.0.9.1)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
